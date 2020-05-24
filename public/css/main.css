@@ -140,3 +140,9 @@ td, th {
 .addStudentBtn {
     margin-top: 15px;
 }
+
+.studentTitle {
+    font-size: 84px;
+    margin-left: 230px;
+    margin-top: 10px;
+}
