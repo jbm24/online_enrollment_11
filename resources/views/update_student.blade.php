@@ -27,7 +27,7 @@
                         <label for="lastName">Last Name</label><br>
                         <input type="text" class="loginInput" name="lastName" value={{ $lName }} ><br>
                         <label for="idNumber">ID Number</label><br>
-                        <input type="text" class="loginInput" name="idNumber" value={{ $idNum }} ><br>
+                        <input type="number" class="loginInput" name="idNumber" value={{ $idNum }} ><br>
                         <label for="birthday">Birthday</label><br>
                         <input type="date" class="loginInput" name="birthday" value={{ $bday }} ><br>
                         <label for="course">Course</label><br>

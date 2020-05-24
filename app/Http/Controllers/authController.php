@@ -25,10 +25,10 @@ class authController extends Controller
         }
 
         if ($flag == 1){
-            return redirect('student_management');
+            return view('staff_main_page');
         }
         else{
-        echo "Wrong login details";
+            return view('welcome');
         }
     }
 }
