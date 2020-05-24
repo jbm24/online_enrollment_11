@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Student Management</title>
+        <title>Subject Management</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -19,7 +19,7 @@
 
     <body>
         <div id="existIndicator" style="display: none">
-            <h2> A student with that ID Number already exists  </h2>
+            <h2> That subject already exists  </h2>
         </div>
         
         <div class="staffLogin">
@@ -37,16 +37,14 @@
 
                     <form action="add_student" method="post">
                     @csrf
-                        <label for="firstName">First Name</label><br>
-                        <input type="text" class="loginInput" name="firstName" placeholder="Enter first name here..."><br>
-                        <label for="lastName">Last Name</label><br>
-                        <input type="text" class="loginInput" name="lastName" placeholder="Enter last name here..."><br>
-                        <label for="idNumber">ID Number</label><br>
-                        <input type="number" class="loginInput" name="idNumber" placeholder="Enter ID Number here..."><br>
-                        <label for="birthday">Birthday</label><br>
-                        <input type="date" class="loginInput" name="birthday"><br>
-                        <label for="course">Course</label><br>
-                        <input type="text" class="loginInput" name="course" placeholder="Enter course here..."><br>
+                        <label for="subjectName">Subject Name</label><br>
+                        <input type="text" class="loginInput" name="subjectName" placeholder="Enter subject name here..."><br>
+                        <label for="capacity">Capacity</label><br>
+                        <input type="number" class="loginInput" name="capacity" placeholder="Enter capacity..."><br>
+                        <label for="room">Room</label><br>
+                        <input type="text" class="loginInput" name="room" placeholder="Enter Room here..."><br>
+                        <label for="schedule">Schedule</label><br>
+                        <input type="text" class="loginInput" name="schedule"><br>
 
                         <input type="submit" value="Add Student">
                     </form>
