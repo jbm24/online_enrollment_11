@@ -23,9 +23,9 @@ Route::post('/auth', 'authController@authenticate');
 
 Route::get('/student_management', 'StudentController@index');
 
-Route::get('/edit/{id}', 'StudentController@edit');
-
 Route::post('/add_student', 'StudentController@store');
+
+Route::get('/edit/{id}', 'StudentController@edit');
 
 Route::put('/update_student/{id}', 'StudentController@update');
 
@@ -40,3 +40,5 @@ Route::get('/staff_main_page', function () {
 
 
 Route::get('/subject_management', 'SubjectController@index');
+
+Route::post('/add_subject', 'SubjectController@store');
