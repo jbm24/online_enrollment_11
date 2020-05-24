@@ -22,9 +22,7 @@
             <h2> A student with that ID Number already exists  </h2>
         </div>
         
-        <div class="staffLogin">
-            <button id="staffModal" class="loginBtn">Add Student</button>
-        </div>
+        
 
         <div id="simpleModal" class="modal">
             <div class="modal-content">
@@ -61,7 +59,7 @@
                     Student Management
                 </div>
 
-                <table style="width:80%;margin-left: 10%;">
+                <table class="student_table">
                     <tr>
                     <th style="width: 25%;">ID Number</th>
                     <th style="width: 25%;">Name</th>
@@ -84,7 +82,9 @@
                             </tr>
                         @endforeach
                 </table>
-
+                <div class="addStudentBtn">
+                    <button id="staffModal" class="loginBtn">Add Student</button>
+                </div>
             </div>
         </div>
 
