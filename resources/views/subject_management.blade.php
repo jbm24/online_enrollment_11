@@ -35,18 +35,18 @@
                 </div>
                 <div class="modal-body">
 
-                    <form action="add_student" method="post">
+                    <form action="add_subject" method="post">
                     @csrf
                         <label for="subjectName">Subject Name</label><br>
-                        <input type="text" class="loginInput" name="subjectName" placeholder="Enter subject name here..."><br>
+                        <input type="text" class="loginInput" name="subjectName" placeholder="Enter Subject Name here..."><br>
                         <label for="capacity">Capacity</label><br>
-                        <input type="number" class="loginInput" name="capacity" placeholder="Enter capacity..."><br>
+                        <input type="number" class="loginInput" name="capacity" placeholder="Enter Capacity..."><br>
                         <label for="room">Room</label><br>
                         <input type="text" class="loginInput" name="room" placeholder="Enter Room here..."><br>
                         <label for="schedule">Schedule</label><br>
-                        <input type="text" class="loginInput" name="schedule"><br>
+                        <input type="text" class="loginInput" name="schedule" placeholder="Enter Schedule here..."><br>
 
-                        <input type="submit" value="Add Student">
+                        <input type="submit" value="Add Subject">
                     </form>
 
                 </div>
@@ -57,29 +57,21 @@
         <div>
             <div class="content">
                 <div class="title m-b-md">
-                    Student Management
+                    Subject Management
                 </div>
 
                 <table style="width:80%;margin-left: 10%;">
                     <tr>
-                    <th style="width: 25%;">ID Number</th>
-                    <th style="width: 25%;">Name</th>
-                    <th style="width: 10%;">Course</th>
+                    <th style="width: 25%;">Subject</th>
+                    <th style="width: 25%;">Enrollees</th>
                     </tr>
 
-                        @foreach ($students as $student) 
+                        @foreach ($subjects as $subject) 
                             <tr>
-                            <td>{{ $student->id_number }}</td>
-                            <td>{{ $student->last_name }}, {{ $student->first_name }}</td>
-                            <td>{{ $student->course }}</td>
-                            <td> <a href = 'edit/{{ $student->id_number }}'> Edit </button> </td>
-                            <td> 
-                                <form method="POST" action="/delete/{{ $student->id_number }}">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit"> Delete </button> 
-                                </form>
-                            </td>
+                            <td>{{ $subject->subject_name }}</td>
+                            <td>enrollees</td>
+                            <td> <button> Edit Subject </button> </td>
+                            <td>  <button type="submit"> View Subject </button> </td>
                             </tr>
                         @endforeach
                 </table>
