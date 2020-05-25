@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
+use App\Student;
 
 class StudentController extends Controller
 {
     public function index(){
-        $students = DB::table('students')->orderBy('last_name', 'asc')->get();
+        $studentList = Student::orderBy('last_name', 'asc')->get();
 
         return view('/student_management', [
-            'students' => $students,
+            'students' => $studentList,
             'exists' => false
         ]);
     }
@@ -25,18 +25,23 @@ class StudentController extends Controller
         $birthday = request('birthday');
         $course = request('course');
         
-        $exists = DB::table('students')->where('id_number', $idNum)->exists();
+        $exists = Student::where('id_number', $idNum)->exists();
 
         if ($exists == false){
-            DB::table('students')->insert(
-                ['first_name' => $fName, 'last_name' => $lName, 'id_number' => $idNum, 'birthday' => $birthday, 'course' => $course]
-            );
+            $newStudent = new Student;
+            $newStudent->first_name = $fName;
+            $newStudent->last_name = $lName;
+            $newStudent->id_number = $idNum;
+            $newStudent->birthday = $birthday;
+            $newStudent->course = $course;
+
+            $newStudent->save();
         }
 
-        $students = DB::table('students')->orderBy('last_name', 'asc')->get();
+        $studentList = Student::orderBy('last_name', 'asc')->get();
 
         return view('/student_management', [
-            'students' => $students,
+            'students' => $studentList,
             'exists' => $exists
         ]);
     }
@@ -45,7 +50,7 @@ class StudentController extends Controller
 
 
     public function edit($id){
-        $student = DB::table('students')->where('id_number', $id)->first();
+        Student::firstWhere('id_number', $id);
 
         $fName = $student->first_name;
         $lName = $student->last_name;
@@ -73,10 +78,15 @@ class StudentController extends Controller
         $birthday = request('birthday');
         $course = request('course');
         
-            DB::table('students')->where('id_number', $id)->update(
-                ['first_name' => $fName, 'last_name' => $lName, 'id_number' => $idNum, 'birthday' => $birthday, 'course' => $course]
-            );
+        $student = Student::where('id_number', $id)->get();
 
+        $student->first_name = $fName;
+        $student->last_name = $lName;
+        $student->id_number = $idNum;
+        $student->birthday = $birthday;
+        $student->course = $course;
+        
+        $student->save();
 
         return redirect('student_management');
     }
@@ -84,9 +94,7 @@ class StudentController extends Controller
 
     
     public function destroy($id) {
-        DB::table('students')->where('id_number', $id)->delete();
-
-        $students = DB::table('students')->get();
+        Student::where('id_number', $id)->delete();
 
         return redirect('student_management');
      }

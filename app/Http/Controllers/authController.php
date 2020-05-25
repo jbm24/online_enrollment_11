@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
+use App\Employee;
 
 class authController extends Controller
 {
@@ -13,7 +13,7 @@ class authController extends Controller
         $password = request('pass');
         $flag = 0;
 
-        $employees = DB::table('employees')->get();
+        $employees = Employee::all();
 
 
         foreach ($employees as $employee) {

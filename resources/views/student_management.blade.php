@@ -30,24 +30,24 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <span class="closeBtn">&times;</span>
-                    <h2>Add Student</h2>
+                    <h2 id="modalHeader">Add Student</h2>
                 </div>
                 <div class="modal-body">
 
                     <form action="add_student" method="post">
                     @csrf
                         <label for="firstName">First Name</label><br>
-                        <input type="text" class="loginInput" name="firstName" placeholder="Enter first name here..."><br>
+                        <input type="text" id="fname" class="loginInput" name="firstName" placeholder="Enter first name here..."><br>
                         <label for="lastName">Last Name</label><br>
-                        <input type="text" class="loginInput" name="lastName" placeholder="Enter last name here..."><br>
+                        <input type="text" id="lname" class="loginInput" name="lastName" placeholder="Enter last name here..."><br>
                         <label for="idNumber">ID Number</label><br>
-                        <input type="number" class="loginInput" name="idNumber" placeholder="Enter ID Number here..."><br>
+                        <input type="number" id="idNum" class="loginInput" name="idNumber" placeholder="Enter ID Number here..."><br>
                         <label for="birthday">Birthday</label><br>
-                        <input type="date" class="loginInput" name="birthday"><br>
+                        <input type="date" id="bday" class="loginInput" name="birthday"><br>
                         <label for="course">Course</label><br>
-                        <input type="text" class="loginInput" name="course" placeholder="Enter course here..."><br>
+                        <input type="text" id="course" class="loginInput" name="course" placeholder="Enter course here..."><br>
 
-                        <input type="submit" value="Add Student">
+                        <input type="submit" id="modalSubmit" value="Add Student">
                     </form>
 
                 </div>
@@ -73,7 +73,7 @@
                             <td>{{ $student->id_number }}</td>
                             <td>{{ $student->last_name }}, {{ $student->first_name }}</td>
                             <td>{{ $student->course }}</td>
-                            <td> <a href = 'edit/{{ $student->id_number }}'> Edit </button> </td>
+                            <td> <button id="{{ $student->id_number }}" class="editButton"> Edit </button> </td>
                             <td> 
                                 <form method="POST" action="/delete/{{ $student->id_number }}">
                                     @csrf
@@ -90,24 +90,12 @@
             </div>
         </div>
 
-        <script type="text/javascript" src="/js/modal.js"></script>
 
+        <script type="text/javascript" src="/js/modal.js"></script>
         <script>
-            // Toggle indicator of whether added student already exists
-            function toggleExistIndicator(state){
-                if(state){
-                    $("#existIndicator").show();
-                }
-                else{
-                    $("#existIndicator").hide();
-                }
-            }
-            // Check whether added student already exists
-            if ( <?php echo json_encode($exists); ?> == true){
-                toggleExistIndicator(true);
-            }
-            else toggleExistIndicator(false);
+            var exists = <?php echo json_encode($exists); ?>;
         </script>
+        <script type="text/javascript" src="/js/student_management.js"></script>
 
     </body>
 </html>
