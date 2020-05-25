@@ -23,7 +23,6 @@
         </div>
         
         <div class="staffLogin">
-            <button id="staffModal" class="loginBtn">Add Student</button>
             <a href="/staff_main_page"> Back to Staff Main Page </a>
         </div>
 
@@ -58,11 +57,11 @@
 
         <div>
             <div class="content">
-                <div class="title m-b-md">
+                <div class="studentTitle m-b-md">
                     Student Management
                 </div>
 
-                <table style="width:80%;margin-left: 10%;">
+                <table class="student_table">
                     <tr>
                     <th style="width: 25%;">ID Number</th>
                     <th style="width: 25%;">Name</th>
@@ -85,7 +84,9 @@
                             </tr>
                         @endforeach
                 </table>
-
+                <div class="addStudentBtn">
+                    <button id="staffModal" class="loginBtn">Add Student</button>
+                </div>
             </div>
         </div>
 

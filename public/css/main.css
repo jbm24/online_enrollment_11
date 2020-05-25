@@ -119,7 +119,30 @@ html, body {
     cursor: pointer;
 }
 
-@keyframes modalOpen{
+@keyframes modalOpen {
     from { opacity: 0 }
     to { opacity: 1 }
+}
+
+/*Student Management*/
+
+.student_table {
+    width: 80%;
+    margin-left: 10%;
+    border: 2px solid black;
+    padding: 20px;
+}
+
+td, th {
+    padding: 10px;
+}
+
+.addStudentBtn {
+    margin-top: 15px;
+}
+
+.studentTitle {
+    font-size: 84px;
+    margin-left: 230px;
+    margin-top: 10px;
 }
