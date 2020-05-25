@@ -19,7 +19,7 @@
 
 
     <body>
-                    <form method="POST" action="/update_student/{{ $id }}">
+                    <form method="POST" action="/update_student">
                     @csrf
                     @method('put')
                         <label for="firstName">First Name</label><br>

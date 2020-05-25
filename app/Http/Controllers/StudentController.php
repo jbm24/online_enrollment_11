@@ -45,40 +45,19 @@ class StudentController extends Controller
             'exists' => $exists
         ]);
     }
-
-
-
-
-    public function edit($id){
-        Student::firstWhere('id_number', $id);
-
-        $fName = $student->first_name;
-        $lName = $student->last_name;
-        $idNum = $student->id_number;
-        $bday = $student->birthday;
-        $course = $student->course;
-
-        return view('/update_student', [
-            'fName' => $fName,
-            'lName' => $lName,
-            'idNum' => $idNum,
-            'bday' => $bday,
-            'course' => $course,
-            'id' => $id
-        ]);
-    }
-
     
 
 
-    public function update($id){
-        $fName = request('firstName');
-        $lName = request('lastName');
-        $idNum = request('idNumber');
-        $birthday = request('birthday');
-        $course = request('course');
+    public function update(){
+        $oldIdNum = request('oldIdNumber');
+
+        $fName = request('updatedFirstName');
+        $lName = request('updatedLastName');
+        $idNum = request('updatedIdNumber');
+        $birthday = request('updatedBirthday');
+        $course = request('updatedCourse');
         
-        $student = Student::where('id_number', $id)->get();
+        $student = Student::firstWhere('id_number', $oldIdNum);
 
         $student->first_name = $fName;
         $student->last_name = $lName;

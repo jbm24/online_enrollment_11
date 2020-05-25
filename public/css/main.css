@@ -146,3 +146,11 @@ td, th {
     margin-left: 230px;
     margin-top: 10px;
 }
+
+td p {
+    display: inline;
+}
+
+#oldIdNum{
+    display: none;
+}
