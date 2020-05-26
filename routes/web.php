@@ -19,24 +19,28 @@ Route::get('/', function () {
 
 Route::post('/auth', 'authController@authenticate');
 
-
-
-Route::get('/student_management', 'StudentController@index');
-
-Route::post('/add_student', 'StudentController@store');
-
-Route::put('/update_student', 'StudentController@update');
-
-Route::delete('delete/{id}','StudentController@destroy');
-
-
-
 Route::get('/staff_main_page', function () {
     return view('staff_main_page');
 });
 
 
 
+// For student_management page
+Route::get('/student_management', 'StudentController@index');
+
+Route::post('/add_student', 'StudentController@store');
+
+Route::put('/update_student', 'StudentController@update');
+
+Route::delete('delete_student/{id}','StudentController@destroy');
+
+
+
+// For subject_management page
 Route::get('/subject_management', 'SubjectController@index');
 
 Route::post('/add_subject', 'SubjectController@store');
+
+Route::put('/update_subject', 'SubjectController@update');
+
+Route::delete('delete_subject','SubjectController@destroy');

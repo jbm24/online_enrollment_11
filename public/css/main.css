@@ -152,6 +152,8 @@ td p {
 }
 
 .hidden{
+    color: green;
+    text-align: left;
     display: none;
 }
 
@@ -163,4 +165,8 @@ label {
 
 #existIndicator {
     color: red;
+}
+
+.delete {
+    background-color: red;
 }

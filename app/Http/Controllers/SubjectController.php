@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
+use App\Subject;
 
 class SubjectController extends Controller
 {
     public function index(){
-        $subjects = DB::table('subjects')->orderBy('subject_name', 'asc')->get();
+        $subjectList = Subject::orderBy('subject_name', 'asc')->get();
 
         return view('/subject_management', [
-            'subjects' => $subjects,
+            'subjects' => $subjectList,
             'exists' => false
         ]);
     }
@@ -24,69 +24,63 @@ class SubjectController extends Controller
         $capacity = request('capacity');
         $schedule = request('schedule');
         
-        $exists = DB::table('subjects')->where('subject_name', $name)->exists();
+        $exists = Subject::where('subject_name', $name)->exists();
 
         if ($exists == false){
-            DB::table('subjects')->insert(
-                ['subject_name' => $name, 'room' => $room, 'capacity' => $capacity, 'schedule' => $schedule]
-            );
+            $newSubject = new Subject;
+            $newSubject->subject_name = $name;
+            $newSubject->room = $room;
+            $newSubject->capacity = $capacity;
+            $newSubject->schedule = $schedule;
+
+            $newSubject->save();
         }
 
-        $subjects = DB::table('subjects')->orderBy('subject_name', 'asc')->get();
+        $subjectList = Subject::orderBy('subject_name', 'asc')->get();
 
         return view('/subject_management', [
-            'subjects' => $subjects,
+            'subjects' => $subjectList,
             'exists' => $exists
         ]);
     }
 
 
+    public function update(){
+        $oldSubName = request('oldSubName');
 
+        $subName = request('editedSubjectName');
+        $room = request('editedRoom');
+        $capacity = request('editedCapacity');
+        $sched = request('editedSchedule');
 
-    public function edit($id){
-        $student = DB::table('students')->where('id_number', $id)->first();
+        $exists = Subject::where('subject_name', $subName)->exists();
+        
+        if ($exists == false){
+            $subject = Subject::firstWhere('subject_name', $oldSubName);
 
-        $fName = $student->first_name;
-        $lName = $student->last_name;
-        $idNum = $student->id_number;
-        $bday = $student->birthday;
-        $course = $student->course;
+            $subject->subject_name = $subName;
+            $subject->room = $room;
+            $subject->capacity = $capacity;
+            $subject->schedule = $shed;
 
-        return view('/update_student', [
-            'fName' => $fName,
-            'lName' => $lName,
-            'idNum' => $idNum,
-            'bday' => $bday,
-            'course' => $course,
-            'id' => $id
+            $subject->save();
+        }
+
+        $subjectList = Subject::orderBy('subject_name', 'asc')->get();
+        
+        return view('/student_management', [
+            'subjects' => $subjectList,
+            'exists' => $exists
         ]);
     }
 
-    
-
-
-    public function update($id){
-        $fName = request('firstName');
-        $lName = request('lastName');
-        $idNum = request('idNumber');
-        $birthday = request('birthday');
-        $course = request('course');
-        
-            DB::table('students')->where('id_number', $id)->update(
-                ['first_name' => $fName, 'last_name' => $lName, 'id_number' => $idNum, 'birthday' => $birthday, 'course' => $course]
-            );
-
-
-        return redirect('student_management');
-    }
-
 
     
-    public function destroy($id) {
-        DB::table('students')->where('id_number', $id)->delete();
+    public function destroy() {
+        $name = request('delSubName');
 
-        $students = DB::table('students')->get();
+        Subject::where('subject_name', $name)->delete();
 
-        return redirect('student_management');
+        return redirect('subject_management');
      }
 }

@@ -23,6 +23,7 @@
             <h2> A student with that ID Number already exists  </h2>
         </div>
         
+        <!-- Back to Staff Main Page -->
         <div class="staffLogin">
             <a href="/staff_main_page"> Back to Staff Main Page </a>
         </div>
@@ -63,7 +64,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <span class="closeUpdateBtn">&times;</span>
-                    <h2 id="modalHeader">Update Student Information</h2>
+                    <h2 id="modalHeader">Edit Student Information</h2>
                 </div>
                 <div class="modal-body">
 
@@ -83,7 +84,7 @@
 
                         <input type="number" id="oldIdNum" class="hidden" name="oldIdNumber"><br>
 
-                        <input type="submit" id="modalSubmit" value="Update">
+                        <input type="submit" id="modalSubmit" value="Edit">
                     </form>
 
                 </div>
@@ -117,7 +118,7 @@
 
 
 
-
+        <!-- Table of Students -->
         <div>
             <div class="content">
                 <div class="studentTitle m-b-md">
@@ -142,10 +143,10 @@
                             <td> <button class="viewBtn"> View </button> </td>
                             <td class="editTD"> 
                                 <button class="editBtn"> Edit </button> 
-                                <p class="hidden">{{ $student->birthday }}</p> <br> 
+                                <p class="hidden">{{ $student->birthday }}</p> 
                             </td>
                             <td> 
-                                <form method="POST" action="/delete/{{ $student->id_number }}">
+                                <form method="POST" action="/delete_student/{{ $student->id_number }}">
                                     @csrf
                                     @method('delete')
                                     <button type="submit"> Delete </button> 
