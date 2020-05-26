@@ -56,18 +56,28 @@ class StudentController extends Controller
         $idNum = request('updatedIdNumber');
         $birthday = request('updatedBirthday');
         $course = request('updatedCourse');
-        
-        $student = Student::firstWhere('id_number', $oldIdNum);
 
-        $student->first_name = $fName;
-        $student->last_name = $lName;
-        $student->id_number = $idNum;
-        $student->birthday = $birthday;
-        $student->course = $course;
-        
-        $student->save();
+        $exists = Student::where('id_number', $idNum)->exists();
 
-        return redirect('student_management');
+        if ($exists == false){
+        
+            $student = Student::firstWhere('id_number', $oldIdNum);
+
+            $student->first_name = $fName;
+            $student->last_name = $lName;
+            $student->id_number = $idNum;
+            $student->birthday = $birthday;
+            $student->course = $course;
+            
+            $student->save();
+        }
+
+        $studentList = Student::orderBy('last_name', 'asc')->get();
+        
+        return view('/student_management', [
+            'students' => $studentList,
+            'exists' => $exists
+        ]);
     }
 
 

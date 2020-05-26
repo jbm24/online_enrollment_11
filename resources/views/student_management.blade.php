@@ -18,6 +18,7 @@
 
 
     <body>
+        <!-- Indicator for if added or updated Student Id already exists -->
         <div id="existIndicator" style="display: none">
             <h2> A student with that ID Number already exists  </h2>
         </div>
@@ -80,7 +81,7 @@
                         <label for="updatedCourse">Course</label><br>
                         <input type="text" id="course" class="loginInput" name="updatedCourse"><br>
 
-                        <input type="number" id="oldIdNum" name="oldIdNumber"><br>
+                        <input type="number" id="oldIdNum" class="hidden" name="oldIdNumber"><br>
 
                         <input type="submit" id="modalSubmit" value="Update">
                     </form>
@@ -128,6 +129,9 @@
                     <th style="width: 25%;">ID Number</th>
                     <th style="width: 40%;">Name</th>
                     <th style="width: 10%;">Course</th>
+                    <th style="width: 10%;"></th>
+                    <th style="width: 10%;"></th>
+                    <th style="width: 10%;"></th>
                     </tr>
 
                         @foreach ($students as $student) 
@@ -135,8 +139,11 @@
                             <td class="studId">{{ $student->id_number }}</td>
                             <td class="studName"> <p class="studLName"> {{ $student->last_name }} </p>, <p class=studFName> {{ $student->first_name }} </p> </td>
                             <td class="studCourse">{{ $student->course }}</td>
-                            <td> <button class="viewtBtn"> View </button> </td>
-                            <td> <button id="{{ $student->birthday }}" class="editBtn"> Edit </button> </td>
+                            <td> <button class="viewBtn"> View </button> </td>
+                            <td class="editTD"> 
+                                <button class="editBtn"> Edit </button> 
+                                <p class="hidden">{{ $student->birthday }}</p> <br> 
+                            </td>
                             <td> 
                                 <form method="POST" action="/delete/{{ $student->id_number }}">
                                     @csrf

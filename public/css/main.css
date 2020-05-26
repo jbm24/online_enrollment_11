@@ -151,6 +151,16 @@ td p {
     display: inline;
 }
 
-#oldIdNum{
+.hidden{
     display: none;
+}
+
+label {
+    font-size: large;
+    font-weight: bold;
+    color: black;
+}
+
+#existIndicator {
+    color: red;
 }
