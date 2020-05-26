@@ -44,3 +44,10 @@ Route::post('/add_subject', 'SubjectController@store');
 Route::put('/update_subject', 'SubjectController@update');
 
 Route::delete('delete_subject','SubjectController@destroy');
+
+
+
+// For enrollment page
+Route::get('/enrollment_page', function () {
+    return view('enrollment_page');
+});

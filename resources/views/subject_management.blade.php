@@ -57,7 +57,7 @@
         </div>
 
 
-        <!-- Modal for updating subject details -->
+        <!-- Modal for updating Subject details -->
         <div id="updateModal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
@@ -78,7 +78,7 @@
                         <label for="editedSchedule">Schedule</label><br>
                         <input type="text" class="loginInput" id="eSchedule" name="editedSchedule"><br>
 
-                        <input type="number" id="oldSubName" class="hidden" name="oldSubName"><br>
+                        <input type="text" id="oldSubName" class="hidden" name="oldSubName"><br>
 
                         <input type="submit" id="modalSubmit" value="Edit">
                     </form>
@@ -95,6 +95,39 @@
         </div>
 
 
+        <!-- Modal for viewing Enrollees of a Subject  -->
+        <div id="viewModal" class="modal">
+            <div class="enrollee-modal-content">
+                <div class="modal-header">
+                    <span class="closeViewBtn">&times;</span>
+                    <h2 id="modalHeader">Edit Subject Information</h2>
+                </div>
+                <div class="modal-body">
+
+                <table style="width:80%;margin-left: 10%;">
+                    <tr>
+                    <th style="width: 25%;">ID Number</th>
+                    <th style="width: 10%;">Full Name</th>
+                    <th style="width: 105%;">Course</th>
+                    <th style="width: 10%;"></th>
+                    </tr>
+
+                        @foreach ($subjects as $subject) 
+                            <tr>
+                            <td>  </td>
+                            <td>  </td>
+                            <td>  </td>
+                            <td> 
+                                <button class="unenroll"> Unenroll </button> 
+                            </td>
+                            </tr>
+                        @endforeach
+                </table>
+
+                </div>
+            </div>
+        </div>
+
         
         <!-- Table of Subjects -->
         <div>
@@ -107,7 +140,7 @@
                     <tr>
                     <th style="width: 25%;">Subject</th>
                     <th style="width: 10%;">Enrollees</th>
-                    <th style="width: 5%;"></th>
+                    <th style="width: 10%;"></th>
                     <th style="width: 10%;"></th>
                     </tr>
 
@@ -121,7 +154,7 @@
                                 <h2 class="hidden">{{ $subject->room }}</h2>
                                 <h3 class="hidden">{{ $subject->schedule }}</h3>
                             </td>
-                            <td>  <button class="viewBtn" type="submit"> View Enrollees </button> </td>
+                            <td>  <button class="viewBtn"> View Enrollees </button> </td>
                             </tr>
                         @endforeach
                 </table>

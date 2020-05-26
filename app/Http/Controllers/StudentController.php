@@ -57,7 +57,12 @@ class StudentController extends Controller
         $birthday = request('updatedBirthday');
         $course = request('updatedCourse');
 
-        $exists = Student::where('id_number', $idNum)->exists();
+        if ($oldIdNum == $idNum){
+            $exists = false;
+        }
+        else {
+            $exists = Student::where('id_number', $idNum)->exists();
+        }
 
         if ($exists == false){
         

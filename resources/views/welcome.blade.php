@@ -25,7 +25,7 @@
                 </div>
                 <div class="modal-body">
 
-                    <form action="auth" method="post">
+                    <form action="/auth" method="post">
                     @csrf
                         <label for="user">Username</label><br>
                         <input type="text" value="user" class="loginInput" name="user" placeholder="Enter username here..."><br>
@@ -52,7 +52,7 @@
                     enrollment!
                 </p>
                 <p>
-                    <form action="">
+                    <form action="/enrollment_page">
                         <input type="submit" value="Click here to enroll">
                     </form>
                 </p>

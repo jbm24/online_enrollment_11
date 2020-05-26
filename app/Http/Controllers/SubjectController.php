@@ -53,22 +53,27 @@ class SubjectController extends Controller
         $capacity = request('editedCapacity');
         $sched = request('editedSchedule');
 
-        $exists = Subject::where('subject_name', $subName)->exists();
+        if ($oldSubName == $subName){
+            $exists = false;
+        }
+        else {
+            $exists = Subject::where('subject_name', $subName)->exists();
+        }
         
         if ($exists == false){
-            $subject = Subject::firstWhere('subject_name', $oldSubName);
+            $subject = Subject::where('subject_name', $oldSubName)->first();
 
             $subject->subject_name = $subName;
             $subject->room = $room;
             $subject->capacity = $capacity;
-            $subject->schedule = $shed;
+            $subject->schedule = $sched;
 
             $subject->save();
         }
 
         $subjectList = Subject::orderBy('subject_name', 'asc')->get();
         
-        return view('/student_management', [
+        return view('/subject_management', [
             'subjects' => $subjectList,
             'exists' => $exists
         ]);

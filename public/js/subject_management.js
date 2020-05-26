@@ -41,8 +41,7 @@ $(document).ready(function(){
     var closeViewBtn = $('.closeViewBtn');
 
     //listen and open View modal 
-    viewBtn.on('click', function openViwModal(){
-        console.log();
+    viewBtn.on('click', function openViewModal(){
         $("#viewFirstName").html( $(this).parent().siblings(".studName").children('p.studFName').html() );
         $("#viewLastName").html( $(this).parent().siblings(".studName").children('p.studLName').html() );
         $("#viewIdNumber").html( $(this).parent().siblings(".studId").html() );
@@ -63,7 +62,7 @@ $(document).ready(function(){
     //listen for outside click
     window.onclick = function(event) {
         if(event.target == document.getElementById('updateModal')){
-            updateModal.hide();
+            viewModal.hide();
         }
         if(event.target == document.getElementById('viewModal')){
             viewModal.hide();

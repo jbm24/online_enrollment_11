@@ -138,7 +138,7 @@
                         @foreach ($students as $student) 
                             <tr>
                             <td class="studId">{{ $student->id_number }}</td>
-                            <td class="studName"> <p class="studLName"> {{ $student->last_name }} </p>, <p class=studFName> {{ $student->first_name }} </p> </td>
+                            <td class="studName"> <p class="studLName">{{ $student->last_name }}</p>, <p class=studFName>{{ $student->first_name }}</p> </td>
                             <td class="studCourse">{{ $student->course }}</td>
                             <td> <button class="viewBtn"> View </button> </td>
                             <td class="editTD"> 

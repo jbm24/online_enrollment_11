@@ -79,6 +79,14 @@ html, body {
     animation-name: modalOpen;
     animation-duration: 0.5s;
 }
+.enrollee-modal-content {
+    background-color: #f4f4f4;
+    margin: 10% auto;
+    width: 80%;
+    height: 70%;
+    animation-name: modalOpen;
+    animation-duration: 0.5s;
+}
 
 .modal-header{
     padding: 10px;
