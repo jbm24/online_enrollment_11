@@ -25,7 +25,7 @@
                 </div>
                 <div class="modal-body">
 
-                    <form action="auth" method="post">
+                    <form action="/auth" method="post">
                     <?php echo csrf_field(); ?>
                         <label for="user">Username</label><br>
                         <input type="text" value="user" class="loginInput" name="user" placeholder="Enter username here..."><br>
@@ -41,6 +41,7 @@
             
 
             <div class="content">
+                <img class="home-logo" src="/img/computer.png" alt="logo">
                 <div class="title m-b-md">
                     Online Enrollment
                 </div>
@@ -52,7 +53,7 @@
                     enrollment!
                 </p>
                 <p>
-                    <form action="">
+                    <form action="/enrollment_page">
                         <input type="submit" value="Click here to enroll">
                     </form>
                 </p>

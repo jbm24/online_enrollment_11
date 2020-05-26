@@ -7,6 +7,27 @@ html, body {
     margin: 0;
 }
 
+.home-logo  {
+    width: 50%;
+    height: 50%;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    color: black;
+    background-color: white;
+    font-family: 'Nunito', sans-serif;
+    border-radius: 10px;
+}
+
+button:hover {
+    color: white;
+    background-color: gray;
+}
+
 .full-height {
     height: 100vh;
 }
@@ -93,6 +114,8 @@ html, body {
     border: 2px solid black;
     border-bottom: none;
     text-align: center;
+    color: white;
+    background-color: gray;
 }
 
 .modal-header h2 {

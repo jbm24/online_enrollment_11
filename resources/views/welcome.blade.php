@@ -41,6 +41,7 @@
             
 
             <div class="content">
+                <img class="home-logo" src="/img/computer.png" alt="logo">
                 <div class="title m-b-md">
                     Online Enrollment
                 </div>

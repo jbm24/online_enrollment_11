@@ -132,11 +132,11 @@
         <!-- Table of Subjects -->
         <div>
             <div class="content">
-                <div class="title m-b-md">
+                <div class="studentTitle m-b-md">
                     Subject Management
                 </div>
 
-                <table style="width:80%;margin-left: 10%;">
+                <table class="student_table">
                     <tr>
                     <th style="width: 25%;">Subject</th>
                     <th style="width: 10%;">Enrollees</th>
