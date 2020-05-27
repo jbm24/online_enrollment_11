@@ -197,7 +197,16 @@ label {
 #existIndicator {
     color: red;
 }
+#enrolledIndicator {
+    color: red;
+}
+#confirmIndicator{
+    color: red;
+}
+#fullIndicator{
+    color: red;
+} 
 
 .delete {
-    background-color: red;
+    color: red;
 }

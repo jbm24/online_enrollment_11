@@ -53,7 +53,7 @@
                     enrollment!
                 </p>
                 <p>
-                    <form action="/enrollment_page">
+                    <form action="/enrollment">
                         <input type="submit" value="Click here to enroll">
                     </form>
                 </p>

@@ -48,6 +48,6 @@ Route::delete('delete_subject','SubjectController@destroy');
 
 
 // For enrollment page
-Route::get('/enrollment_page', function () {
-    return view('enrollment_page');
-});
+Route::get('/enrollment', 'EnrollmentController@index');
+
+Route::post('/enroll', 'EnrollmentController@store');

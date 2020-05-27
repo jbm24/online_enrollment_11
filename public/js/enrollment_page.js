@@ -8,7 +8,11 @@ $(document).ready(function(){
 
     //listen and open Enrollment Confirmation modal 
     enrollBtn.on('click', function() {
-        enrollModal.show();
+        if ($(this).parent().siblings(".population").children(".enrollees").html() < $(this).parent().siblings(".population").children(".capacity").html()) {
+            $("#subject").val( $(this).parent().siblings(".subName").html() );
+            enrollModal.show();
+        }
+        else toggleFullIndicator(true);
     } );
 
     //listen for close
@@ -26,3 +30,53 @@ $(document).ready(function(){
         }
     }
 });
+
+
+// Toggle Enrolled indicator
+function toggleEnrolledIndicator(state){
+    if(state){
+        $("#enrolledIndicator").show();
+    }
+    else{
+        $("#enrolledIndicator").hide();
+    }
+}
+
+// Toggle confirm indicator
+function toggleConfirmIndicator(state){
+    if(state){
+        $("#confirmIndicator").show();
+    }
+    else{
+        $("#confirmIndicator").hide();
+    }
+}
+
+// Toggle full indicator
+function toggleFullIndicator(state){
+    if(state){
+        $("#fullIndicator").show();
+    }
+    else{
+        $("#fullIndicator").hide();
+    }
+}
+
+
+// Check whether to toggle alreadyEnrolled indicator
+if ( alreadyEnrolled == true){
+    toggleEnrolledIndicator(true);
+}
+else toggleEnrolledIndicator(false);
+
+// Check whether to toggle confirmIndicator
+if ( flag == false){
+    toggleConfirmIndicator(true);
+}
+else toggleConfirmIndicator(false);
+
+// Check whether to toggle fullIndicator
+if ( full == true){
+    toggleFullIndicator(true);
+}
+else toggleFullIndicator(false);

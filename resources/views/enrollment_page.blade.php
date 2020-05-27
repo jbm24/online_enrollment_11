@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Subject Management</title>
+        <title>Enrollment Page</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -18,6 +18,22 @@
 
 
     <body>
+        <!-- Indicator for if Student is already an Enrollee in the Subject -->
+        <div id="enrolledIndicator" style="display: none">
+            <h2> You are already enrolled in this subject.  </h2>
+        </div>
+
+        <!-- Indicator for if correct Student details were inputted -->
+        <div id="confirmIndicator" style="display: none">
+            <h2> Wrong ID Number or Birthday.  </h2>
+        </div>
+
+        <!-- Indicator for if the class is already full -->
+        <div id="fullIndicator" style="display: none">
+            <h2> This subject is already full.  </h2>
+        </div>
+
+
         <!-- Modal for Enrollment confirmation -->
         <div id="enrollModal" class="modal">
             <div class="modal-content">
@@ -34,6 +50,8 @@
                         <label for="editedCapacity">Birthday</label><br>
                         <input type="date" class="loginInput" name="confirmBday"><br>
 
+                        <input type="text" id="subject" class="hidden" name="subject"><br>
+
                         <input type="submit" id="modalSubmit" value="Confirm Enrollment">
                     </form>
 
@@ -46,7 +64,7 @@
         <div>
             <div class="content">
                 <div class="title m-b-md">
-                    Subject Management
+                    Enrollment Page
                 </div>
 
                 <table style="width:80%;margin-left: 10%;">
@@ -57,11 +75,24 @@
                     <th style="width: 10%;"></th>
                     </tr>
 
-                    <td>  <button class="enrollBtn"> Enroll </button> </td>
+                    @foreach ($subjectList as $subject) 
+                            <tr>
+                            <td class="subName">{{ $subject->subject_name }}</td>
+                            <td class="population"> <p class="enrollees">{{ $subject->enrollee()->count() }}</p> / <p class="capacity">{{ $subject->capacity }}</p></td>
+                            <td> {{ $subject->room }} - {{ $subject->schedule }} </td>
+                            <td>  <button class="enrollBtn"> Enroll </button> </td>
+                            </tr>
+                    @endforeach
 
             </div>
         </div>
 
+
+        <script>
+            var alreadyEnrolled = <?php echo json_encode($alreadyEnrolled); ?>;
+            var flag = <?php echo json_encode($flag); ?>;
+            var full = <?php echo json_encode($full); ?>;
+        </script>
         <script type="text/javascript" src="/js/enrollment_page.js"></script>
     </body>
 </html>

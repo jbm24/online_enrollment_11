@@ -62,7 +62,7 @@ $(document).ready(function(){
     //listen for outside click
     window.onclick = function(event) {
         if(event.target == document.getElementById('updateModal')){
-            viewModal.hide();
+            updateModal.hide();
         }
         if(event.target == document.getElementById('viewModal')){
             viewModal.hide();

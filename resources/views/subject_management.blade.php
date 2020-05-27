@@ -147,7 +147,7 @@
                         @foreach ($subjects as $subject) 
                             <tr>
                             <td class="subName">{{ $subject->subject_name }}</td>
-                            <td>enrollees</td>
+                            <td>{{ $subject->enrollee()->count() }}/{{ $subject->capacity }}</td>
                             <td> 
                                 <button class="editBtn"> Edit Subject </button> 
                                 <h1 class="hidden">{{ $subject->capacity }}</h1>
