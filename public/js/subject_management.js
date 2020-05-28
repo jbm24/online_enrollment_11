@@ -38,7 +38,7 @@ $(document).ready(function(){
     //edit modal btn
     var viewBtn = $('.viewBtn');
     //close btn
-    var closeViewBtn = $('.closeViewBtn');
+    var closeBtn = $('.closeBtn');
 
     //listen and open View modal 
     viewBtn.on('click', function openViewModal(){
@@ -50,7 +50,7 @@ $(document).ready(function(){
     } );
 
     //listen for close
-    closeViewBtn.on('click', closeViewModal);
+    closeBtn.on('click', closeViewModal);
 
     //fcn to close modal
     function closeViewModal(){

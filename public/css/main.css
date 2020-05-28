@@ -210,3 +210,60 @@ label {
     font-weight: bold;
     color: red;
 }
+
+/* Staff Main Page */
+
+
+
+.staffBtn {
+    margin-bottom: 20px;
+}
+
+.btnStaff {
+    color: black;
+    background-color: white;
+    font-family: 'Nunito', sans-serif;
+    border-radius: 10px;
+    font-size: x-large;
+    margin: 10px;
+}
+
+
+.btnStaff:hover {
+    color: white;
+    background-color: gray;
+}
+
+.loginBtn {
+    color: black;
+    background-color: white;
+    font-family: 'Nunito', sans-serif;
+    border-radius: 10px;
+    font-size: medium;
+    margin: 10px;
+}
+
+
+.loginBtn:hover {
+    color: white;
+    background-color: gray;
+}
+
+.staffP {
+    font-size: xx-large;
+    margin-left: 38%;
+}
+
+.contentStaff {
+    text-align: center;
+    height: 70%;
+}
+
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+ 
+input[type="number"] {
+    -moz-appearance: textfield;
+}

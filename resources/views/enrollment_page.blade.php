@@ -19,7 +19,7 @@
 
     <body>
         <form action="/">
-            <input type="submit" value="Back to Landing Page">
+            <input type="submit" class="loginBtn" value="Back to Landing Page">
         </form>
         <!-- Indicator for if Student is already an Enrollee in the Subject -->
         <div id="enrolledIndicator" style="display: none">

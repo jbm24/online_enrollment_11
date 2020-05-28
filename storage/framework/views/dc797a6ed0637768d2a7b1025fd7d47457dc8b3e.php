@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Online Enrollment</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -54,7 +54,7 @@
                 </p>
                 <p>
                     <form action="/enrollment">
-                        <input type="submit" value="Click here to enroll">
+                        <input type="submit" class="btnStaff" value="Click here to enroll">
                     </form>
                 </p>
             </div>

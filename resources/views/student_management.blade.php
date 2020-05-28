@@ -41,15 +41,15 @@
                     <form action="add_student" method="post">
                     @csrf
                         <label for="firstName">First Name</label><br>
-                        <input type="text" class="loginInput" name="firstName" placeholder="Enter first name here..."><br>
+                        <input type="text" class="loginInput" name="firstName" placeholder="Enter first name here..." required><br>
                         <label for="lastName">Last Name</label><br>
-                        <input type="text" class="loginInput" name="lastName" placeholder="Enter last name here..."><br>
+                        <input type="text" class="loginInput" name="lastName" placeholder="Enter last name here..." required><br>
                         <label for="idNumber">ID Number</label><br>
-                        <input type="number" class="loginInput" name="idNumber" placeholder="Enter ID Number here..."><br>
+                        <input type="number" class="loginInput" name="idNumber" placeholder="Enter ID Number here..." required><br>
                         <label for="birthday">Birthday</label><br>
-                        <input type="date" class="loginInput" name="birthday"><br>
+                        <input type="date" class="loginInput" name="birthday" required><br>
                         <label for="course">Course</label><br>
-                        <input type="text" class="loginInput" name="course" placeholder="Enter course here..."><br>
+                        <input type="text" class="loginInput" name="course" placeholder="Enter course here..." required><br>
 
                         <input type="submit" id="modalSubmit" value="Add Student">
                     </form>
@@ -128,7 +128,7 @@
                 <!-- For adding Student -->
                 <div class="addStudentBtn">
                     <button id="staffModal" class="loginBtn">Add Student</button>
-                </div>
+                </div><br>
 
                 <table class="student_table">
                     <tr>

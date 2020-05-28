@@ -18,17 +18,27 @@
 
 
     <body>
-        <form action="/">
-            <input type="submit" value="Back to Landing Page">
-        </form>
-        <br>
+    <div class="container">
+        <p class="staffP">
+                What would you like to do?
+        </p>
+        <div class="contentStaff">
+            
+            <form action="/student_management">
+                <input type="submit" class="btnStaff" value="Student Management">
+            </form>
+             
+            <form action="/subject_management">
+                <input type="submit" class="btnStaff" value="Subject Management">
+            </form>
 
-        <form action="/student_management">
-            <input type="submit" value="Student Management">
-        </form>
-
-        <form action="/subject_management">
-            <input type="submit" value="Subject Management">
-        </form>
+            <form action="/">
+                <input type="submit" class="btnStaff" value="Logout">
+            </form>
+            
+        </div>
+    </div>
+    
+        
     </body>
 </html>

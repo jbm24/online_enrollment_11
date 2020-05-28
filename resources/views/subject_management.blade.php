@@ -35,20 +35,20 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <span class="closeBtn">&times;</span>
-                    <h2>Add Student</h2>
+                    <h2>Add Subject</h2>
                 </div>
                 <div class="modal-body">
 
                     <form action="add_subject" method="post">
                     @csrf
                         <label for="subjectName">Subject Name</label><br>
-                        <input type="text" class="loginInput" name="subjectName" placeholder="Enter Subject Name here..."><br>
+                        <input type="text" class="loginInput" name="subjectName" placeholder="Enter Subject Name here..." required><br>
                         <label for="room">Room</label><br>
-                        <input type="text" class="loginInput" name="room" placeholder="Enter Room here..."><br>
+                        <input type="text" class="loginInput" name="room" placeholder="Enter Room here..." required><br>
                         <label for="capacity">Capacity</label><br>
-                        <input type="number" class="loginInput" name="capacity" placeholder="Enter Capacity..."><br>
+                        <input type="number" class="loginInput" name="capacity" placeholder="Enter Capacity..." required><br>
                         <label for="schedule">Schedule</label><br>
-                        <input type="text" class="loginInput" name="schedule" placeholder="Enter Schedule here..."><br>
+                        <input type="text" class="loginInput" name="schedule" placeholder="Enter Schedule here..." required><br>
 
                         <input type="submit" id="modalSubmit" value="Add Subject">
                     </form>
@@ -100,8 +100,8 @@
         <div id="viewModal" class="modal">
             <div class="enrollee-modal-content">
                 <div class="modal-header">
-                    <span class="closeViewBtn">&times;</span>
-                    <h2 id="modalHeader">Enrollees</h2>
+                    <span class="closeBtn">&times;</span>
+                    <h2>Enrollees</h2>
                 </div>
                 <div id="viewEnrolleesTable" class="modal-body">
 
@@ -127,7 +127,7 @@
                 <form action="/clear_enrollees" method="post">
                     @csrf
                     @method('delete')
-                    <input type="submit" value="Clear Enrollees">
+                    <input type="submit" class="loginBtn" value="Clear Enrollees">
                 </form>
 
                 <table id="enrollee_table" class="student_table">

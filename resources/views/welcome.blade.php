@@ -54,7 +54,7 @@
                 </p>
                 <p>
                     <form action="/enrollment">
-                        <input type="submit" value="Click here to enroll">
+                        <input type="submit" class="btnStaff" value="Click here to enroll">
                     </form>
                 </p>
             </div>
