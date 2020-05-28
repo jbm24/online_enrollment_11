@@ -52,6 +52,8 @@ Route::delete('delete_subject','SubjectController@destroy');
 // For enrollment page
 Route::get('/enrollment', 'EnrollmentController@index');
 
+Route::get('/search', 'EnrollmentController@search');
+
 Route::post('/enroll', 'EnrollmentController@store');
 
 Route::delete('delete_enrollee/{id}','EnrollmentController@destroy');
