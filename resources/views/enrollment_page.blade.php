@@ -47,7 +47,7 @@
                 <div class="modal-body">
 
                     <form action="/enroll" method="post">
-                    @csrf
+                        @csrf
                         <label for="editedSubjectName">Id Number</label><br>
                         <input type="number" class="loginInput" name="confirmId"><br>
                         <label for="editedCapacity">Birthday</label><br>
@@ -62,7 +62,18 @@
             </div>
         </div>
 
+
+
+        <!-- Searchbar for subjects -->
+        <form action="/search">
+            @csrf
+            <label for="searchSubject">Search subject:</label><br>
+            <input type="text" name="searchSubject"><br>
+
+            <input type="submit" value="Search">
+        </form>
         
+
         <!-- Table of Subjects -->
         <div>
             <div class="content">
