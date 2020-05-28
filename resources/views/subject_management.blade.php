@@ -25,7 +25,7 @@
         
         <!-- Back to Staff Main Page -->
         <div class="staffLogin">
-            <a href="/staff_main_page"> Back to Staff Main Page </a>
+            <a href="/staff_main_page" class="backMain"> Back to Staff Main Page </a>
         </div>
 
 
@@ -71,15 +71,15 @@
                     @csrf
                     @method('put')
                         <label for="editedSubjectName">Subject Name</label><br>
-                        <input type="text" class="loginInput" id="eSubName" name="editedSubjectName"><br>
+                        <input type="text" class="loginInput" id="eSubName" name="editedSubjectName" required><br>
                         <label for="editedCapacity">Capacity</label><br>
-                        <input type="number" class="loginInput" id="eCapacity" name="editedCapacity"><br>
+                        <input type="number" class="loginInput" id="eCapacity" name="editedCapacity" required><br>
                         <label for="editedRoom">Room</label><br>
-                        <input type="text" class="loginInput" id="eRoom" name="editedRoom"><br>
+                        <input type="text" class="loginInput" id="eRoom" name="editedRoom" required><br>
                         <label for="editedSchedule">Schedule</label><br>
-                        <input type="text" class="loginInput" id="eSchedule" name="editedSchedule"><br>
+                        <input type="text" class="loginInput" id="eSchedule" name="editedSchedule" required><br>
 
-                        <input type="text" id="oldSubName" class="hidden" name="oldSubName"><br>
+                        <input type="text" id="oldSubName" class="hidden" name="oldSubName" required><br>
 
                         <input type="submit" id="modalSubmit" value="Edit">
                     </form>

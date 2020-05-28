@@ -18,9 +18,6 @@
 
 
     <body>
-        <form action="/">
-            <input type="submit" class="loginBtn" value="Back to Landing Page">
-        </form>
         <!-- Indicator for if Student is already an Enrollee in the Subject -->
         <div id="enrolledIndicator" style="display: none">
             <h2> You are already enrolled in this subject.  </h2>
@@ -35,6 +32,11 @@
         <div id="fullIndicator" style="display: none">
             <h2> This subject is already full.  </h2>
         </div>
+        
+        <form action="/">
+            <input type="submit" class="loginBtn" value="Back to Landing Page">
+        </form>
+        
 
 
         <!-- Modal for Enrollment confirmation -->
@@ -49,9 +51,9 @@
                     <form action="/enroll" method="post">
                         @csrf
                         <label for="editedSubjectName">Id Number</label><br>
-                        <input type="number" class="loginInput" name="confirmId"><br>
+                        <input type="number" class="loginInput" name="confirmId" required><br>
                         <label for="editedCapacity">Birthday</label><br>
-                        <input type="date" class="loginInput" name="confirmBday"><br>
+                        <input type="date" class="loginInput" name="confirmBday" required><br>
 
                         <input type="text" id="subject" class="hidden" name="subject"><br>
 
@@ -62,16 +64,6 @@
             </div>
         </div>
 
-
-
-        <!-- Searchbar for subjects -->
-        <form action="/search">
-            @csrf
-            <label for="searchSubject">Search subject:</label><br>
-            <input type="text" name="searchSubject"><br>
-
-            <input type="submit" value="Search">
-        </form>
         
 
         <!-- Table of Subjects -->
@@ -80,7 +72,14 @@
                 <div class="title m-b-md">
                     Enrollment Page
                 </div>
+                <!-- Searchbar for subjects -->
+                <form action="/search">
+                    @csrf
+                    <label for="searchSubject">Search subject:</label><br>
+                    <input type="text" name="searchSubject"><br>
 
+                    <input type="submit" value="Search">
+                </form>
                 <table style="width:80%;margin-left: 10%;">
                     <tr>
                     <th style="width: 25%;">Subject Name</th>

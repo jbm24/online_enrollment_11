@@ -19,13 +19,13 @@
 
     <body>
         <!-- Indicator for if added or updated Student Id already exists -->
-        <div id="existIndicator" style="display: none">
+        <div id="existIndicator">
             <h2> A student with that ID Number already exists  </h2>
         </div>
         
         <!-- Back to Staff Main Page -->
         <div class="staffLogin">
-            <a href="/staff_main_page"> Back to Staff Main Page </a>
+            <a href="/staff_main_page" class="backMain"> Back to Staff Main Page </a>
         </div>
 
 
@@ -72,17 +72,17 @@
                     @csrf
                     @method('put')
                         <label for="updatedFirstName">First Name</label><br>
-                        <input type="text" id="fname" class="loginInput" name="updatedFirstName"><br>
+                        <input type="text" id="fname" class="loginInput" name="updatedFirstName" required><br>
                         <label for="updatedLastName">Last Name</label><br>
-                        <input type="text" id="lname" class="loginInput" name="updatedLastName"><br>
+                        <input type="text" id="lname" class="loginInput" name="updatedLastName" required><br>
                         <label for="updatedIdNumber">ID Number</label><br>
-                        <input type="number" id="idNum" class="loginInput" name="updatedIdNumber"><br>
+                        <input type="number" id="idNum" class="loginInput" name="updatedIdNumber" required><br>
                         <label for="updatedBirthday">Birthday</label><br>
-                        <input type="date" id="bday" class="loginInput" name="updatedBirthday"><br>
+                        <input type="date" id="bday" class="loginInput" name="updatedBirthday" required><br>
                         <label for="updatedCourse">Course</label><br>
-                        <input type="text" id="course" class="loginInput" name="updatedCourse"><br>
+                        <input type="text" id="course" class="loginInput" name="updatedCourse" required><br>
 
-                        <input type="number" id="oldIdNum" class="hidden" name="oldIdNumber"><br>
+                        <input type="number" id="oldIdNum" class="hidden" name="oldIdNumber" required><br>
 
                         <input type="submit" id="modalSubmit" value="Edit">
                     </form>
