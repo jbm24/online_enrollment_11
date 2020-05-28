@@ -8,7 +8,10 @@ $(document).ready(function(){
 
     //listen and open Enrollment Confirmation modal 
     enrollBtn.on('click', function() {
-        if ($(this).parent().siblings(".population").children(".enrollees").html() < $(this).parent().siblings(".population").children(".capacity").html()) {
+        var enrollees = Number( $(this).parent().siblings(".population").children(".enrollees").html() );
+        var capacity = Number( $(this).parent().siblings(".population").children(".capacity").html() );
+        
+        if ( enrollees < capacity ) {
             $("#subject").val( $(this).parent().siblings(".subName").html() );
             enrollModal.show();
         }

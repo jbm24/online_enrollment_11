@@ -29,6 +29,7 @@
         </div>
 
 
+
         <!-- Modal for adding Subjects -->
         <div id="simpleModal" class="modal">
             <div class="modal-content">
@@ -87,46 +88,28 @@
                         @csrf
                         @method('delete')
                         <input type="text" id="delSubName" class="hidden" name="delSubName"><br>
-                        <button type="submit" class="delete"> Delete this student </button> 
+                        <button type="submit" class="delete"> Delete this subject </button> 
                     </form>
 
                 </div>
             </div>
         </div>
-
+        
 
         <!-- Modal for viewing Enrollees of a Subject  -->
         <div id="viewModal" class="modal">
             <div class="enrollee-modal-content">
                 <div class="modal-header">
                     <span class="closeViewBtn">&times;</span>
-                    <h2 id="modalHeader">Edit Subject Information</h2>
+                    <h2 id="modalHeader">Enrollees</h2>
                 </div>
-                <div class="modal-body">
-
-                <table style="width:80%;margin-left: 10%;">
-                    <tr>
-                    <th style="width: 25%;">ID Number</th>
-                    <th style="width: 10%;">Full Name</th>
-                    <th style="width: 105%;">Course</th>
-                    <th style="width: 10%;"></th>
-                    </tr>
-
-                        @foreach ($subjects as $subject) 
-                            <tr>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td> 
-                                <button class="unenroll"> Unenroll </button> 
-                            </td>
-                            </tr>
-                        @endforeach
-                </table>
+                <div id="viewEnrolleesTable" class="modal-body">
 
                 </div>
             </div>
         </div>
+
+
 
         
         <!-- Table of Subjects -->
@@ -136,7 +119,18 @@
                     Subject Management
                 </div>
 
-                <table class="student_table">
+                <!-- For adding Subjects -->
+                <div class="addStudentBtn">
+                    <button id="staffModal" class="loginBtn">Add Subject</button>
+                </div>
+                <!-- For clearing all Enrollees -->
+                <form action="/clear_enrollees" method="post">
+                    @csrf
+                    @method('delete')
+                    <input type="submit" value="Clear Enrollees">
+                </form>
+
+                <table id="enrollee_table" class="student_table">
                     <tr>
                     <th style="width: 25%;">Subject</th>
                     <th style="width: 10%;">Enrollees</th>
@@ -148,23 +142,45 @@
                             <tr>
                             <td class="subName">{{ $subject->subject_name }}</td>
                             <td>{{ $subject->enrollee()->count() }}/{{ $subject->capacity }}</td>
-                            <td> 
+                            <td class="edit"> 
                                 <button class="editBtn"> Edit Subject </button> 
                                 <h1 class="hidden">{{ $subject->capacity }}</h1>
                                 <h2 class="hidden">{{ $subject->room }}</h2>
                                 <h3 class="hidden">{{ $subject->schedule }}</h3>
+
+                                <table class="hidden">
+                                <tr>
+                                    <th style="width: 25%;">ID Number</th>
+                                    <th style="width: 10%;">Full Name</th>
+                                    <th style="width: 10%;">Course</th>
+                                    <th style="width: 10%;"></th>
+                                </tr>
+                                @foreach ($subject->enrollee as $enrolled)
+                                <tr>
+                                <td>{{ $enrolled->student->id_number }}</td>
+                                <td>{{ $enrolled->student->last_name }}, {{ $enrolled->student->first_name }}</td>
+                                <td>{{ $enrolled->student->course }}</td>
+                                <td> 
+                                <form method="POST" action="/delete_enrollee/{{ $enrolled->student_id }}">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit"> Unenroll </button> 
+                                </form>
+                            </td>
+                                </tr>
+                                @endforeach
+                                </table>
                             </td>
                             <td>  <button class="viewBtn"> View Enrollees </button> </td>
                             </tr>
                         @endforeach
                 </table>
 
-                <div class="addStudentBtn">
-                    <button id="staffModal" class="loginBtn">Add Subject</button>
-                </div>
-
             </div>
         </div>
+
+
+
 
         <script type="text/javascript" src="/js/modal.js"></script>
         <script>

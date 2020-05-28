@@ -8,7 +8,7 @@ use App\Subject;
 class SubjectController extends Controller
 {
     public function index(){
-        $subjectList = Subject::orderBy('subject_name', 'asc')->get();
+        $subjectList = Subject::orderBy('subject_name', 'asc')->with('enrollee')->get();
 
         return view('/subject_management', [
             'subjects' => $subjectList,
@@ -83,8 +83,12 @@ class SubjectController extends Controller
     
     public function destroy() {
         $name = request('delSubName');
+        $subject = Subject::firstWhere('subject_name', $name);
 
-        Subject::where('subject_name', $name)->delete();
+        // for deleting enrollees in this subject
+        $subject->enrollee()->delete();
+        // for deleting the subject itself
+        $subject->delete();
 
         return redirect('subject_management');
      }

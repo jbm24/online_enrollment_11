@@ -18,6 +18,9 @@
 
 
     <body>
+        <form action="/">
+            <input type="submit" value="Back to Landing Page">
+        </form>
         <!-- Indicator for if Student is already an Enrollee in the Subject -->
         <div id="enrolledIndicator" style="display: none">
             <h2> You are already enrolled in this subject.  </h2>
@@ -78,7 +81,7 @@
                     @foreach ($subjectList as $subject) 
                             <tr>
                             <td class="subName">{{ $subject->subject_name }}</td>
-                            <td class="population"> <p class="enrollees">{{ $subject->enrollee()->count() }}</p> / <p class="capacity">{{ $subject->capacity }}</p></td>
+                            <td class="population"><p class="enrollees">{{ $subject->enrollee()->count() }}</p>/<p class="capacity">{{ $subject->capacity }}</p></td>
                             <td> {{ $subject->room }} - {{ $subject->schedule }} </td>
                             <td>  <button class="enrollBtn"> Enroll </button> </td>
                             </tr>

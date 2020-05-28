@@ -68,4 +68,19 @@ class EnrollmentController extends Controller
             'flag' => $flag
         ]);
     }
+
+
+
+    public function destroy($id) {
+        Enrollee::where('student_id', $id)->delete();
+
+        return redirect('subject_management');
+     }
+
+
+     public function clear() {
+        Enrollee::truncate();
+
+        return redirect('subject_management');
+     }
 }

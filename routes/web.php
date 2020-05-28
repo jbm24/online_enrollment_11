@@ -17,6 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+// For staff login
 Route::post('/auth', 'authController@authenticate');
 
 Route::get('/staff_main_page', function () {
@@ -51,3 +53,7 @@ Route::delete('delete_subject','SubjectController@destroy');
 Route::get('/enrollment', 'EnrollmentController@index');
 
 Route::post('/enroll', 'EnrollmentController@store');
+
+Route::delete('delete_enrollee/{id}','EnrollmentController@destroy');
+
+Route::delete('clear_enrollees','EnrollmentController@clear');

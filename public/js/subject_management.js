@@ -42,13 +42,11 @@ $(document).ready(function(){
 
     //listen and open View modal 
     viewBtn.on('click', function openViewModal(){
-        $("#viewFirstName").html( $(this).parent().siblings(".studName").children('p.studFName').html() );
-        $("#viewLastName").html( $(this).parent().siblings(".studName").children('p.studLName').html() );
-        $("#viewIdNumber").html( $(this).parent().siblings(".studId").html() );
-        $("#viewBirthday").html( $(this).parent().siblings(".editTD").children('p.hidden').html() );
-        $("#viewCourse").html( $(this).parent().siblings(".studCourse").html() );
+        var clone = $(this).parent().siblings(".edit").children('table').clone(false);
+        $("#viewEnrolleesTable").html(clone);
 
         viewModal.show();
+        $("#viewEnrolleesTable").children().show();
     } );
 
     //listen for close

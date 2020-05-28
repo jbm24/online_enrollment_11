@@ -125,6 +125,11 @@
                     Student Management
                 </div>
 
+                <!-- For adding Student -->
+                <div class="addStudentBtn">
+                    <button id="staffModal" class="loginBtn">Add Student</button>
+                </div>
+
                 <table class="student_table">
                     <tr>
                     <th style="width: 25%;">ID Number</th>
@@ -155,9 +160,7 @@
                             </tr>
                         @endforeach
                 </table>
-                <div class="addStudentBtn">
-                    <button id="staffModal" class="loginBtn">Add Student</button>
-                </div>
+                
             </div>
         </div>
 

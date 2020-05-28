@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Staff Main Page</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -18,8 +18,17 @@
 
 
     <body>
-        <a href="/student_management"> Student Management </a>
+        <form action="/">
+            <input type="submit" value="Back to Landing Page">
+        </form>
         <br>
-        <a href="/subject_management"> Subject Management </a>
+
+        <form action="/student_management">
+            <input type="submit" value="Student Management">
+        </form>
+
+        <form action="/subject_management">
+            <input type="submit" value="Subject Management">
+        </form>
     </body>
 </html>
