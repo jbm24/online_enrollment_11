@@ -24,7 +24,7 @@ class EnrollmentController extends Controller
     public function search(){
         $subject = request('searchSubject');
 
-        $subjectList = Subject::where('subject_name', 'LIKE', "%{$subject}%")->get();
+        $subjectList = Subject::where('subject_name', 'LIKE', "%{$subject}%")->orderBy('subject_name', 'asc')->get();
             return view('/enrollment_page', [
                 'subjectList' => $subjectList,
                 'alreadyEnrolled' => false,              
