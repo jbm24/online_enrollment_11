@@ -1,4 +1,8 @@
 $(document).ready(function(){
+    generateTable();
+
+
+
     //modal element
     var addModal = $('#addModal');
     //open modal btn

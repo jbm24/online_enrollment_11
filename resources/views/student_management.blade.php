@@ -151,6 +151,7 @@
                 </div><br>
 
                 <table id="student_table" class="student_table">
+                    <thead>
                     <tr>
                     <th style="width: 25%;">ID Number</th>
                     <th style="width: 40%;">Name</th>
@@ -159,26 +160,11 @@
                     <th style="width: 10%;"></th>
                     <th style="width: 10%;"></th>
                     </tr>
+                    </thead>
 
-                        @foreach ($students as $student) 
-                            <tr>
-                            <td class="studId">{{ $student->id_number }}</td>
-                            <td class="studName"> <p class="studLName">{{ $student->last_name }}</p>, <p class=studFName>{{ $student->first_name }}</p> </td>
-                            <td class="studCourse">{{ $student->course }}</td>
-                            <td> <button class="viewBtn"> View </button> </td>
-                            <td class="editTD"> 
-                                <button class="editBtn"> Edit </button> 
-                                <p class="hidden">{{ $student->birthday }}</p> 
-                            </td>
-                            <td> 
-                                <form method="POST" action="/delete_student/{{ $student->id_number }}">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit"> Delete </button> 
-                                </form>
-                            </td>
-                            </tr>
-                        @endforeach
+                    <tbody id="studTable">
+                        
+                    </tbody>
                 </table>
                 
             </div>
@@ -194,6 +180,7 @@
                     }
                 });
 
+                // Add Student
                 $('#addSubmit').click(function (e) {
                     e.preventDefault();
                     $(this).val('Adding student..');
@@ -209,7 +196,7 @@
 
                             $('#existIndicator').html(data.success);
                             $('#existIndicator').show();
-
+                            generateTable();
                         },
 
                         error: function (data) {
@@ -218,6 +205,33 @@
                     });
                 });
             });
+
+            // Generate Student table
+            function generateTable(){
+                $.ajax({
+                    url: "fetchTable",
+                    type: "get",
+                    dataType: 'json',
+
+                    success: function (data) {
+                        var table = $("#studTable");
+                        var tableData;
+                        for (var count=0; count<data.length; count++){
+                            tableData += '<tr><td class="studId">' + data[count].id_number + '</td>';
+                            tableData += '<td class="studName"> <p class="studLName">' + data[count].last_name + "</p>, <p class=studFName>" + data[count].first_name + '</p></td>';
+                            tableData += '<td class="studCourse">' + data[count].course + '</td>';
+                            tableData += '<td><button type="button" class="viewBtn">View</button></td>'
+                            tableData += '<td class="editTD"><button type="button" class="editBtn">Edit</button></td>'
+                            tableData += '<td><button type="button" class="deleteBtn">Delete</button></td></tr>'
+                        }
+                        table.html(tableData);
+                    },
+
+                    error: function (data) {
+                        console.log('Error:', data);
+                    }
+                });
+            }
         </script>
 
         <script type="text/javascript" src="/js/student_management.js"></script>

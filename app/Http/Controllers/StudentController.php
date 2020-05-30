@@ -8,12 +8,16 @@ use App\Student;
 class StudentController extends Controller
 {
     public function index(){
-        $studentList = Student::orderBy('last_name', 'asc')->get();
+        return view('/student_management');
+    }
 
-        return view('/student_management', [
-            'students' => $studentList,
-            'exists' => false
-        ]);
+
+
+    public function fetchTable(Request $request){
+        if ($request->ajax()){
+            $studentList = Student::orderBy('last_name', 'asc')->get();
+            echo json_encode($studentList);
+        }
     }
 
 
@@ -37,7 +41,10 @@ class StudentController extends Controller
 
             $newStudent->save();
 
-            return response()->json(['success'=>'Successfully added student.']);
+
+            $studentList = Student::orderBy('last_name', 'asc')->get();
+
+            return response()->json(['success'=> 'Successfully added student.', 'students'=> $studentList]);
         }
         else {
             return response()->json(['success'=>'A student with that ID number already exists.']);

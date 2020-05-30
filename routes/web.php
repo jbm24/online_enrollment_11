@@ -30,6 +30,8 @@ Route::get('/staff_main_page', function () {
 // For student_management page
 Route::get('/student_management', 'StudentController@index');
 
+Route::get('/fetchTable', 'StudentController@fetchTable');
+
 Route::post('/add_student', 'StudentController@store');
 
 Route::put('/update_student', 'StudentController@update');
