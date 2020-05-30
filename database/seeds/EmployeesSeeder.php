@@ -14,7 +14,7 @@ class EmployeesSeeder extends Seeder
     {
         DB::table('employees')->insert([
             'username' => 'user',
-            'password' => 'pass'
+            'password' => Hash::make('pass')
         ]);
     }
 }
