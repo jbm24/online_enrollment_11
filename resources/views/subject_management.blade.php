@@ -72,10 +72,10 @@
                     @method('put')
                         <label for="editedSubjectName">Subject Name</label><br>
                         <input type="text" class="loginInput" id="eSubName" name="editedSubjectName" required><br>
-                        <label for="editedCapacity">Capacity</label><br>
-                        <input type="number" class="loginInput" id="eCapacity" name="editedCapacity" required><br>
                         <label for="editedRoom">Room</label><br>
                         <input type="text" class="loginInput" id="eRoom" name="editedRoom" required><br>
+                        <label for="editedCapacity">Capacity</label><br>
+                        <input type="number" class="loginInput" id="eCapacity" name="editedCapacity" required><br>
                         <label for="editedSchedule">Schedule</label><br>
                         <input type="text" class="loginInput" id="eSchedule" name="editedSchedule" required><br>
 
@@ -161,7 +161,7 @@
                                 <td>{{ $enrolled->student->last_name }}, {{ $enrolled->student->first_name }}</td>
                                 <td>{{ $enrolled->student->course }}</td>
                                 <td> 
-                                <form method="POST" action="/delete_enrollee/{{ $enrolled->student_id }}">
+                                <form method="POST" action="/delete_enrollee/{{ $enrolled->student_id }}/{{ $enrolled->subject_id }}">
                                     @csrf
                                     @method('delete')
                                     <button type="submit"> Unenroll </button> 

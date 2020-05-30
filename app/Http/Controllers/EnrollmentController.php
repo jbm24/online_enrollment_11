@@ -84,8 +84,11 @@ class EnrollmentController extends Controller
 
 
 
-    public function destroy($id) {
-        Enrollee::where('student_id', $id)->delete();
+    public function destroy($studId, $subId) {
+        Enrollee::where([
+            ['student_id', $studId],
+            ['subject_id', $subId],
+        ])->delete();
 
         return redirect('subject_management');
      }

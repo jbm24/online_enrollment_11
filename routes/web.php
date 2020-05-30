@@ -47,6 +47,10 @@ Route::put('/update_subject', 'SubjectController@update');
 
 Route::delete('delete_subject','SubjectController@destroy');
 
+Route::delete('delete_enrollee/{studId}/{subId}','EnrollmentController@destroy');
+
+Route::delete('clear_enrollees','EnrollmentController@clear');
+
 
 
 // For enrollment page
@@ -55,7 +59,3 @@ Route::get('/enrollment', 'EnrollmentController@index');
 Route::get('/search', 'EnrollmentController@search');
 
 Route::post('/enroll', 'EnrollmentController@store');
-
-Route::delete('delete_enrollee/{id}','EnrollmentController@destroy');
-
-Route::delete('clear_enrollees','EnrollmentController@clear');
