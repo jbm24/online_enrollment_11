@@ -12,6 +12,13 @@ html, body {
     height: 50%;
 }
 
+ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+
 a {
     text-decoration: none;
 }
@@ -175,7 +182,7 @@ td, th {
 
 .studentTitle {
     font-size: 84px;
-    margin-left: 230px;
+    margin: auto;
     margin-top: 10px;
 }
 

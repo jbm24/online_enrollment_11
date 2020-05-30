@@ -11,49 +11,46 @@
 
         <!-- Styles -->
         <link href="/css/main.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     </head>
 
 
 
     <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="/img/computer.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            Online Enrollment
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/student_management">Student Management</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Subject Management <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav> 
         <!-- Indicator for if added or updated Subject already exists -->
         <div id="existIndicator" style="display: none">
             <h2> That subject already exists  </h2>
         </div>
-        <div class="row nav">
-            <div class="col">
-                <form action="/student_management">
-                    <input type="submit" class="btn btn-secondary" value="Student Management">
-                </form>
-            </div>
-            <div class="col">
-                <form action="/subject_management">
-                    <input type="submit" class="btn btn-secondary" value="Subject Management">
-                </form>
-            </div>
-            <div class="row nav">
-                <form action="/">
-                    <input type="submit" class="btn btn-secondary" value="Logout">
-                </form>
-            </div>
-        </div>
         
-        <!-- Back to Staff Main Page -->
-        <div class="staffLogin">
-            <a href="/staff_main_page" class="backMain"> Back to Staff Main Page </a>
-        </div>
-
-
-
         <!-- Modal for adding Subjects -->
         <div id="simpleModal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <span class="closeBtn">&times;</span>
                     <h2>Add Subject</h2>
+                    <span class="closeBtn">&times;</span>
                 </div>
                 <div class="modal-body">
 
@@ -80,8 +77,8 @@
         <div id="updateModal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <span class="closeUpdateBtn">&times;</span>
                     <h2 id="modalHeader">Edit Subject Information</h2>
+                    <span class="closeUpdateBtn">&times;</span>
                 </div>
                 <div class="modal-body">
 
@@ -118,8 +115,8 @@
         <div id="viewModal" class="modal">
             <div class="enrollee-modal-content">
                 <div class="modal-header">
-                    <span class="closeBtn">&times;</span>
                     <h2>Enrollees</h2>
+                    <span class="closeBtn">&times;</span>
                 </div>
                 <div id="viewEnrolleesTable" class="modal-body">
 
@@ -139,13 +136,13 @@
 
                 <!-- For adding Subjects -->
                 <div class="addStudentBtn">
-                    <button id="staffModal" class="loginBtn">Add Subject</button>
+                    <button id="staffModal" class="loginBtn btn btn-secondary">Add Subject</button>
                 </div>
                 <!-- For clearing all Enrollees -->
                 <form action="/clear_enrollees" method="post">
                     @csrf
                     @method('delete')
-                    <input type="submit" class="loginBtn" value="Clear Enrollees">
+                    <input type="submit" class="loginBtn btn btn-secondary" value="Clear Enrollees">
                 </form>
 
                 <table id="enrollee_table" class="student_table">
@@ -161,7 +158,7 @@
                             <td class="subName">{{ $subject->subject_name }}</td>
                             <td>{{ $subject->enrollee()->count() }}/{{ $subject->capacity }}</td>
                             <td class="edit"> 
-                                <button class="editBtn"> Edit Subject </button> 
+                                <button class="editBtn btn btn-secondary"> Edit Subject </button> 
                                 <h1 class="hidden">{{ $subject->capacity }}</h1>
                                 <h2 class="hidden">{{ $subject->room }}</h2>
                                 <h3 class="hidden">{{ $subject->schedule }}</h3>
@@ -189,7 +186,7 @@
                                 @endforeach
                                 </table>
                             </td>
-                            <td>  <button class="viewBtn"> View Enrollees </button> </td>
+                            <td>  <button class="viewBtn btn btn-secondary"> View Enrollees </button> </td>
                             </tr>
                         @endforeach
                 </table>
@@ -205,5 +202,8 @@
             var exists = <?php echo json_encode($exists); ?>;
         </script>
         <script type="text/javascript" src="/js/subject_management.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     </body>
 </html>
