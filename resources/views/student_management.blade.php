@@ -11,6 +11,7 @@
 
         <!-- Styles -->
         <link href="/css/main.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     </head>
@@ -21,6 +22,23 @@
         <!-- Indicator for if added or updated Student Id already exists -->
         <div id="existIndicator">
             <h2> A student with that ID Number already exists  </h2>
+        </div>
+        <div class="row nav">
+            <div class="col">
+                <form action="/student_management">
+                    <input type="submit" class="btn btn-secondary" value="Student Management">
+                </form>
+            </div>
+            <div class="col">
+                <form action="/subject_management">
+                    <input type="submit" class="btn btn-secondary" value="Subject Management">
+                </form>
+            </div>
+            <div class="row nav">
+                <form action="/">
+                    <input type="submit" class="btn btn-secondary" value="Logout">
+                </form>
+            </div>
         </div>
         
         <!-- Back to Staff Main Page -->
