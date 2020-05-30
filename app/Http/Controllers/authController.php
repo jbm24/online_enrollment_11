@@ -25,7 +25,7 @@ class authController extends Controller
         }
 
         if ($flag == 1){
-            return view('student_management');
+            return redirect('student_management');
         }
         else{
             return view('welcome');

@@ -18,12 +18,12 @@ class StudentController extends Controller
 
 
 
-    public function store(){
-        $fName = request('firstName');
-        $lName = request('lastName');
-        $idNum = request('idNumber');
-        $birthday = request('birthday');
-        $course = request('course');
+    public function store(Request $request){
+        $fName = $request->firstName;
+        $lName = $request->lastName;
+        $idNum = $request->idNumber;
+        $birthday = $request->birthday;
+        $course = $request->course;
         
         $exists = Student::where('id_number', $idNum)->exists();
 
@@ -36,14 +36,12 @@ class StudentController extends Controller
             $newStudent->course = $course;
 
             $newStudent->save();
+
+            return response()->json(['success'=>'Successfully added student.']);
         }
-
-        $studentList = Student::orderBy('last_name', 'asc')->get();
-
-        return view('/student_management', [
-            'students' => $studentList,
-            'exists' => $exists
-        ]);
+        else {
+            return response()->json(['success'=>'A student with that ID number already exists.']);
+        }
     }
     
 

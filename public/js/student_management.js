@@ -1,5 +1,24 @@
 $(document).ready(function(){
     //modal element
+    var addModal = $('#addModal');
+    //open modal btn
+    var modalBtn = $('#showAdd');
+    //close btn
+    var closeAddBtn = $('.closeBtn');
+
+    //fcn to open modal
+    modalBtn.on('click', function openModal(){
+        addModal.show();
+    });
+
+    //fcn to close modal
+    closeAddBtn.on('click', function(){
+        addModal.hide();
+        $(".resultIndicator").hide();
+    });
+    
+    
+    //modal element
     var updateModal = $('#updateModal');
     //edit modal btn
     var editBtn = $('.editBtn');
@@ -25,6 +44,7 @@ $(document).ready(function(){
     //fcn to close modal
     function closeUpdateModal(){
         updateModal.hide();
+        $(".resultIndicator").hide();
     } 
 
 
@@ -57,34 +77,21 @@ $(document).ready(function(){
     //fcn to close modal
     function closeViewModal(){
         viewModal.hide();
+        $(".resultIndicator").hide();
     } 
 
     //listen for outside click
     window.onclick = function(event) {
-        if(event.target == document.getElementById('updateModal')){
+        if(event.target == document.getElementById('addModal')){
+            addModal.hide();
+            $(".resultIndicator").hide();
+        }if(event.target == document.getElementById('updateModal')){
             updateModal.hide();
+            $(".resultIndicator").hide();
         }
         if(event.target == document.getElementById('viewModal')){
             viewModal.hide();
+            $(".resultIndicator").hide();
         }
     }
 });
-
-
-
-
-// Toggle indicator of whether added student already exists
-function toggleExistIndicator(state){
-    if(state){
-        $("#existIndicator").show();
-    }
-    else{
-        $("#existIndicator").hide();
-    }
-}
-
-// Check whether added student already exists
-if ( exists == true){
-    toggleExistIndicator(true);
-}
-else toggleExistIndicator(false);

@@ -14,15 +14,13 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+        <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
 
 
 
     <body>
-        <!-- Indicator for if added or updated Student Id already exists -->
-        <div id="existIndicator">
-            <h2> A student with that ID Number already exists  </h2>
-        </div>
         <div class="row nav">
             <div class="col">
                 <form action="/student_management">
@@ -41,6 +39,7 @@
             </div>
         </div>
         
+    <body>   
         <!-- Back to Staff Main Page -->
         <div class="staffLogin">
             <a href="/staff_main_page" class="backMain"> Back to Staff Main Page </a>
@@ -48,15 +47,20 @@
 
 
         <!-- Modal for adding students -->
-        <div id="simpleModal" class="modal">
+        <div id="addModal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
                     <span class="closeBtn">&times;</span>
                     <h2 id="modalHeader">Add Student</h2>
                 </div>
+
+                <!-- Indicator sucessful/unsuccessful adding -->
+                <div id="existIndicator">dasf
+                </div>
+
                 <div class="modal-body">
 
-                    <form action="add_student" method="post">
+                    <form id="addForm">
                     @csrf
                         <label for="firstName">First Name</label><br>
                         <input type="text" class="loginInput" name="firstName" placeholder="Enter first name here..." required><br>
@@ -69,7 +73,7 @@
                         <label for="course">Course</label><br>
                         <input type="text" class="loginInput" name="course" placeholder="Enter course here..." required><br>
 
-                        <input type="submit" id="modalSubmit" value="Add Student">
+                        <input type="submit" id="addSubmit" value="Add Student">
                     </form>
 
                 </div>
@@ -86,7 +90,7 @@
                 </div>
                 <div class="modal-body">
 
-                    <form action="/update_student" method="post">
+                    <form id="updateForm" action="/update_student" method="post">
                     @csrf
                     @method('put')
                         <label for="updatedFirstName">First Name</label><br>
@@ -102,7 +106,7 @@
 
                         <input type="number" id="oldIdNum" class="hidden" name="oldIdNumber" required><br>
 
-                        <input type="submit" id="modalSubmit" value="Edit">
+                        <input type="submit" id="updateSubmit" value="Edit">
                     </form>
 
                 </div>
@@ -118,7 +122,6 @@
                     <h2 id="modalHeader">View Student Information</h2>
                 </div>
                 <div class="modal-body">
-
                         <label for="viewFirstName">First Name</label> <br>
                         <p id="viewFirstName" name="viewFirstName"></p> <br>
                         <label for="viewLastName">Last Name</label> <br>
@@ -129,7 +132,6 @@
                         <p id="viewBirthday" name="viewBirthday"></p> <br>
                         <label for="viewCourse">Course</label> <br>
                         <p id="viewCourse" name="viewCourse"></p> <br>
-
                 </div>
             </div>
         </div>
@@ -143,12 +145,12 @@
                     Student Management
                 </div>
 
-                <!-- For adding Student -->
+                <!-- Button for adding Student -->
                 <div class="addStudentBtn">
-                    <button id="staffModal" class="loginBtn">Add Student</button>
+                    <button id="showAdd" class="loginBtn">Add Student</button>
                 </div><br>
 
-                <table class="student_table">
+                <table id="student_table" class="student_table">
                     <tr>
                     <th style="width: 25%;">ID Number</th>
                     <th style="width: 40%;">Name</th>
@@ -184,10 +186,40 @@
 
 
 
-        <script type="text/javascript" src="/js/modal.js"></script>
         <script>
-            var exists = <?php echo json_encode($exists); ?>;
+            $(function () {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $('#addSubmit').click(function (e) {
+                    e.preventDefault();
+                    $(this).val('Adding student..');
+
+                    $.ajax({
+                        data: $('#addForm').serialize(),
+                        url: "add_student",
+                        type: "post",
+                        dataType: 'json',
+
+                        success: function (data) {
+                            $('#addForm').trigger("reset");
+
+                            $('#existIndicator').html(data.success);
+                            $('#existIndicator').show();
+
+                        },
+
+                        error: function (data) {
+                            console.log('Error:', data);
+                        }
+                    });
+                });
+            });
         </script>
+
         <script type="text/javascript" src="/js/student_management.js"></script>
     </body>
 </html>
