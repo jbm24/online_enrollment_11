@@ -11,7 +11,7 @@ class authController extends Controller
     public function authenticate(){
 
         $username = request('user');
-        $password = request('pass');
+        $password = bcrypt(request('pass'));
         $flag = 0;
 
         $employees = Employee::all();
