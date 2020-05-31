@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use App\Employee;
 
 class authController extends Controller
@@ -10,7 +11,7 @@ class authController extends Controller
     public function authenticate(){
 
         $username = request('user');
-        $password = request('pass');
+        $password = bcrypt(request('pass'));
         $flag = 0;
 
         $employees = Employee::all();
@@ -18,7 +19,7 @@ class authController extends Controller
 
         foreach ($employees as $employee) {
 
-            if ($username == $employee->username && $password == $employee->password){
+            if ($username == $employee->username && Hash::check('pass', $password)){
                 $flag = 1;
                 break;
             }
