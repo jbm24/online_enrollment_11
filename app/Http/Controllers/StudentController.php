@@ -13,7 +13,7 @@ class StudentController extends Controller
 
 
 
-    public function fetchTable(Request $request){
+    public function fetch(Request $request){
         if ($request->ajax()){
             $studentList = Student::orderBy('last_name', 'asc')->get();
             echo json_encode($studentList);
