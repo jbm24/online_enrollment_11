@@ -46,66 +46,71 @@
         </div>
         
         <!-- Modal for adding Subjects -->
-        <div id="simpleModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2>Add Subject</h2>
-                    <span class="closeBtn">&times;</span>
-                </div>
-                <div class="modal-body">
+        <div id="simpleModal" class="modal" tabindex=-1 role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Add Subject</h2>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </div>
+                    <div class="modal-body">
 
-                    <form action="add_subject" method="post">
-                    @csrf
-                        <label for="subjectName">Subject Name</label><br>
-                        <input type="text" class="loginInput" name="subjectName" placeholder="Enter Subject Name here..." required><br>
-                        <label for="room">Room</label><br>
-                        <input type="text" class="loginInput" name="room" placeholder="Enter Room here..." required><br>
-                        <label for="capacity">Capacity</label><br>
-                        <input type="number" class="loginInput" name="capacity" placeholder="Enter Capacity..." required><br>
-                        <label for="schedule">Schedule</label><br>
-                        <input type="text" class="loginInput" name="schedule" placeholder="Enter Schedule here..." required><br>
+                        <form action="add_subject" method="post">
+                        @csrf
+                            <label for="subjectName">Subject Name</label><br>
+                            <input type="text" class="loginInput" name="subjectName" placeholder="Enter Subject Name here..." required><br>
+                            <label for="room">Room</label><br>
+                            <input type="text" class="loginInput" name="room" placeholder="Enter Room here..." required><br>
+                            <label for="capacity">Capacity</label><br>
+                            <input type="number" class="loginInput" name="capacity" placeholder="Enter Capacity..." required><br>
+                            <label for="schedule">Schedule</label><br>
+                            <input type="text" class="loginInput" name="schedule" placeholder="Enter Schedule here..." required><br>
 
-                        <input type="submit" id="modalSubmit" value="Add Subject">
-                    </form>
+                            <input type="submit" id="modalSubmit" value="Add Subject">
+                        </form>
 
+                    </div>
                 </div>
             </div>
         </div>
 
 
         <!-- Modal for updating Subject details -->
-        <div id="updateModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 id="modalHeader">Edit Subject Information</h2>
-                    <span class="closeUpdateBtn">&times;</span>
-                </div>
-                <div class="modal-body">
+        <div id="updateModal" class="modal" tabindex=-1 role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 id="modalHeader">Edit Subject Information</h2>
+                        <span class="closeUpdateBtn">&times;</span>
+                    </div>
+                    <div class="modal-body">
 
-                    <form action="/update_subject" method="post">
-                    @csrf
-                    @method('put')
-                        <label for="editedSubjectName">Subject Name</label><br>
-                        <input type="text" class="loginInput" id="eSubName" name="editedSubjectName" required><br>
-                        <label for="editedRoom">Room</label><br>
-                        <input type="text" class="loginInput" id="eRoom" name="editedRoom" required><br>
-                        <label for="editedCapacity">Capacity</label><br>
-                        <input type="number" class="loginInput" id="eCapacity" name="editedCapacity" required><br>
-                        <label for="editedSchedule">Schedule</label><br>
-                        <input type="text" class="loginInput" id="eSchedule" name="editedSchedule" required><br>
-
-                        <input type="text" id="oldSubName" class="hidden" name="oldSubName" required><br>
-
-                        <input type="submit" id="modalSubmit" value="Edit">
-                    </form>
-
-                    <form method="POST" action="/delete_subject">
+                        <form action="/update_subject" method="post">
                         @csrf
-                        @method('delete')
-                        <input type="text" id="delSubName" class="hidden" name="delSubName"><br>
-                        <button type="submit" class="delete"> Delete this subject </button> 
-                    </form>
+                        @method('put')
+                            <label for="editedSubjectName">Subject Name</label><br>
+                            <input type="text" class="loginInput" id="eSubName" name="editedSubjectName" required><br>
+                            <label for="editedRoom">Room</label><br>
+                            <input type="text" class="loginInput" id="eRoom" name="editedRoom" required><br>
+                            <label for="editedCapacity">Capacity</label><br>
+                            <input type="number" class="loginInput" id="eCapacity" name="editedCapacity" required><br>
+                            <label for="editedSchedule">Schedule</label><br>
+                            <input type="text" class="loginInput" id="eSchedule" name="editedSchedule" required><br>
 
+                            <input type="text" id="oldSubName" class="hidden" name="oldSubName" required><br>
+
+                            <input type="submit" id="modalSubmit" value="Edit">
+                        </form>
+
+                        <form method="POST" action="/delete_subject">
+                            @csrf
+                            @method('delete')
+                            <input type="text" id="delSubName" class="hidden" name="delSubName"><br>
+                            <button type="submit" class="delete"> Delete this subject </button> 
+                        </form>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -136,7 +141,7 @@
 
                 <!-- For adding Subjects -->
                 <div class="addStudentBtn">
-                    <button id="staffModal" class="loginBtn btn btn-secondary">Add Subject</button>
+                    <button type="button" id="staffModal" class="loginBtn btn btn-secondary" data-toggle="modal" data-target="#simpleModal">Add Subject</button>
                 </div>
                 <!-- For clearing all Enrollees -->
                 <form action="/clear_enrollees" method="post">

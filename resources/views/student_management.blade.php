@@ -85,38 +85,40 @@
 
 
         <!-- Modal for updating student details -->
-        <div id="updateModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <span class="closeUpdateBtn">&times;</span>
-                    <h2 id="modalHeader">Edit Student Information</h2>
-                </div>
+        <div id="updateModal" class="modal" tabindex=-1 role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 id="modalHeader">Edit Student Information</h2>
+                        <span class="closeUpdateBtn">&times;</span>
+                    </div>
 
-                <!-- Indicator sucessful/unsuccessful adding -->
-                <div class="existIndicator">
-                </div>
+                    <!-- Indicator sucessful/unsuccessful adding -->
+                    <div class="existIndicator">
+                    </div>
 
-                <div class="modal-body">
+                    <div class="modal-body">
 
-                    <form id="updateForm">
-                    @csrf
-                    @method('put')
-                        <label for="updatedFirstName">First Name</label><br>
-                        <input type="text" id="fname" class="loginInput" name="updatedFirstName" required><br>
-                        <label for="updatedLastName">Last Name</label><br>
-                        <input type="text" id="lname" class="loginInput" name="updatedLastName" required><br>
-                        <label for="updatedIdNumber">ID Number</label><br>
-                        <input type="number" id="idNum" class="loginInput" name="updatedIdNumber" required><br>
-                        <label for="updatedBirthday">Birthday</label><br>
-                        <input type="date" id="bday" class="loginInput" name="updatedBirthday" required><br>
-                        <label for="updatedCourse">Course</label><br>
-                        <input type="text" id="course" class="loginInput" name="updatedCourse" required><br>
+                        <form id="updateForm">
+                        @csrf
+                        @method('put')
+                            <label for="updatedFirstName">First Name</label><br>
+                            <input type="text" id="fname" class="loginInput" name="updatedFirstName" required><br>
+                            <label for="updatedLastName">Last Name</label><br>
+                            <input type="text" id="lname" class="loginInput" name="updatedLastName" required><br>
+                            <label for="updatedIdNumber">ID Number</label><br>
+                            <input type="number" id="idNum" class="loginInput" name="updatedIdNumber" required><br>
+                            <label for="updatedBirthday">Birthday</label><br>
+                            <input type="date" id="bday" class="loginInput" name="updatedBirthday" required><br>
+                            <label for="updatedCourse">Course</label><br>
+                            <input type="text" id="course" class="loginInput" name="updatedCourse" required><br>
 
-                        <input type="number" id="oldIdNum" class="hidden" name="oldIdNumber" required><br>
+                            <input type="number" id="oldIdNum" class="hidden" name="oldIdNumber" required><br>
 
-                        <input type="submit" id="updateSubmit" value="Edit">
-                    </form>
+                            <input type="submit" id="updateSubmit" value="Edit">
+                        </form>
 
+                    </div>
                 </div>
             </div>
         </div>

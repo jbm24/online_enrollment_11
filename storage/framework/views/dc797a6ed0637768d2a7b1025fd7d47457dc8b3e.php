@@ -26,7 +26,7 @@
                     <div class="modal-header">
                         <h2>Staff Login</h2>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true">&times;</span>
                     </div>
                     <div class="modal-body">
 

@@ -151,6 +151,24 @@ button:hover {
     cursor: pointer;
 }
 
+.closeViewBtn:hover,.closeViewBtn:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.closeUpdateBtn:hover,.closeUpdateBtn:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.closeEnrollBtn:hover,.closeEnrollBtn:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 @keyframes modalOpen {
     from { opacity: 0 }
     to { opacity: 1 }

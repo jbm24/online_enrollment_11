@@ -41,26 +41,28 @@
 
 
         <!-- Modal for Enrollment confirmation -->
-        <div id="enrollModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <span class="closeEnrollBtn">&times;</span>
-                    <h2 id="modalHeader">Enrollment Confirmation</h2>
-                </div>
-                <div class="modal-body">
+        <div id="enrollModal" class="modal" tabindex=-1 role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 id="modalHeader">Enrollment Confirmation</h2>
+                        <span class="closeEnrollBtn">&times;</span>
+                    </div>
+                    <div class="modal-body">
 
-                    <form action="/enroll" method="post">
-                        @csrf
-                        <label for="editedSubjectName">Id Number</label><br>
-                        <input type="number" class="loginInput" name="confirmId" required><br>
-                        <label for="editedCapacity">Birthday</label><br>
-                        <input type="date" class="loginInput" name="confirmBday" required><br>
+                        <form action="/enroll" method="post">
+                            @csrf
+                            <label for="editedSubjectName">Id Number</label><br>
+                            <input type="number" class="loginInput" name="confirmId" required><br>
+                            <label for="editedCapacity">Birthday</label><br>
+                            <input type="date" class="loginInput" name="confirmBday" required><br>
 
-                        <input type="text" id="subject" class="hidden" name="subject"><br>
+                            <input type="text" id="subject" class="hidden" name="subject"><br>
 
-                        <input type="submit" id="modalSubmit" value="Confirm Enrollment">
-                    </form>
+                            <input type="submit" id="modalSubmit" value="Confirm Enrollment">
+                        </form>
 
+                    </div>
                 </div>
             </div>
         </div>
