@@ -86,7 +86,7 @@ $(document).on('click', '.deleteBtn', function(){
 // Generate Student table
 function generateTable(){
     $.ajax({
-        url: "fetchTable",
+        url: "fetch_student_table",
         type: "get",
         dataType: 'json',
 

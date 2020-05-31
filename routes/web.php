@@ -30,7 +30,7 @@ Route::get('/staff_main_page', function () {
 // For student_management page
 Route::get('/student_management', 'StudentController@index');
 
-Route::get('/fetchTable', 'StudentController@fetchTable');
+Route::get('/fetch_student_table', 'StudentController@fetch');
 
 Route::post('/add_student', 'StudentController@store');
 
@@ -42,6 +42,8 @@ Route::delete('/delete_student','StudentController@destroy');
 
 // For subject_management page
 Route::get('/subject_management', 'SubjectController@index');
+
+Route::get('/fetch_subject_table', 'SubjectController@fetch');
 
 Route::post('/add_subject', 'SubjectController@store');
 
