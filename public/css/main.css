@@ -88,24 +88,17 @@ button:hover {
     margin-right: 10px;
 }
 
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0,0,0,0.5);
-    overflow: auto;
+.modal-backdrop {
+    opacity: 0.5 !important;
 }
 
-.modal-content {
+ .modal-content {
     background-color: #f4f4f4;
     margin: 10% auto;
     width: 20%;
     animation-name: modalOpen;
     animation-duration: 0.5s;
+    text-align: center;
 }
 .enrollee-modal-content {
     background-color: #f4f4f4;
@@ -117,7 +110,7 @@ button:hover {
     animation-duration: 0.5s;
 }
 
-.modal-header{
+/* .modal-header{
     padding: 10px;
     border: 2px solid black;
     border-bottom: none;
@@ -134,7 +127,7 @@ button:hover {
     padding: 10px;
     border: 2px solid black;
     text-align: center;
-}
+} */
 
 .loginInput {
     margin: 10px;

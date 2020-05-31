@@ -46,36 +46,40 @@
 
 
         <!-- Modal for adding students -->
-        <div id="addModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <span id="closeAddBtn">&times;</span>
-                    <h2 id="modalHeader">Add Student</h2>
+        <div id="addModal" class="modal" tabindex=-1 role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 id="modalHeader">Add Student</h2>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </div>
+
+                    <!-- Indicator for sucessful/unsuccessful adding -->
+                    <div class="existIndicator">
+                    </div>
+
+                    <div class="modal-body">
+
+                        <form id="addForm">
+                        @csrf
+                            <label for="firstName">First Name</label><br>
+                            <input type="text" class="loginInput" name="firstName" placeholder="Enter first name here..." required><br>
+                            <label for="lastName">Last Name</label><br>
+                            <input type="text" class="loginInput" name="lastName" placeholder="Enter last name here..." required><br>
+                            <label for="idNumber">ID Number</label><br>
+                            <input type="number" class="loginInput" name="idNumber" placeholder="Enter ID Number here..." required><br>
+                            <label for="birthday">Birthday</label><br>
+                            <input type="date" class="loginInput" name="birthday" required><br>
+                            <label for="course">Course</label><br>
+                            <input type="text" class="loginInput" name="course" placeholder="Enter course here..." required><br>
+
+                            <input type="submit" id="addSubmit" value="Add Student">
+                        </form>
+
+                    </div>
                 </div>
 
-                <!-- Indicator for sucessful/unsuccessful adding -->
-                <div class="existIndicator">
-                </div>
-
-                <div class="modal-body">
-
-                    <form id="addForm">
-                    @csrf
-                        <label for="firstName">First Name</label><br>
-                        <input type="text" class="loginInput" name="firstName" placeholder="Enter first name here..." required><br>
-                        <label for="lastName">Last Name</label><br>
-                        <input type="text" class="loginInput" name="lastName" placeholder="Enter last name here..." required><br>
-                        <label for="idNumber">ID Number</label><br>
-                        <input type="number" class="loginInput" name="idNumber" placeholder="Enter ID Number here..." required><br>
-                        <label for="birthday">Birthday</label><br>
-                        <input type="date" class="loginInput" name="birthday" required><br>
-                        <label for="course">Course</label><br>
-                        <input type="text" class="loginInput" name="course" placeholder="Enter course here..." required><br>
-
-                        <input type="submit" id="addSubmit" value="Add Student">
-                    </form>
-
-                </div>
             </div>
         </div>
 
@@ -119,23 +123,25 @@
 
 
         <!-- Modal for viewing student details -->
-        <div id="viewModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <span class="closeViewBtn">&times;</span>
-                    <h2 id="modalHeader">View Student Information</h2>
-                </div>
-                <div class="modal-body">
-                        <label for="viewFirstName">First Name</label> <br>
-                        <p id="viewFirstName" name="viewFirstName"></p> <br>
-                        <label for="viewLastName">Last Name</label> <br>
-                        <p id="viewLastName" name="viewLastName"></p> <br>
-                        <label for="viewIdNumber">ID Number</label> <br>
-                        <p id="viewIdNumber" name="viewIdNumber"></p> <br>
-                        <label for="viewBirthday">Birthday</label> <br>
-                        <p id="viewBirthday" name="viewBirthday"></p> <br>
-                        <label for="viewCourse">Course</label> <br>
-                        <p id="viewCourse" name="viewCourse"></p> <br>
+        <div id="viewModal" class="modal" tabindex=-1 role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 id="modalHeader">View Student Information</h2>
+                        <span class="closeViewBtn">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                            <label for="viewFirstName">First Name</label> <br>
+                            <p id="viewFirstName" name="viewFirstName"></p> <br>
+                            <label for="viewLastName">Last Name</label> <br>
+                            <p id="viewLastName" name="viewLastName"></p> <br>
+                            <label for="viewIdNumber">ID Number</label> <br>
+                            <p id="viewIdNumber" name="viewIdNumber"></p> <br>
+                            <label for="viewBirthday">Birthday</label> <br>
+                            <p id="viewBirthday" name="viewBirthday"></p> <br>
+                            <label for="viewCourse">Course</label> <br>
+                            <p id="viewCourse" name="viewCourse"></p> <br>
+                    </div>
                 </div>
             </div>
         </div>
@@ -165,7 +171,7 @@
 
                 <!-- Button for adding Student -->
                 <div class="addStudentBtn">
-                    <button id="showAdd" class="loginBtn btn btn-secondary">Add Student</button>
+                    <button type="button" id="showAdd" class="loginBtn btn btn-secondary" data-toggle="modal" data-target="#addModal">Add Student</button>
                 </div><br>
 
                 <table id="student_table" class="student_table">

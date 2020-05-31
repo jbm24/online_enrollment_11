@@ -10,32 +10,40 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
         <!-- Styles -->
-        <link href="/css/main.css" rel="stylesheet">
+        <link href="/css/main.css" rel="stylesheet">      
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     </head>
     <body>
         <div class="staffLogin">
-            <button id="staffModal" class="loginBtn">Staff Login</button>
+            <button type="button" id="staffModal" class="loginBtn btn btn-secondary" data-toggle="modal" data-target="#simpleModal">Staff Login</button>
         </div>
 
-        <div id="simpleModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <span class="closeBtn">&times;</span>
-                    <h2>Staff Login</h2>
-                </div>
-                <div class="modal-body">
+        <div id="simpleModal" class="modal" tabindex=-1 role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Staff Login</h2>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </div>
+                    <div class="modal-body">
 
-                    <form action="/auth" method="post">
-                    @csrf
-                        <label for="user">Username</label><br>
-                        <input type="text" value="user" class="loginInput" name="user" placeholder="Enter username here..."><br>
-                        <label for="pass">Password</label><br>
-                        <input type="password" value="pass" class="loginInput" name="pass" placeholder="Enter password here..."><br>
-                        <input type="submit" value="Login">
-                    </form>
+                        <form action="/auth" method="post">
+                        @csrf
+                            <label for="user">Username</label><br>
+                            <input type="text" class="loginInput" name="user" placeholder="Enter username here..."><br>
+                            <label for="pass">Password</label><br>
+                            <input type="password" class="loginInput" name="pass" placeholder="Enter password here..."><br>
+                            <input type="submit" class="btn btn-secondary" value="Login">
+                            
+                        </form>
 
+                    </div>
                 </div>
             </div>
+            
         </div>
         <div class="flex-center position-ref full-height">
             
@@ -54,11 +62,12 @@
                 </p>
                 <p>
                     <form action="/enrollment">
-                        <input type="submit" class="btnStaff" value="Click here to enroll">
+                        <input type="submit" class="btnStaff btn btn-secondary" value="Click here to enroll">
                     </form>
                 </p>
             </div>
         </div>
-        <script type="text/javascript" src="/js/modal.js"></script>
+        <!-- <script type="text/javascript" src="/js/modal.js"></script> -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
     </body>
 </html>
