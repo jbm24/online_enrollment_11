@@ -53,14 +53,14 @@ class StudentController extends Controller
     
 
 
-    public function update(){
-        $oldIdNum = request('oldIdNumber');
+    public function update(Request $request){
+        $oldIdNum = $request->oldIdNumber;
 
-        $fName = request('updatedFirstName');
-        $lName = request('updatedLastName');
-        $idNum = request('updatedIdNumber');
-        $birthday = request('updatedBirthday');
-        $course = request('updatedCourse');
+        $fName = $request->updatedFirstName;
+        $lName = $request->updatedLastName;
+        $idNum = $request->updatedIdNumber;
+        $birthday = $request->updatedBirthday;
+        $course = $request->updatedCourse;
 
         if ($oldIdNum == $idNum){
             $exists = false;
@@ -80,21 +80,23 @@ class StudentController extends Controller
             $student->course = $course;
             
             $student->save();
+
+
+            $studentList = Student::orderBy('last_name', 'asc')->get();
+
+            return response()->json(['success'=> 'Successfully edited student.', 'students'=> $studentList]);
         }
 
-        $studentList = Student::orderBy('last_name', 'asc')->get();
-        
-        return view('/student_management', [
-            'students' => $studentList,
-            'exists' => $exists
-        ]);
+        else {
+            return response()->json(['success'=>'A student with that ID number already exists.']);
+        }
     }
 
 
     
-    public function destroy($id) {
-        Student::where('id_number', $id)->delete();
+    public function destroy(Request $request) {
+        Student::where('id', $request->id)->delete();
 
-        return redirect('student_management');
+        return response()->json(['success'=> 'Successfully deleted student.']);
      }
 }

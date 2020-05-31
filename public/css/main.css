@@ -200,7 +200,7 @@ label {
     color: black;
 }
 
-#existIndicator {
+.existIndicator {
     color: red;
     display: none;
     background-color: black;

@@ -36,7 +36,7 @@ Route::post('/add_student', 'StudentController@store');
 
 Route::put('/update_student', 'StudentController@update');
 
-Route::delete('delete_student/{id}','StudentController@destroy');
+Route::delete('/delete_student','StudentController@destroy');
 
 
 

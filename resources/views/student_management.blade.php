@@ -49,12 +49,12 @@
         <div id="addModal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <span class="closeBtn">&times;</span>
+                    <span id="closeAddBtn">&times;</span>
                     <h2 id="modalHeader">Add Student</h2>
                 </div>
 
-                <!-- Indicator sucessful/unsuccessful adding -->
-                <div id="existIndicator">
+                <!-- Indicator for sucessful/unsuccessful adding -->
+                <div class="existIndicator">
                 </div>
 
                 <div class="modal-body">
@@ -87,9 +87,14 @@
                     <span class="closeUpdateBtn">&times;</span>
                     <h2 id="modalHeader">Edit Student Information</h2>
                 </div>
+
+                <!-- Indicator sucessful/unsuccessful adding -->
+                <div class="existIndicator">
+                </div>
+
                 <div class="modal-body">
 
-                    <form id="updateForm" action="/update_student" method="post">
+                    <form id="updateForm">
                     @csrf
                     @method('put')
                         <label for="updatedFirstName">First Name</label><br>
@@ -136,6 +141,20 @@
         </div>
 
 
+        <!-- Modal for indicating successful deleting of student -->
+        <div id="deleteModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="closeDelBtn">&times;</span>
+                </div>
+                <div id="deleteMsg" class="modal-body">
+ 
+                </div>
+            </div>
+        </div>
+
+
+
 
         <!-- Table of Students -->
         <div>
@@ -171,71 +190,8 @@
 
 
 
-        <script>
-            $(function () {
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-
-                // Add Student
-                $('#addSubmit').click(function (e) {
-                    e.preventDefault();
-                    $(this).val('Adding student..');
-
-                    $.ajax({
-                        data: $('#addForm').serialize(),
-                        url: "add_student",
-                        type: "post",
-                        dataType: 'json',
-
-                        success: function (data) {
-                            $('#addForm').trigger("reset");
-
-                            $('#existIndicator').html(data.success);
-                            $('#existIndicator').show();
-                            generateTable();
-                        },
-
-                        error: function (data) {
-                            console.log('Error:', data);
-                        }
-                    });
-                });
-            });
-
-            // Generate Student table
-            function generateTable(){
-                $.ajax({
-                    url: "fetchTable",
-                    type: "get",
-                    dataType: 'json',
-
-                    success: function (data) {
-                        var table = $("#studTable");
-                        var tableData;
-                        for (var count=0; count<data.length; count++){
-                            tableData += '<tr><td class="studId">' + data[count].id_number + '</td>';
-                            tableData += '<td class="studName"> <p class="studLName">' + data[count].last_name + "</p>, <p class=studFName>" + data[count].first_name + '</p></td>';
-                            tableData += '<td class="studCourse">' + data[count].course + '</td>';
-                            tableData += '<td><button type="button" class="viewBtn">View</button></td>'
-                            tableData += '<td class="editTD"><button type="button" class="editBtn">Edit</button></td>'
-                            tableData += '<td><button type="button" class="deleteBtn">Delete</button></td></tr>'
-                        }
-                        table.html(tableData);
-                    },
-
-                    error: function (data) {
-                        console.log('Error:', data);
-                    }
-                });
-            }
-        </script>
-
         <script type="text/javascript" src="/js/student_management.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     </body>
 </html>
