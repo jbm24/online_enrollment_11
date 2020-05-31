@@ -49,7 +49,7 @@ Route::post('/add_subject', 'SubjectController@store');
 
 Route::put('/update_subject', 'SubjectController@update');
 
-Route::delete('delete_subject','SubjectController@destroy');
+Route::delete('/delete_subject','SubjectController@destroy');
 
 Route::delete('delete_enrollee/{studId}/{subId}','EnrollmentController@destroy');
 

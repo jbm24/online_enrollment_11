@@ -13,6 +13,8 @@
         <link href="/css/main.css" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+        <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
 
 
@@ -39,14 +41,11 @@
                 </li>
             </ul>
         </div>
-    </nav> 
-        <!-- Indicator for if added or updated Subject already exists -->
-        <div id="existIndicator" style="display: none">
-            <h2> That subject already exists  </h2>
-        </div>
-        
+    </nav>         
+
+
         <!-- Modal for adding Subjects -->
-        <div id="simpleModal" class="modal" tabindex=-1 role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true">
+        <div id="addModal" class="modal" tabindex=-1 role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -54,9 +53,14 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </div>
+
+                    <!-- Indicator for sucessful/unsuccessful adding -->
+                    <div class="existIndicator">
+                    </div>
+
                     <div class="modal-body">
 
-                        <form action="add_subject" method="post">
+                        <form id="addForm" action="add_subject" method="post">
                         @csrf
                             <label for="subjectName">Subject Name</label><br>
                             <input type="text" class="loginInput" name="subjectName" placeholder="Enter Subject Name here..." required><br>
@@ -67,13 +71,14 @@
                             <label for="schedule">Schedule</label><br>
                             <input type="text" class="loginInput" name="schedule" placeholder="Enter Schedule here..." required><br>
 
-                            <input type="submit" id="modalSubmit" value="Add Subject">
+                            <input type="submit" id="addSubmit" value="Add Subject">
                         </form>
 
                     </div>
                 </div>
             </div>
         </div>
+
 
 
         <!-- Modal for updating Subject details -->
@@ -84,30 +89,36 @@
                         <h2 id="modalHeader">Edit Subject Information</h2>
                         <span class="closeUpdateBtn">&times;</span>
                     </div>
+
+                    <!-- Indicator for sucessful/unsuccessful adding -->
+                    <div class="existIndicator">
+                    </div>
+
                     <div class="modal-body">
 
-                        <form action="/update_subject" method="post">
+                        <form id="updateForm">
                         @csrf
                         @method('put')
-                            <label for="editedSubjectName">Subject Name</label><br>
-                            <input type="text" class="loginInput" id="eSubName" name="editedSubjectName" required><br>
-                            <label for="editedRoom">Room</label><br>
-                            <input type="text" class="loginInput" id="eRoom" name="editedRoom" required><br>
-                            <label for="editedCapacity">Capacity</label><br>
-                            <input type="number" class="loginInput" id="eCapacity" name="editedCapacity" required><br>
-                            <label for="editedSchedule">Schedule</label><br>
-                            <input type="text" class="loginInput" id="eSchedule" name="editedSchedule" required><br>
+                        <label for="editedSubjectName">Subject Name</label><br>
+                        <input type="text" class="loginInput" id="eSubName" name="editedSubjectName" required><br>
+                        <label for="editedRoom">Room</label><br>
+                        <input type="text" class="loginInput" id="eRoom" name="editedRoom" required><br>
+                        <label for="editedCapacity">Capacity</label><br>
+                        <input type="number" class="loginInput" id="eCapacity" name="editedCapacity" required><br>
+                        <label for="editedSchedule">Schedule</label><br>
+                        <input type="text" class="loginInput" id="eSchedule" name="editedSchedule" required><br>
 
-                            <input type="text" id="oldSubName" class="hidden" name="oldSubName" required><br>
+                        <input type="text" id="oldSubName" class="hidden" name="oldSubName" required><br>
 
-                            <input type="submit" id="modalSubmit" value="Edit">
+                        <input type="submit" id="updateSubmit" value="Edit">
                         </form>
 
-                        <form method="POST" action="/delete_subject">
+
+                        <form id="deleteSubject">
                             @csrf
                             @method('delete')
                             <input type="text" id="delSubName" class="hidden" name="delSubName"><br>
-                            <button type="submit" class="delete"> Delete this subject </button> 
+                            <button type="button" class="btn btn-danger btn-xs deleteBtn"> Delete this subject </button> 
                         </form>
 
                     </div>
@@ -131,6 +142,20 @@
 
 
 
+        <!-- Modal for indicating successful deleting of Subject -->
+        <div id="deleteModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="closeDelBtn">&times;</span>
+                </div>
+                <div id="deleteMsg" class="modal-body">
+ 
+                </div>
+            </div>
+        </div>
+
+
+
         
         <!-- Table of Subjects -->
         <div>
@@ -141,8 +166,9 @@
 
                 <!-- For adding Subjects -->
                 <div class="addStudentBtn">
-                    <button type="button" id="staffModal" class="loginBtn btn btn-secondary" data-toggle="modal" data-target="#simpleModal">Add Subject</button>
+                    <button type="button" id="showAdd" class="loginBtn btn btn-secondary" data-toggle="modal" data-target="#simpleModal">Add Subject</button>
                 </div>
+
                 <!-- For clearing all Enrollees -->
                 <form action="/clear_enrollees" method="post">
                     @csrf
@@ -150,50 +176,19 @@
                     <input type="submit" class="loginBtn btn btn-secondary" value="Clear Enrollees">
                 </form>
 
+
                 <table id="enrollee_table" class="student_table">
+                    <thead>
                     <tr>
                     <th style="width: 25%;">Subject</th>
                     <th style="width: 10%;">Enrollees</th>
                     <th style="width: 10%;"></th>
                     <th style="width: 10%;"></th>
                     </tr>
+                    </thead>
+                    <tbody id="subjTable">
 
-                        @foreach ($subjects as $subject) 
-                            <tr>
-                            <td class="subName">{{ $subject->subject_name }}</td>
-                            <td>{{ $subject->enrollee()->count() }}/{{ $subject->capacity }}</td>
-                            <td class="edit"> 
-                                <button class="editBtn btn btn-secondary"> Edit Subject </button> 
-                                <h1 class="hidden">{{ $subject->capacity }}</h1>
-                                <h2 class="hidden">{{ $subject->room }}</h2>
-                                <h3 class="hidden">{{ $subject->schedule }}</h3>
-
-                                <table class="hidden">
-                                <tr>
-                                    <th style="width: 25%;">ID Number</th>
-                                    <th style="width: 10%;">Full Name</th>
-                                    <th style="width: 10%;">Course</th>
-                                    <th style="width: 10%;"></th>
-                                </tr>
-                                @foreach ($subject->enrollee as $enrolled)
-                                <tr>
-                                <td>{{ $enrolled->student->id_number }}</td>
-                                <td>{{ $enrolled->student->last_name }}, {{ $enrolled->student->first_name }}</td>
-                                <td>{{ $enrolled->student->course }}</td>
-                                <td> 
-                                <form method="POST" action="/delete_enrollee/{{ $enrolled->student_id }}/{{ $enrolled->subject_id }}">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit"> Unenroll </button> 
-                                </form>
-                            </td>
-                                </tr>
-                                @endforeach
-                                </table>
-                            </td>
-                            <td>  <button class="viewBtn btn btn-secondary"> View Enrollees </button> </td>
-                            </tr>
-                        @endforeach
+                    </tbody>
                 </table>
 
             </div>
@@ -201,11 +196,6 @@
 
 
 
-
-        <script type="text/javascript" src="/js/modal.js"></script>
-        <script>
-            var exists = <?php echo json_encode($exists); ?>;
-        </script>
         <script type="text/javascript" src="/js/subject_management.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

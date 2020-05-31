@@ -42,9 +42,7 @@ class StudentController extends Controller
             $newStudent->save();
 
 
-            $studentList = Student::orderBy('last_name', 'asc')->get();
-
-            return response()->json(['success'=> 'Successfully added student.', 'students'=> $studentList]);
+            return response()->json(['success'=> 'Successfully added student.']);
         }
         else {
             return response()->json(['success'=>'A student with that ID number already exists.']);

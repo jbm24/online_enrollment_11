@@ -45,7 +45,6 @@ $('#updateSubmit').click(function (e) {
         dataType: 'json',
 
         success: function (data) {
-            $('#addForm').trigger("reset");
             $('#updateSubmit').val('Edit student..');
             $('.existIndicator').html(data.success);
             $('.existIndicator').show();
@@ -62,7 +61,23 @@ $('#updateSubmit').click(function (e) {
 
 // Delete student
 $(document).on('click', '.deleteBtn', function(){
+    var deleteModal = $('#deleteModal');
+
+    // For closing Delete modal
+    $(".closeDelBtn").on('click', function(){
+        deleteModal.hide();
+    });
+        
+    //listen for outside click
+    window.onclick = function(event) {
+        if(event.target == document.getElementById('deleteModal')){
+            deleteModal.hide();
+        }
+    }
+
+
     var id = $(this).attr("id");
+
     $.ajax({
         url:"delete_student",
         method:"delete",
@@ -71,7 +86,7 @@ $(document).on('click', '.deleteBtn', function(){
         success:function(data)
         {
             $('#deleteMsg').html(data.success);
-            $('#deleteModal').show();
+            deleteModal.show();
             generateTable();
         },
 
@@ -225,17 +240,5 @@ $(document).ready(function(){
     generateTable();
 
 
-    var deleteModal = $('#deleteModal');
-
-    // For closing Delete modal
-    $(".closeDelBtn").on('click', function(){
-        deleteModal.hide();
-    });
-        
-    //listen for outside click
-    window.onclick = function(event) {
-        if(event.target == document.getElementById('deleteModal')){
-            deleteModal.hide();
-        }
-    }
+    
 });

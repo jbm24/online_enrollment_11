@@ -149,7 +149,7 @@
         </div>
 
 
-        <!-- Modal for indicating successful deleting of student -->
+        <!-- Modal for indicating successful deleting of Student -->
         <div id="deleteModal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
