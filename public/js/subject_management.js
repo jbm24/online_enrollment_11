@@ -130,7 +130,10 @@ function generateEnrolleeTable(id){
         dataType: 'json',
 
         success: function (data) {
+            console.log(id);
             var table = $("#enrolleeTable");
+            table.html('');
+
             var tableData;
             for (var count=0; count<data.length; count++){
                 tableData += '<tr><td>' + data[count].student.id_number + '</td>';
@@ -317,6 +320,8 @@ inputBox.addEventListener("keydown", function(e) {
 
 
 
+
+
 // Unenroll student
 $(document).on('click', '.unenrollBtn', function(){
     
@@ -351,8 +356,10 @@ $(document).on('click', '.unenrollBtn', function(){
         {
             $('#unenrollMsg').html(data.success);
             unenrollModal.show();
-            generateEnrolleeTable(subject_id);
+            
+            console.log(subject_id);
             generateTable();
+            generateEnrolleeTable(subject_id);
         },
 
         error: function (data) {
