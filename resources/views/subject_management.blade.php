@@ -13,6 +13,7 @@
         <link href="/css/main.css" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script>
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
@@ -53,10 +54,6 @@
                         <span id="closeAddBtn">&times;</span>
                     </div>
 
-                    <!-- Indicator for sucessful/unsuccessful adding -->
-                    <div class="existIndicator">
-                    </div>
-
                     <div class="modal-body">
 
                         <form id="addForm" action="add_subject" method="post">
@@ -70,7 +67,12 @@
                             <label for="schedule">Schedule</label><br>
                             <input type="text" class="loginInput" name="schedule" placeholder="Enter Schedule here..." required/><br>
 
-                            <input type="submit" id="addSubmit" value="Add Subject">    
+                            <input type="submit" id="addSubmit" value="Add Subject">
+
+                            <!-- Indicator sucessful/unsuccessful adding -->
+                            <div class="existIndicator">
+                            </div>
+
                         </form>
 
                     </div>
@@ -89,27 +91,28 @@
                         <span class="closeUpdateBtn">&times;</span>
                     </div>
 
-                    <!-- Indicator for sucessful/unsuccessful adding -->
-                    <div class="existIndicator">
-                    </div>
-
                     <div class="modal-body">
 
                         <form id="updateForm">
-                        @csrf
-                        @method('put')
-                        <label for="editedSubjectName">Subject Name</label><br>
-                        <input type="text" class="loginInput" id="eSubName" name="editedSubjectName" required><br>
-                        <label for="editedRoom">Room</label><br>
-                        <input type="text" class="loginInput" id="eRoom" name="editedRoom" required><br>
-                        <label for="editedCapacity">Capacity</label><br>
-                        <input type="number" class="loginInput" id="eCapacity" name="editedCapacity" required><br>
-                        <label for="editedSchedule">Schedule</label><br>
-                        <input type="text" class="loginInput" id="eSchedule" name="editedSchedule" required><br>
+                            @csrf
+                            @method('put')
+                            <label for="editedSubjectName">Subject Name</label><br>
+                            <input type="text" class="loginInput" id="eSubName" name="editedSubjectName" required><br>
+                            <label for="editedRoom">Room</label><br>
+                            <input type="text" class="loginInput" id="eRoom" name="editedRoom" required><br>
+                            <label for="editedCapacity">Capacity</label><br>
+                            <input type="number" class="loginInput" id="eCapacity" name="editedCapacity" required><br>
+                            <label for="editedSchedule">Schedule</label><br>
+                            <input type="text" class="loginInput" id="eSchedule" name="editedSchedule" required><br>
 
-                        <input type="text" id="oldSubName" class="hidden" name="oldSubName" required><br>
+                            <input type="text" id="oldSubName" class="hidden" name="oldSubName" required><br>
 
-                        <input type="submit" id="updateSubmit" value="Edit">
+                            <input type="submit" id="updateSubmit" value="Edit">
+
+                            <!-- Indicator sucessful/unsuccessful adding -->
+                            <div class="existIndicator">
+                            </div>
+
                         </form>
 
 
@@ -131,11 +134,23 @@
             <div class="enrollee-modal-content">
                 <div class="modal-header">
                     <h2>Enrollees</h2>
-                    <span class="closeBtn">&times;</span>
+                    <span class="closeViewBtn">&times;</span>
                 </div>
-                <div id="viewEnrolleesTable" class="modal-body">
 
-                </div>
+                <table>
+                    <thead>
+                    <tr>
+                    <th style="width: 25%;">ID Number</th>
+                    <th style="width: 10%;">Full Name</th>
+                    <th style="width: 10%;">Course</th>
+                    <th style="width: 10%;"></th>
+                    </tr>
+                    </thead>
+                    <tbody id="enrolleeTable">
+
+                    </tbody>
+                </table>
+
             </div>
         </div>
 
@@ -149,6 +164,19 @@
                 </div>
                 <div id="deleteMsg" class="modal-body">
  
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Modal for indicating successful unenrolling of Student -->
+        <div id="unenrollModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="closeUnenrollBtn">&times;</span>
+                </div>
+                <div id="unenrollMsg" class="modal-body">
+
                 </div>
             </div>
         </div>
@@ -176,7 +204,7 @@
                 </form>
 
 
-                <table id="enrollee_table" class="student_table">
+                <table class="student_table">
                     <thead>
                     <tr>
                     <th style="width: 25%;">Subject</th>

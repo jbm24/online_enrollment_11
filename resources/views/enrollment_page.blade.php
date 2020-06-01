@@ -14,29 +14,33 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script>
+
+        <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
 
 
 
     <body>
-        <!-- Indicator for if Student is already an Enrollee in the Subject -->
-        <div id="enrolledIndicator" style="display: none">
-            <h2> You are already enrolled in this subject.  </h2>
-        </div>
-
-        <!-- Indicator for if correct Student details were inputted -->
-        <div id="confirmIndicator" style="display: none">
-            <h2> Wrong ID Number or Birthday.  </h2>
-        </div>
-
-        <!-- Indicator for if the class is already full -->
-        <div id="fullIndicator" style="display: none">
-            <h2> This subject is already full.  </h2>
-        </div>
-        
         <form action="/">
             <input type="submit" class="loginBtn btn btn-secondary" value="Back to Landing Page">
         </form>
+
+
+
+
+        <!-- Modal for Indicator for successful enrollment, full class, or if student is already enrolled -->
+        <div id="modalIndicator" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="closeIndicatorBtn">&times;</span>
+                </div>
+                <div id="indicator" class="modal-body">
+ 
+                </div>
+            </div>
+        </div>
+
         
 
 
@@ -48,9 +52,11 @@
                         <h2 id="modalHeader">Enrollment Confirmation</h2>
                         <span class="closeEnrollBtn">&times;</span>
                     </div>
+
+
                     <div class="modal-body">
 
-                        <form action="/enroll" method="post">
+                        <form id="enrollForm">
                             @csrf
                             <label for="editedSubjectName">Id Number</label><br>
                             <input type="number" class="loginInput" name="confirmId" required><br>
@@ -59,13 +65,18 @@
 
                             <input type="text" id="subject" class="hidden" name="subject"><br>
 
-                            <input type="submit" id="modalSubmit" value="Confirm Enrollment">
+                            <input type="submit" id="enrollSubmit" value="Confirm Enrollment">
+
+                            <!-- Indicator for if input had wrong Student details -->
+                            <div id="wrongIndicator" class="hidden">
+                            </div>
                         </form>
 
                     </div>
                 </div>
             </div>
         </div>
+
 
         
 
@@ -75,40 +86,39 @@
                 <div class="title m-b-md">
                     Enrollment Page
                 </div>
+
                 <!-- Searchbar for subjects -->
-                <form action="/search">
+                <form id="search">
                     @csrf
                     <label for="searchSubject">Search subject:</label><br>
-                    <input type="text" name="searchSubject"><br>
+                    <input type="text" id="searchInput" class="searched" name="searchSubject"><br>
 
-                    <input type="submit" value="Search">
+                    <!-- Indicator for when the searched subject does not exist -->
+                    <p id="searchIndicator" class="hidden">The subject you are looking for does not exist.</p>
+
+                    <input type="button" id="searchBtn" value="Search">
                 </form>
+
                 <table style="width:80%;margin-left: 10%;">
+                    <thead>
                     <tr>
                     <th style="width: 25%;">Subject Name</th>
                     <th style="width: 10%;">Enrolled/Capacity</th>
                     <th style="width: 30%;">Room and Schedule</th>
                     <th style="width: 10%;"></th>
                     </tr>
+                    </thead>
 
-                    @foreach ($subjectList as $subject) 
-                            <tr>
-                            <td class="subName">{{ $subject->subject_name }}</td>
-                            <td class="population"><p class="enrollees">{{ $subject->enrollee()->count() }}</p>/<p class="capacity">{{ $subject->capacity }}</p></td>
-                            <td> {{ $subject->room }} - {{ $subject->schedule }} </td>
-                            <td>  <button class="enrollBtn"> Enroll </button> </td>
-                            </tr>
-                    @endforeach
+                    <tbody id="subjTable">
+
+                    </tbody>
+
+                </table>
 
             </div>
         </div>
 
 
-        <script>
-            var alreadyEnrolled = <?php echo json_encode($alreadyEnrolled); ?>;
-            var flag = <?php echo json_encode($flag); ?>;
-            var full = <?php echo json_encode($full); ?>;
-        </script>
         <script type="text/javascript" src="/js/enrollment_page.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
     </body>

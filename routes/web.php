@@ -45,13 +45,15 @@ Route::get('/subject_management', 'SubjectController@index');
 
 Route::get('/fetch_subject_table', 'SubjectController@fetch');
 
+Route::get('/fetch_enrollee_table', 'EnrollmentController@fetchEnrollees');
+
 Route::post('/add_subject', 'SubjectController@store');
 
 Route::put('/update_subject', 'SubjectController@update');
 
 Route::delete('/delete_subject','SubjectController@destroy');
 
-Route::delete('delete_enrollee/{studId}/{subId}','EnrollmentController@destroy');
+Route::delete('/unenroll','EnrollmentController@destroy');
 
 Route::delete('clear_enrollees','EnrollmentController@clear');
 
@@ -59,6 +61,8 @@ Route::delete('clear_enrollees','EnrollmentController@clear');
 
 // For enrollment page
 Route::get('/enrollment', 'EnrollmentController@index');
+
+Route::get('/fetch_enrollment_table', 'EnrollmentController@fetch');
 
 Route::get('/search', 'EnrollmentController@search');
 

@@ -15,8 +15,8 @@ class SubjectController extends Controller
 
     public function fetch(Request $request){
         if ($request->ajax()){
-            $studentList = Subject::orderBy('subject_name', 'asc')->with('enrollee')->get();
-            echo json_encode($studentList);
+            $subjectList = Subject::orderBy('subject_name', 'asc')->with('enrollee')->get();
+            echo json_encode($subjectList);
         }
     }
 

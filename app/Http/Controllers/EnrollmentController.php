@@ -11,37 +11,43 @@ use App\Enrollee;
 class EnrollmentController extends Controller
 {
     public function index(){
-        $subjectList = Subject::orderBy('subject_name', 'asc')->get();
-            return view('/enrollment_page', [
-                'subjectList' => $subjectList,
-                'alreadyEnrolled' => false,              
-                'full' => false,
-                'flag' => true
-            ]);
+        return view('/enrollment_page');
     }
 
 
-    public function search(){
-        $subject = request('searchSubject');
+    public function fetch(Request $request){
+        if ($request->ajax()){
+            $subjectList = Subject::orderBy('subject_name', 'asc')->with('enrollee')->get();
+            echo json_encode($subjectList);
+        }
+    }
 
-        $subjectList = Subject::where('subject_name', 'LIKE', "%{$subject}%")->orderBy('subject_name', 'asc')->get();
-            return view('/enrollment_page', [
-                'subjectList' => $subjectList,
-                'alreadyEnrolled' => false,              
-                'full' => false,
-                'flag' => true
-            ]);
+
+    public function fetchEnrollees(Request $request){
+        if ($request->ajax()){
+            $enrolleeList = Enrollee::where('subject_id', $request->id)->with('student')->get();
+            echo json_encode($enrolleeList);
+        }
+    }
+
+
+    public function search(Request $request){
+        if ($request->ajax()){   
+            $subject = $request->searchSubject;
+            
+            $subjectList = Subject::where('subject_name', 'LIKE', "%{$subject}%")->orderBy('subject_name', 'asc')->with('enrollee')->get();
+            echo json_encode($subjectList);
+        }
     }
 
 
 
-    public function store(){
-        $studId = request('confirmId');
-        $birthday = request('confirmBday');
-        $subjectName = request('subject');
+    public function store(Request $request){
+        $studId = $request->confirmId;
+        $birthday = $request->confirmBday;
+        $subjectName = $request->subject;
         $flag = false;
         $alreadyEnrolled = false;
-        $id = 1;
 
         $subject = Subject::firstWhere('subject_name', $subjectName);
         if ($subject->enrollee()->count() < $subject->capacity) {
@@ -68,31 +74,34 @@ class EnrollmentController extends Controller
                 }
             }
         }
-        
-        else $full = true;
-        
+        else {
+            $full = true;
+        }
 
-        $subjectList = Subject::orderBy('subject_name', 'asc')->get();
 
-        return view('/enrollment_page', [
-            'subjectList' => $subjectList,
-            'alreadyEnrolled' => $alreadyEnrolled,
-            'full' => $full,
-            'flag' => $flag
-        ]);
+        if ($flag == false){
+            return response()->json(['wrong'=> 'Wrong ID Number or Birthday.']);
+        }
+        else if ($alreadyEnrolled == true){
+            return response()->json(['success'=> 'You are already enrolled in this subject.']);
+        }
+        else if ($full == true){
+            return response()->json(['success'=> 'This subject is already full.']);
+        }
+        else {
+            return response()->json(['success'=> 'You have successfully enrolled']);
+        }
     }
 
 
 
-    public function destroy($studId, $subId) {
-        Enrollee::where([
-            ['student_id', $studId],
-            ['subject_id', $subId],
-        ])->delete();
+    public function destroy(Request $request) {
+        Enrollee::where('id', $request->id)->delete();
 
-        return redirect('subject_management');
+        return response()->json(['success'=> 'Successfully unenrolled student']);
      }
 
+     
 
      public function clear() {
         Enrollee::truncate();

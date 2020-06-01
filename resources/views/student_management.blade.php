@@ -13,6 +13,7 @@
         <link href="/css/main.css" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script>
 
         <meta name="csrf-token" content="{{ csrf_token() }}">
         
@@ -55,10 +56,6 @@
                         <span aria-hidden="true">&times;</span>
                     </div>
 
-                    <!-- Indicator for sucessful/unsuccessful adding -->
-                    <div class="existIndicator">
-                    </div>
-
                     <div class="modal-body">
 
                         <form id="addForm">
@@ -75,6 +72,10 @@
                             <input type="text" class="loginInput" name="course" placeholder="Enter course here..." required><br>
 
                             <input type="submit" id="addSubmit" value="Add Student">
+
+                            <!-- Indicator for sucessful/unsuccessful adding -->
+                            <div class="existIndicator">
+                            </div>
                         </form>
 
                     </div>
@@ -91,10 +92,6 @@
                     <div class="modal-header">
                         <h2 id="modalHeader">Edit Student Information</h2>
                         <span class="closeUpdateBtn">&times;</span>
-                    </div>
-
-                    <!-- Indicator sucessful/unsuccessful adding -->
-                    <div class="existIndicator">
                     </div>
 
                     <div class="modal-body">
@@ -116,6 +113,10 @@
                             <input type="number" id="oldIdNum" class="hidden" name="oldIdNumber" required><br>
 
                             <input type="submit" id="updateSubmit" value="Edit">
+
+                            <!-- Indicator sucessful/unsuccessful adding -->
+                            <div class="existIndicator">
+                            </div>
                         </form>
 
                     </div>

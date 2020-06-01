@@ -8,25 +8,29 @@ $.ajaxSetup({
 
 // Add Subject
 $('#addSubmit').click(function (e) {
-    e.preventDefault();
-    $(this).val('Adding subject..');
 
-    $.ajax({
-        data: $('#addForm').serialize(),
-        url: "add_subject",
-        type: "post",
-        dataType: 'json',
+    $("#addForm").validate({
+        submitHandler: function (form) {
+            $('#addSubmit').val('Adding subject..');
 
-        success: function (data) {
-            $('#addForm').trigger("reset");
-            $('#addSubmit').val('Add subject..');
-            $('.existIndicator').html(data.success);
-            $('.existIndicator').show();
-            generateTable();
-        },
+            $.ajax({
+                data: $('#addForm').serialize(),
+                url: "add_subject",
+                type: "post",
+                dataType: 'json',
 
-        error: function (data) {
-            console.log('Error:', data);
+                success: function (data) {
+                    $('#addForm').trigger("reset");
+                    $('#addSubmit').val('Add subject');
+                    $('.existIndicator').html(data.success);
+                    $('.existIndicator').show();
+                    generateTable();
+                },
+
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+            });
         }
     });
 });
@@ -35,24 +39,28 @@ $('#addSubmit').click(function (e) {
 
 // Edit Subject
 $('#updateSubmit').click(function (e) {
-    e.preventDefault();
-    $(this).val('Editing student..');
 
-    $.ajax({
-        data: $('#updateForm').serialize(),
-        url: "update_subject",
-        type: "put",
-        dataType: 'json',
+    $("#updateForm").validate({
+        submitHandler: function (form) {
+            $('#updateSubmit').val('Editing subject..');
 
-        success: function (data) {
-            $('#updateSubmit').val('Edit student..');
-            $('.existIndicator').html(data.success);
-            $('.existIndicator').show();
-            generateTable();
-        },
+            $.ajax({
+                data: $('#updateForm').serialize(),
+                url: "update_subject",
+                type: "put",
+                dataType: 'json',
 
-        error: function (data) {
-            console.log('Error:', data);
+                success: function (data) {
+                    $('#updateSubmit').val('Edit subject');
+                    $('.existIndicator').html(data.success);
+                    $('.existIndicator').show();
+                    generateTable();
+                },
+
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+            });
         }
     });
 });
@@ -100,7 +108,7 @@ function generateTable(){
                             + '<h1 class="hidden">' + data[count].capacity + '</h1>' 
                             + '<h2 class="hidden">' + data[count].room + '</h2>' 
                             + '<h3 class="hidden">' + data[count].schedule + '</h3></td>';
-                tableData += '<td><button type="button" class="viewBtn btn btn-secondary">View Enrollees</button></td>';
+                tableData += '<td><button type="button" id="' +data[count].id+ '" class="viewBtn btn btn-secondary">View Enrollees</button></td>';
             }
             table.html(tableData);
         },
@@ -110,6 +118,36 @@ function generateTable(){
         }
     });
 }
+
+
+
+// Generates Enrollee table
+function generateEnrolleeTable(id){
+    $.ajax({
+        data:{id:id},
+        url: "fetch_enrollee_table",
+        type: "get",
+        dataType: 'json',
+
+        success: function (data) {
+            var table = $("#enrolleeTable");
+            var tableData;
+            for (var count=0; count<data.length; count++){
+                tableData += '<tr><td>' + data[count].student.id_number + '</td>';
+                tableData += '<td>' + data[count].student.last_name+ ", " + data[count].student.first_name + '</td>';
+                tableData += '<td>' + data[count].student.course + '</td>';
+                tableData += '<td><button type="button" id="' + data[count].id + '" class="unenrollBtn btn btn-secondary">Unenroll</button> <h1 class="hidden">' +id+ '</h1></td>';
+            }
+            table.html(tableData);
+        },
+
+        error: function (data) {
+            console.log('Error:', data);
+        }
+    });
+}
+
+
 
 
 
@@ -206,20 +244,20 @@ $(document).on('click', '.editBtn', function(){
 
 
 
-// For opening View modal
+// For opening View Enrollees modal
 $(document).on('click', '.viewBtn', function(){
-    
+    $("#enrolleeTable").html('');
+
+    var id = $(this).attr("id");
+
+    generateEnrolleeTable(id);
+
+
+
     //modal element
     var viewModal = $('#viewModal');
     //close btn
     var closeViewBtn = $('.closeViewBtn');
-
-    //listen and open View modal 
-    $("#viewFirstName").html( $(this).parent().siblings(".studName").children('p.studFName').html() );
-    $("#viewLastName").html( $(this).parent().siblings(".studName").children('p.studLName').html() );
-    $("#viewIdNumber").html( $(this).parent().siblings(".studId").html() );
-    $("#viewBirthday").html( $(this).parent().siblings(".editTD").children('p.hidden').html() );
-    $("#viewCourse").html( $(this).parent().siblings(".studCourse").html() );
 
     viewModal.show();
 
@@ -229,7 +267,6 @@ $(document).on('click', '.viewBtn', function(){
     //fcn to close modal
     function closeViewModal(){
         viewModal.hide();
-        $(".existIndicator").hide();
     } 
 
     //listen for outside click
@@ -277,6 +314,61 @@ inputBox.addEventListener("keydown", function(e) {
   }
 });
 //number box end
+
+
+
+// Unenroll student
+$(document).on('click', '.unenrollBtn', function(){
+    
+    var unenrollModal = $('#unenrollModal');
+
+    // For closing Delete modal
+    $(".closeUnenrollBtn").on('click', function(){
+        unenrollModal.hide();
+    });
+        
+    //listen for outside click
+    window.onclick = function(event) {
+        if(event.target == document.getElementById('unenrollModal')){
+            unenrollModal.hide();
+        }
+        if(event.target == document.getElementById('viewModal')){
+            $("#viewModal").hide();
+        }
+    }
+
+
+    var id = $(this).attr("id");
+    var subject_id = $(this).siblings(".hidden").html();
+
+    $.ajax({
+        url:"unenroll",
+        method:"delete",
+        data:{id:id},
+        dataType: 'json',
+
+        success:function(data)
+        {
+            $('#unenrollMsg').html(data.success);
+            unenrollModal.show();
+            generateEnrolleeTable(subject_id);
+            generateTable();
+        },
+
+        error: function (data) {
+            console.log('Error:', data);
+        }
+    });
+});
+
+
+
+
+
+
+
+
+
 
 $(document).ready(function(){
     generateTable();

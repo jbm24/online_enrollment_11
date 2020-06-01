@@ -5,54 +5,62 @@ $.ajaxSetup({
 });
 
 
-
 // Add Student
 $('#addSubmit').click(function (e) {
-    e.preventDefault();
-    $(this).val('Adding student..');
 
-    $.ajax({
-        data: $('#addForm').serialize(),
-        url: "add_student",
-        type: "post",
-        dataType: 'json',
+    $("#addForm").validate({
+        submitHandler: function (form) {
+            $('#addSubmit').val('Adding student..');
+            
+            $.ajax({
+                data: $('#addForm').serialize(),
+                url: "add_student",
+                type: "post",
+                dataType: 'json',
 
-        success: function (data) {
-            $('#addForm').trigger("reset");
-            $('#addSubmit').val('Add student..');
-            $('.existIndicator').html(data.success);
-            $('.existIndicator').show();
-            generateTable();
-        },
+                success: function (data) {
+                    $('#addForm').trigger("reset");
+                    $('#addSubmit').val('Add student');
+                    $('.existIndicator').html(data.success);
+                    $('.existIndicator').show();
+                    generateTable();
+                },
 
-        error: function (data) {
-            console.log('Error:', data);
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+            });
         }
     });
 });
 
 
 
+
 // Edit Student
 $('#updateSubmit').click(function (e) {
-    e.preventDefault();
-    $(this).val('Editing student..');
+    
+    $("#updateForm").validate({
+        submitHandler: function (form) {
+            $("#updateSubmit").val('Editing student..');
 
-    $.ajax({
-        data: $('#updateForm').serialize(),
-        url: "update_student",
-        type: "put",
-        dataType: 'json',
+            $.ajax({
+                data: $('#updateForm').serialize(),
+                url: "update_student",
+                type: "put",
+                dataType: 'json',
 
-        success: function (data) {
-            $('#updateSubmit').val('Edit student..');
-            $('.existIndicator').html(data.success);
-            $('.existIndicator').show();
-            generateTable();
-        },
+                success: function (data) {
+                    $('#updateSubmit').val('Edit student');
+                    $('.existIndicator').html(data.success);
+                    $('.existIndicator').show();
+                    generateTable();
+                },
 
-        error: function (data) {
-            console.log('Error:', data);
+                error: function (data) {
+                    console.log('Error:', data);
+                }
+            });
         }
     });
 });
@@ -134,6 +142,8 @@ function generateTable(){
 
 // For opening Add modal
 $(document).on('click', '#showAdd', function(){
+    
+
     //modal element
     var addModal = $('#addModal');
     //close btn
@@ -276,5 +286,4 @@ $(document).ready(function(){
     generateTable();
 
 
-    
 });
