@@ -240,8 +240,43 @@ $(document).on('click', '.viewBtn', function(){
     }
 });
 
+//not allowing text to be placed on number box
+var inputBox = document.getElementById("numberInput");
 
+var invalidChars = [
+  "-",
+  "+",
+  "e",
+];
 
+inputBox.addEventListener("input", function() {
+  this.value = this.value.replace(/[e\+\-]/gi, "");
+});
+
+inputBox.addEventListener("keydown", function(e) {
+  if (invalidChars.includes(e.key)) {
+    e.preventDefault();
+  }
+});
+
+var inputBox = document.getElementById("eCapacity");
+
+var invalidChars = [
+  "-",
+  "+",
+  "e",
+];
+
+inputBox.addEventListener("input", function() {
+  this.value = this.value.replace(/[e\+\-]/gi, "");
+});
+
+inputBox.addEventListener("keydown", function(e) {
+  if (invalidChars.includes(e.key)) {
+    e.preventDefault();
+  }
+});
+//number box end
 
 $(document).ready(function(){
     generateTable();

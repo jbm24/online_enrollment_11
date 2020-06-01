@@ -68,7 +68,7 @@
                             <label for="lastName">Last Name</label><br>
                             <input type="text" class="loginInput" name="lastName" placeholder="Enter last name here..." required><br>
                             <label for="idNumber">ID Number</label><br>
-                            <input type="number" class="loginInput" name="idNumber" placeholder="Enter ID Number here..." required><br>
+                            <input type="number" class="loginInput" id="numberInput" name="idNumber" placeholder="Enter ID Number here..." required><br>
                             <label for="birthday">Birthday</label><br>
                             <input type="date" class="loginInput" name="birthday" required><br>
                             <label for="course">Course</label><br>

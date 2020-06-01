@@ -169,6 +169,12 @@ button:hover {
     cursor: pointer;
 }
 
+#closeAddBtn:hover,#closeAddBtn:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 @keyframes modalOpen {
     from { opacity: 0 }
     to { opacity: 1 }
