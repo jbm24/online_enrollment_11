@@ -114,7 +114,8 @@
                             <label for="updatedCourse">Course</label><br>
                             <input type="text" id="course" class="loginInput" name="updatedCourse" required><br>
 
-                            <input type="number" id="oldIdNum" class="hidden" name="oldIdNumber" required><br>
+                            <input type="number" id="oldIdNum" class="hidden" name="oldIdNumber">
+                            <input type="number" id="studentId" class="hidden" name="studentId">
 
                             <input type="submit" id="updateSubmit" value="Edit">
 

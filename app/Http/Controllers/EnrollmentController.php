@@ -79,14 +79,14 @@ class EnrollmentController extends Controller
         }
 
 
-        if ($flag == false){
+        if ($full == true){
+            return response()->json(['success'=> 'This subject is already full.']);
+        }
+        else if ($flag == false){
             return response()->json(['wrong'=> 'Wrong ID Number or Birthday.']);
         }
         else if ($alreadyEnrolled == true){
             return response()->json(['success'=> 'You are already enrolled in this subject.']);
-        }
-        else if ($full == true){
-            return response()->json(['success'=> 'This subject is already full.']);
         }
         else {
             return response()->json(['success'=> 'You have successfully enrolled']);

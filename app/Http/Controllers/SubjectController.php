@@ -50,6 +50,7 @@ class SubjectController extends Controller
 
     public function update(Request $request){
         $oldSubName = $request->oldSubName;
+        $id = $request->subjId;
 
         $subName = $request->editedSubjectName;
         $room = $request->editedRoom;
@@ -65,7 +66,7 @@ class SubjectController extends Controller
 
         
         if ($exists == false){
-            $subject = Subject::firstWhere('subject_name', $oldSubName);
+            $subject = Subject::firstWhere('id', $id);
 
             $subject->subject_name = $subName;
             $subject->room = $room;
@@ -85,8 +86,8 @@ class SubjectController extends Controller
 
     
     public function destroy(Request $request) {
-        $name = $request->delSubName;
-        $subject = Subject::firstWhere('subject_name', $name);
+        $id = $request->delSubId;
+        $subject = Subject::firstWhere('id', $id);
 
         // for deleting enrollees in this subject
         $subject->enrollee()->delete();

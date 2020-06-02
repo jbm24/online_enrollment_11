@@ -122,7 +122,7 @@ function generateTable(){
                 tableData += '<td class="studCourse">' + data[count].course + '</td>';
                 tableData += '<td><button type="button" class="viewBtn">View</button></td>';
                 tableData += '<td class="editTD"> <button type="button" class="editBtn">Edit</button> <p class="hidden">' + data[count].birthday + '</p></td>';
-                tableData += '<td><button type="button" class="btn btn-danger btn-xs deleteBtn" id="' + data[count].id + '">Delete</button></td></tr>';
+                tableData += '<td class="del"><button type="button" class="btn btn-danger btn-xs deleteBtn" id="' + data[count].id + '">Delete</button></td></tr>';
             }
             table.html(tableData);
         },
@@ -185,6 +185,7 @@ $(document).on('click', '.editBtn', function(){
         $("#course").val( $(this).parent().siblings(".studCourse").html() );
 
         $("#oldIdNum").val( $(this).parent().siblings(".studId").html() );
+        $("#studentId").val( $(this).parent().siblings(".del").children(".deleteBtn").attr("id") );
 
         updateModal.show();
 

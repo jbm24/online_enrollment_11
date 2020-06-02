@@ -109,7 +109,8 @@
                             <label for="editedSchedule">Schedule</label><br>
                             <input type="text" class="loginInput" id="eSchedule" name="editedSchedule" required><br>
 
-                            <input type="text" id="oldSubName" class="hidden" name="oldSubName" required><br>
+                            <input type="text" id="oldSubName" class="hidden" name="oldSubName">
+                            <input type="text" id="subjId" class="hidden" name="subjId">
 
                             <input type="submit" id="updateSubmit" value="Edit">
 
@@ -121,7 +122,7 @@
                         <form id="deleteSubject">
                             @csrf
                             @method('delete')
-                            <input type="text" id="delSubName" class="hidden" name="delSubName"><br>
+                            <input type="text" id="delSubId" class="hidden" name="delSubId"><br>
                             <button type="button" class="btn btn-danger btn-xs deleteBtn"> Delete this subject </button> 
                         </form>
 
