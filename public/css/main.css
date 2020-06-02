@@ -249,6 +249,12 @@ h2 {
     text-align: center;
 } 
 
+#wrongIndicator, #searchIndicator, #loginIndicator {
+    color: red;
+}
+
+
+
 .delete {
     font-weight: bold;
     color: red;

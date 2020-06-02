@@ -34,7 +34,7 @@
                     <div class="modal-body">
 
                         <form id="loginForm" method="post" action="/auth">
-                        <!-- Indicator for if input had wrong Student details -->
+                        <!-- Indicator for if input had wrong details -->
                         <div id="loginIndicator" class="hidden">
                             </div>
                         <?php echo csrf_field(); ?>
