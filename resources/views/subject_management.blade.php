@@ -171,21 +171,20 @@
                     </div>
                 </div>
             </div>
-            
-        </div>
-        <div id="deleteModal" class="modal">
-            
         </div>
 
 
         <!-- Modal for indicating successful unenrolling of Student -->
-        <div id="unenrollModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <span class="closeUnenrollBtn">&times;</span>
-                </div>
-                <div id="unenrollMsg" class="modal-body">
+        <div id="unenrollModal" class="modal" tabindex=-1 role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6>Unenrolled</h6>
+                        <span class="closeUnenrollBtn">&times;</span>
+                    </div>
+                    <div id="unenrollMsg" class="modal-body">
 
+                    </div>
                 </div>
             </div>
         </div>
