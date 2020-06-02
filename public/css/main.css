@@ -320,3 +320,7 @@ input[type="number"] {
 .backMain:hover {
     color: red;
 }
+
+.error{
+    color: red;
+}
