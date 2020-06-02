@@ -140,7 +140,7 @@
                 <table>
                     <thead>
                     <tr>
-                    <th style="width: 25%;">ID Number</th>
+                    <th style="width: 10%;">ID Number</th>
                     <th style="width: 10%;">Full Name</th>
                     <th style="width: 10%;">Course</th>
                     <th style="width: 10%;"></th>
@@ -207,7 +207,7 @@
                 <table class="student_table">
                     <thead>
                     <tr>
-                    <th style="width: 25%;">Subject</th>
+                    <th style="width: 15%;">Subject</th>
                     <th style="width: 10%;">Enrollees</th>
                     <th style="width: 10%;"></th>
                     <th style="width: 10%;"></th>

@@ -14,6 +14,9 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script>
+
+        <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
     <body>
         <div class="staffLogin">
@@ -30,14 +33,17 @@
                     </div>
                     <div class="modal-body">
 
-                        <form action="/auth" method="post">
+                        <form id="loginForm" method="post" action="/auth">
                         @csrf
                             <label for="user">Username</label><br>
-                            <input type="text" class="loginInput" name="user" placeholder="Enter username here..."><br>
+                            <input type="text" class="loginInput" name="user" placeholder="Enter username here..." required><br>
                             <label for="pass">Password</label><br>
-                            <input type="password" class="loginInput" name="pass" placeholder="Enter password here..."><br>
-                            <input type="submit" class="btn btn-secondary" value="Login">
+                            <input type="password" class="loginInput" name="pass" placeholder="Enter password here..." required><br>
+                            <input type="submit" id="loginSubmit" class="btn btn-secondary" value="Login">
                             
+                            <!-- Indicator for if input had wrong Student details -->
+                            <div id="loginIndicator" class="hidden">
+                            </div>
                         </form>
 
                     </div>
@@ -67,7 +73,51 @@
                 </p>
             </div>
         </div>
+
         <!-- <script type="text/javascript" src="/js/modal.js"></script> -->
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+        
+        
+        <script>
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            // Authenticate Login
+            $('#loginSubmit').click(function (e) {
+                $('#loginIndicator').hide();
+
+                $("#loginForm").validate({
+                    submitHandler: function (form) {
+                        $('#loginSubmit').val('Authenticating..');
+
+                        $.ajax({
+                            data: $('#loginForm').serialize(),
+                            url: "auth",
+                            type: "post",
+                            dataType: 'json',
+
+                            success: function (data) {
+                                if (data.success){
+                                    window.location.href= "student_management";
+                                }
+                                else{
+                                    $('#loginForm').trigger("reset");
+                                    $('#loginSubmit').val('Login');
+                                    $('#loginIndicator').html(data.incorrect);
+                                    $('#loginIndicator').show();
+                                }
+                            },
+
+                            error: function (data) {
+                                console.log('Error:', data);
+                            }
+                        });
+                    }
+                });
+            });
+        </script>
     </body>
 </html>

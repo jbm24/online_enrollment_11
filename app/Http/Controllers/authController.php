@@ -8,10 +8,10 @@ use App\Employee;
 
 class authController extends Controller
 {
-    public function authenticate(){
+    public function authenticate(Request $request){
 
-        $username = request('user');
-        $password = bcrypt(request('pass'));
+        $username = $request->user;
+        $password = bcrypt($request->pass);
         $flag = 0;
 
         $employees = Employee::all();
@@ -26,10 +26,10 @@ class authController extends Controller
         }
 
         if ($flag == 1){
-            return redirect('student_management');
+            return response()->json(['success'=> 'Login was successful']);
         }
         else{
-            return view('welcome');
+            return response()->json(['incorrect'=> 'Wrong login details.']);
         }
     }
 }

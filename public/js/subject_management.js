@@ -130,7 +130,6 @@ function generateEnrolleeTable(id){
         dataType: 'json',
 
         success: function (data) {
-            console.log(id);
             var table = $("#enrolleeTable");
             table.html('');
 
@@ -357,7 +356,6 @@ $(document).on('click', '.unenrollBtn', function(){
             $('#unenrollMsg').html(data.success);
             unenrollModal.show();
             
-            console.log(subject_id);
             generateTable();
             generateEnrolleeTable(subject_id);
         },
