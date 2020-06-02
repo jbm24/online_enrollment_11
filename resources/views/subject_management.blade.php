@@ -159,15 +159,22 @@
 
 
         <!-- Modal for indicating successful deleting of Subject -->
-        <div id="deleteModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <span class="closeDelBtn">&times;</span>
-                </div>
-                <div id="deleteMsg" class="modal-body">
- 
+        <div id="deleteModal" class="modal" tabindex=-1 role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6>Deleted</h6>
+                        <span class="closeDelBtn">&times;</span>
+                    </div>
+                    <div id="deleteMsg" class="modal-body">
+    
+                    </div>
                 </div>
             </div>
+            
+        </div>
+        <div id="deleteModal" class="modal">
+            
         </div>
 
 
