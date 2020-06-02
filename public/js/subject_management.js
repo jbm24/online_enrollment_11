@@ -81,6 +81,7 @@ $(document).on('click', '.deleteBtn', function(){
             $('#deleteMsg').html(data.success);
             deleteModal.show();
             generateTable();
+            $('#updateModal').hide();
         },
 
         error: function (data) {
@@ -107,7 +108,8 @@ function generateTable(){
                 tableData += '<td class="edit"> <button class="editBtn btn btn-secondary"> Edit Subject </button>' 
                             + '<h1 class="hidden">' + data[count].capacity + '</h1>' 
                             + '<h2 class="hidden">' + data[count].room + '</h2>' 
-                            + '<h3 class="hidden">' + data[count].schedule + '</h3></td>';
+                            + '<h3 class="hidden">' + data[count].schedule + '</h3>'
+                            + '<h4 class="hidden">' + data[count].id + '</h4></td>';
                 tableData += '<td><button type="button" id="' +data[count].id+ '" class="viewBtn btn btn-secondary">View Enrollees</button></td>';
             }
             table.html(tableData);
@@ -204,8 +206,9 @@ $(document).on('click', '.editBtn', function(){
     $("#eSchedule").val( $(this).siblings('h3').html() );
 
     $("#oldSubName").val( $(this).parent().siblings(".subName").html() );
+    $("#subjId").val( $(this).siblings('h4').html() );
 
-    $("#delSubName").val( $(this).parent().siblings(".subName").html() );
+    $("#delSubId").val( $(this).siblings('h4').html() );
 
     updateModal.show();
 

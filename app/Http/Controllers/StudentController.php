@@ -53,6 +53,7 @@ class StudentController extends Controller
 
     public function update(Request $request){
         $oldIdNum = $request->oldIdNumber;
+        $id = $request->studentId;
 
         $fName = $request->updatedFirstName;
         $lName = $request->updatedLastName;
@@ -69,7 +70,7 @@ class StudentController extends Controller
 
         if ($exists == false){
         
-            $student = Student::firstWhere('id_number', $oldIdNum);
+            $student = Student::firstWhere('id', $id);
 
             $student->first_name = $fName;
             $student->last_name = $lName;
