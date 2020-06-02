@@ -34,6 +34,9 @@
                     <div class="modal-body">
 
                         <form id="loginForm" method="post" action="/auth">
+                        <!-- Indicator for if input had wrong Student details -->
+                        <div id="loginIndicator" class="hidden">
+                            </div>
                         @csrf
                             <label for="user">Username</label><br>
                             <input type="text" class="loginInput" name="user" placeholder="Enter username here..." required><br>
@@ -41,9 +44,7 @@
                             <input type="password" class="loginInput" name="pass" placeholder="Enter password here..." required><br>
                             <input type="submit" id="loginSubmit" class="btn btn-secondary" value="Login">
                             
-                            <!-- Indicator for if input had wrong Student details -->
-                            <div id="loginIndicator" class="hidden">
-                            </div>
+                            
                         </form>
 
                     </div>

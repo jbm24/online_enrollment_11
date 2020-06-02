@@ -57,6 +57,9 @@
                     <div class="modal-body">
 
                         <form id="addForm" action="add_subject" method="post">
+                            <!-- Indicator sucessful/unsuccessful adding -->
+                            <div class="existIndicator">
+                            </div>
                         @csrf
                             <label for="subjectName">Subject Name</label><br>
                             <input type="text" class="loginInput" name="subjectName" placeholder="Enter Subject Name here..." required/><br>
@@ -69,9 +72,7 @@
 
                             <input type="submit" id="addSubmit" value="Add Subject">
 
-                            <!-- Indicator sucessful/unsuccessful adding -->
-                            <div class="existIndicator">
-                            </div>
+                            
 
                         </form>
 
@@ -94,6 +95,9 @@
                     <div class="modal-body">
 
                         <form id="updateForm">
+                        <!-- Indicator sucessful/unsuccessful adding -->
+                        <div class="existIndicator">
+                            </div>
                             @csrf
                             @method('put')
                             <label for="editedSubjectName">Subject Name</label><br>
@@ -109,9 +113,7 @@
 
                             <input type="submit" id="updateSubmit" value="Edit">
 
-                            <!-- Indicator sucessful/unsuccessful adding -->
-                            <div class="existIndicator">
-                            </div>
+                            
 
                         </form>
 

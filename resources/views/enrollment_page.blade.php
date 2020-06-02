@@ -31,12 +31,15 @@
 
         <!-- Modal for Indicator for successful enrollment, full class, or if student is already enrolled -->
         <div id="modalIndicator" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <span class="closeIndicatorBtn">&times;</span>
-                </div>
-                <div id="indicator" class="modal-body">
- 
+        <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6>Enrollment Message</h6>
+                        <span class="closeIndicatorBtn">&times;</span>
+                    </div>
+                    <div id="indicator" class="modal-body">
+    
+                    </div>
                 </div>
             </div>
         </div>
@@ -57,6 +60,9 @@
                     <div class="modal-body">
 
                         <form id="enrollForm">
+                            <!-- Indicator for if input had wrong Student details -->
+                            <div id="wrongIndicator" class="hidden">
+                            </div>
                             @csrf
                             <label for="editedSubjectName">Id Number</label><br>
                             <input type="number" class="loginInput" name="confirmId" required><br>
@@ -67,9 +73,7 @@
 
                             <input type="submit" id="enrollSubmit" value="Confirm Enrollment">
 
-                            <!-- Indicator for if input had wrong Student details -->
-                            <div id="wrongIndicator" class="hidden">
-                            </div>
+                            
                         </form>
 
                     </div>

@@ -59,6 +59,9 @@
                     <div class="modal-body">
 
                         <form id="addForm">
+                        <!-- Indicator for sucessful/unsuccessful adding -->
+                        <div class="existIndicator">
+                            </div>
                         @csrf
                             <label for="firstName">First Name</label><br>
                             <input type="text" class="loginInput" name="firstName" placeholder="Enter first name here..." required><br>
@@ -73,9 +76,7 @@
 
                             <input type="submit" id="addSubmit" value="Add Student">
 
-                            <!-- Indicator for sucessful/unsuccessful adding -->
-                            <div class="existIndicator">
-                            </div>
+                            
                         </form>
 
                     </div>
@@ -97,6 +98,9 @@
                     <div class="modal-body">
 
                         <form id="updateForm">
+                        <!-- Indicator sucessful/unsuccessful adding -->
+                        <div class="existIndicator">
+                            </div>
                         @csrf
                         @method('put')
                             <label for="updatedFirstName">First Name</label><br>
@@ -114,9 +118,7 @@
 
                             <input type="submit" id="updateSubmit" value="Edit">
 
-                            <!-- Indicator sucessful/unsuccessful adding -->
-                            <div class="existIndicator">
-                            </div>
+                            
                         </form>
 
                     </div>
@@ -151,15 +153,19 @@
 
 
         <!-- Modal for indicating successful deleting of Student -->
-        <div id="deleteModal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <span class="closeDelBtn">&times;</span>
-                </div>
-                <div id="deleteMsg" class="modal-body">
- 
+        <div id="deleteModal" class="modal" tabindex=-1 role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6>Deleted</h6>
+                        <span class="closeDelBtn">&times;</span>
+                    </div>
+                    <div id="deleteMsg" class="modal-body">
+    
+                    </div>
                 </div>
             </div>
+            
         </div>
 
 

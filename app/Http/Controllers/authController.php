@@ -26,7 +26,7 @@ class authController extends Controller
         }
 
         if ($flag == 1){
-            return response()->json(['success'=> 'Login was successful']);
+            return response()->json(['success'=> 'Login was successful']);  
         }
         else{
             return response()->json(['incorrect'=> 'Wrong login details.']);

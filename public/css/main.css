@@ -110,29 +110,15 @@ button:hover {
     animation-duration: 0.5s;
 }
 
-/* .modal-header{
-    padding: 10px;
-    border: 2px solid black;
-    border-bottom: none;
-    text-align: center;
-    color: white;
-    background-color: gray;
-}
-
-.modal-header h2 {
-    margin: 0;
-}
-
-.modal-body {
-    padding: 10px;
-    border: 2px solid black;
-    text-align: center;
-} */
 
 .loginInput {
     margin: 10px;
     margin-left: 0px;
     width: 90%;
+}
+
+.closeDelBtn{
+    float: right;
 }
 
 .login {
@@ -164,6 +150,18 @@ button:hover {
 }
 
 .closeEnrollBtn:hover,.closeEnrollBtn:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.closeIndicatorBtn:hover,.closeIndicatorBtn:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.closeDelBtn:hover,.closeDelBtn:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
