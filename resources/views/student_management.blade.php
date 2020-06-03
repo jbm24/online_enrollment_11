@@ -57,11 +57,14 @@
                     </div>
 
                     <div class="modal-body">
+                        <!-- Indicator for sucessful adding -->
+                        <div class="alert alert-success collapse" role="alert" data-dismiss="alert">
+                        </div>
+                        <!-- Indicator for unsuccessful adding -->
+                        <div class="alert alert-danger collapse" role="alert" data-dismiss="alert">
+                        </div>
 
                         <form id="addForm" class="form-group">
-                        <!-- Indicator for sucessful/unsuccessful adding -->
-                        <div class="existIndicator">
-                            </div>
                         @csrf
                             <label for="firstName">First Name</label><br>
                             <input type="text" class="form-control" name="firstName" placeholder="Enter first name here..." required><br>
@@ -98,11 +101,14 @@
                     </div>
 
                     <div class="modal-body">
+                        <!-- Indicator sucessful editing -->
+                        <div class="alert alert-success collapse" role="alert" data-dismiss="alert">
+                        </div>
+                        <!-- Indicator unsucessful editing -->
+                        <div class="alert alert-danger collapse" role="alert" data-dismiss="alert">
+                        </div>
 
                         <form id="updateForm" class="form-group">
-                        <!-- Indicator sucessful/unsuccessful adding -->
-                        <div class="existIndicator">
-                            </div>
                         @csrf
                         @method('put')
                             <label for="updatedFirstName">First Name</label><br>
@@ -165,8 +171,8 @@
                         <h6>Deleted</h6>
                         <span class="closeDelBtn">&times;</span>
                     </div>
-                    <div id="deleteMsg" class="modal-body">
-    
+                    <!-- Successful Delete Alert -->
+                    <div class="alert alert-success collapse" role="alert" data-dismiss="alert">
                     </div>
                 </div>
             </div>

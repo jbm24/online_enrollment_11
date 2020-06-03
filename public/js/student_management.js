@@ -7,6 +7,7 @@ $.ajaxSetup({
 
 // Add Student
 $('#addSubmit').click(function (e) {
+    $('.alert').hide();
 
     $("#addForm").validate({
         submitHandler: function (form) {
@@ -21,13 +22,27 @@ $('#addSubmit').click(function (e) {
                 success: function (data) {
                     $('#addForm').trigger("reset");
                     $('#addSubmit').val('Add student');
-                    $('.existIndicator').html(data.success);
-                    $('.existIndicator').show();
+                    if (data.exists){
+                        $('.alert-danger').html(data.exists);
+                        $('.alert-danger').show();
+                    }
+                    else{
+                        $('.alert-success').html(data.success);
+                        $('.alert-success').show();
+                        setTimeout(function(){
+                            $('.alert-success').hide('fade');
+                        }, 2000);
+                    }
+
                     generateTable();
                 },
 
                 error: function (data) {
                     console.log('Error:', data);
+
+                    $('#addSubmit').val('Add student');
+                    $('.alert-danger').html(data.responseJSON.message);
+                    $('.alert-danger').show();
                 }
             });
         }
@@ -39,7 +54,8 @@ $('#addSubmit').click(function (e) {
 
 // Edit Student
 $('#updateSubmit').click(function (e) {
-    
+    $('.alert').hide();
+
     $("#updateForm").validate({
         submitHandler: function (form) {
             $("#updateSubmit").val('Editing student..');
@@ -52,13 +68,28 @@ $('#updateSubmit').click(function (e) {
 
                 success: function (data) {
                     $('#updateSubmit').val('Edit student');
-                    $('.existIndicator').html(data.success);
-                    $('.existIndicator').show();
+
+                    if (data.exists){
+                        $('.alert-danger').html(data.exists);
+                        $('.alert-danger').show();
+                    }
+                    else{
+                        $('.alert-success').html(data.success);
+                        $('.alert-success').show();
+                        setTimeout(function(){
+                            $('.alert-success').hide('fade');
+                        }, 2000);
+                    }
+
                     generateTable();
                 },
 
                 error: function (data) {
                     console.log('Error:', data);
+
+                    $('#updateSubmit').val('Edit student');
+                    $('.alert-danger').html(data.responseJSON.message);
+                    $('.alert-danger').show();
                 }
             });
         }
@@ -74,12 +105,14 @@ $(document).on('click', '.deleteBtn', function(){
     // For closing Delete modal
     $(".closeDelBtn").on('click', function(){
         deleteModal.hide();
+        $('.alert-success').hide();
     });
         
     //listen for outside click
     window.onclick = function(event) {
         if(event.target == document.getElementById('deleteModal')){
             deleteModal.hide();
+            $('.alert-success').hide();
         }
     }
 
@@ -93,8 +126,15 @@ $(document).on('click', '.deleteBtn', function(){
 
         success:function(data)
         {
-            $('#deleteMsg').html(data.success);
+            $('.alert-success').html(data.success);
+            $('.alert-success').show();
             deleteModal.show();
+
+            setTimeout(function(){
+                deleteModal.hide('fade');
+                $('.alert').hide('fade');
+            }, 2000);
+
             generateTable();
         },
 
@@ -155,14 +195,14 @@ $(document).on('click', '#showAdd', function(){
     //fcn to close modal
     closeAddBtn.on('click', function(){
         addModal.hide();
-        $(".existIndicator").hide();
+        $('.alert').hide();
     });
 
     //listen for outside click
     window.onclick = function(event) {
         if(event.target == document.getElementById('addModal')){
             addModal.hide();
-            $(".existIndicator").hide();
+            $('.alert').hide();
         }
     }
 });
@@ -195,14 +235,14 @@ $(document).on('click', '.editBtn', function(){
     //fcn to close modal
     function closeUpdateModal(){
         updateModal.hide();
-        $(".existIndicator").hide();
+        $('.alert').hide();
     } 
 
     //listen for outside click
     window.onclick = function(event) {
         if(event.target == document.getElementById('updateModal')){
             updateModal.hide();
-            $(".existIndicator").hide();
+            $('.alert').hide();
         }
     }
 });
@@ -233,7 +273,7 @@ $(document).on('click', '.viewBtn', function(){
     //fcn to close modal
     function closeViewModal(){
         viewModal.hide();
-        $(".existIndicator").hide();
+        $('.alert').hide();
     } 
 
     //listen for outside click
@@ -286,6 +326,4 @@ inputBox.addEventListener("keydown", function(e) {
 
 $(document).ready(function(){
     generateTable();
-
-
 });

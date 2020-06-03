@@ -23,6 +23,15 @@ class StudentController extends Controller
 
 
     public function store(Request $request){
+        $request->validate([
+            'firstName' => ['required'],
+            'lastName' => ['required'],
+            'idNumber' => ['required', 'numeric'],
+            'birthday' => ['required', 'date'],
+            'course' => ['required'],
+        ]);
+
+
         $fName = $request->firstName;
         $lName = $request->lastName;
         $idNum = $request->idNumber;
@@ -45,13 +54,24 @@ class StudentController extends Controller
             return response()->json(['success'=> 'Successfully added student.']);
         }
         else {
-            return response()->json(['success'=>'A student with that ID number already exists.']);
+            return response()->json(['exists'=>'A student with that ID number already exists.']);
         }
     }
     
 
 
     public function update(Request $request){
+        $request->validate([
+            'oldIdNumber' => ['required', 'numeric'],
+            'studentId' => ['required', 'numeric'],
+            'updatedFirstName' => ['required'],
+            'updatedLastName' => ['required'],
+            'updatedIdNumber' => ['required', 'numeric'],
+            'updatedBirthday' => ['required', 'date'],
+            'updatedCourse' => ['required'],
+        ]);
+
+
         $oldIdNum = $request->oldIdNumber;
         $id = $request->studentId;
 
@@ -87,7 +107,7 @@ class StudentController extends Controller
         }
 
         else {
-            return response()->json(['success'=>'A student with that ID number already exists.']);
+            return response()->json(['exists'=>'A student with that ID number already exists.']);
         }
     }
 

@@ -10,6 +10,13 @@ class authController extends Controller
 {
     public function authenticate(Request $request){
 
+        $request->validate([
+            'user' => ['required'],
+            'pass' => ['required'],
+        ]);
+
+
+
         $username = $request->user;
         $password = bcrypt($request->pass);
         $flag = 0;
