@@ -58,23 +58,25 @@
 
                     <div class="modal-body">
 
-                        <form id="addForm">
+                        <form id="addForm" class="form-group">
                         <!-- Indicator for sucessful/unsuccessful adding -->
                         <div class="existIndicator">
                             </div>
                         @csrf
                             <label for="firstName">First Name</label><br>
-                            <input type="text" class="loginInput" name="firstName" placeholder="Enter first name here..." required><br>
+                            <input type="text" class="form-control" name="firstName" placeholder="Enter first name here..." required><br>
                             <label for="lastName">Last Name</label><br>
-                            <input type="text" class="loginInput" name="lastName" placeholder="Enter last name here..." required><br>
+                            <input type="text" class="form-control" name="lastName" placeholder="Enter last name here..." required><br>
                             <label for="idNumber">ID Number</label><br>
-                            <input type="number" class="loginInput" id="numberInput" name="idNumber" placeholder="Enter ID Number here..." required><br>
+                            <input type="number" class="form-control" id="numberInput" name="idNumber" placeholder="Enter ID Number here..." required><br>
                             <label for="birthday">Birthday</label><br>
-                            <input type="date" class="loginInput" name="birthday" required><br>
+                            <input type="date" class="form-control" name="birthday" required><br>
                             <label for="course">Course</label><br>
-                            <input type="text" class="loginInput" name="course" placeholder="Enter course here..." required><br>
-
-                            <input type="submit" id="addSubmit" value="Add Student">
+                            <input type="text" class="form-control" name="course" placeholder="Enter course here..." required><br>
+                            <div class="positionDiv">
+                                <input type="submit" id="addSubmit" class="btn btn-outline-dark mb-2" value="Add Student">
+                            </div>
+                            
 
                             
                         </form>
@@ -97,27 +99,29 @@
 
                     <div class="modal-body">
 
-                        <form id="updateForm">
+                        <form id="updateForm" class="form-group">
                         <!-- Indicator sucessful/unsuccessful adding -->
                         <div class="existIndicator">
                             </div>
                         @csrf
                         @method('put')
                             <label for="updatedFirstName">First Name</label><br>
-                            <input type="text" id="fname" class="loginInput" name="updatedFirstName" required><br>
+                            <input type="text" id="fname" class="form-control" name="updatedFirstName" required><br>
                             <label for="updatedLastName">Last Name</label><br>
-                            <input type="text" id="lname" class="loginInput" name="updatedLastName" required><br>
+                            <input type="text" id="lname" class="form-control" name="updatedLastName" required><br>
                             <label for="updatedIdNumber">ID Number</label><br>
-                            <input type="number" id="idNum" class="loginInput" name="updatedIdNumber" required><br>
+                            <input type="number" id="idNum" class="form-control" name="updatedIdNumber" required><br>
                             <label for="updatedBirthday">Birthday</label><br>
-                            <input type="date" id="bday" class="loginInput" name="updatedBirthday" required><br>
+                            <input type="date" id="bday" class="form-control" name="updatedBirthday" required><br>
                             <label for="updatedCourse">Course</label><br>
-                            <input type="text" id="course" class="loginInput" name="updatedCourse" required><br>
+                            <input type="text" id="course" class="form-control" name="updatedCourse" required><br>
 
                             <input type="number" id="oldIdNum" class="hidden" name="oldIdNumber">
                             <input type="number" id="studentId" class="hidden" name="studentId">
-
-                            <input type="submit" id="updateSubmit" value="Edit">
+                            <div class="positionDiv">
+                                <input type="submit" id="updateSubmit" class="btn btn-outline-dark" value="Edit">
+                            </div>
+                            
 
                             
                         </form>
@@ -181,25 +185,27 @@
 
                 <!-- Button for adding Student -->
                 <div class="addStudentBtn">
-                    <button type="button" id="showAdd" class="loginBtn btn btn-secondary" data-toggle="modal" data-target="#addModal">Add Student</button>
+                    <button type="button" id="showAdd" class="btn btn-outline-dark mt-1" data-toggle="modal" data-target="#addModal">Add Student</button>
                 </div><br>
+                <div class="border border-dark mx-auto">
+                    <table>
+                        <thead>
+                        <tr>
+                        <th style="width: 25%;">ID Number</th>
+                        <th style="width: 40%;">Name</th>
+                        <th style="width: 10%;">Course</th>
+                        <th style="width: 10%;"></th>
+                        <th style="width: 10%;"></th>
+                        <th style="width: 10%;"></th>
+                        </tr>
+                        </thead>
 
-                <table id="student_table" class="student_table">
-                    <thead>
-                    <tr>
-                    <th style="width: 25%;">ID Number</th>
-                    <th style="width: 40%;">Name</th>
-                    <th style="width: 10%;">Course</th>
-                    <th style="width: 10%;"></th>
-                    <th style="width: 10%;"></th>
-                    <th style="width: 10%;"></th>
-                    </tr>
-                    </thead>
-
-                    <tbody id="studTable">
-                        
-                    </tbody>
-                </table>
+                        <tbody id="studTable">
+                            
+                        </tbody>
+                    </table>
+                </div>
+                
                 
             </div>
         </div>

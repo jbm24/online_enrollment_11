@@ -105,12 +105,12 @@ function generateTable(){
             for (var count=0; count<data.length; count++){
                 tableData += '<tr><td class="subName">' + data[count].subject_name + '</td>';
                 tableData += '<td class="studName">' + data[count].enrollee.length + "/" + data[count].capacity + '</td>';
-                tableData += '<td class="edit"> <button class="editBtn btn btn-secondary"> Edit Subject </button>' 
+                tableData += '<td class="edit"> <button class="editBtn btn btn-outline-dark"> Edit Subject </button>' 
                             + '<h1 class="hidden">' + data[count].capacity + '</h1>' 
                             + '<h2 class="hidden">' + data[count].room + '</h2>' 
                             + '<h3 class="hidden">' + data[count].schedule + '</h3>'
                             + '<h4 class="hidden">' + data[count].id + '</h4></td>';
-                tableData += '<td><button type="button" id="' +data[count].id+ '" class="viewBtn btn btn-secondary">View Enrollees</button></td>';
+                tableData += '<td><button type="button" id="' +data[count].id+ '" class="viewBtn btn btn-outline-dark">View Enrollees</button></td>';
             }
             table.html(tableData);
         },
@@ -140,7 +140,7 @@ function generateEnrolleeTable(id){
                 tableData += '<tr><td>' + data[count].student.id_number + '</td>';
                 tableData += '<td>' + data[count].student.last_name+ ", " + data[count].student.first_name + '</td>';
                 tableData += '<td>' + data[count].student.course + '</td>';
-                tableData += '<td><button type="button" id="' + data[count].id + '" class="unenrollBtn btn btn-secondary">Unenroll</button> <h1 class="hidden">' +id+ '</h1></td>';
+                tableData += '<td><button type="button" id="' + data[count].id + '" class="unenrollBtn btn btn-outline-danger">Unenroll</button> <h1 class="hidden">' +id+ '</h1></td>';
             }
             table.html(tableData);
         },
@@ -318,6 +318,7 @@ inputBox.addEventListener("keydown", function(e) {
     e.preventDefault();
   }
 });
+
 //number box end
 
 

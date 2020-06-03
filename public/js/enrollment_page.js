@@ -83,7 +83,7 @@ function generateTable(){
                 tableData += '<tr><td class="subName">' + data[count].subject_name + '</td>';
                 tableData += '<td class="population"> <p class="enrollees">' + data[count].enrollee.length + '</p>/<p class="capacity">' + data[count].capacity + '</p></td>';
                 tableData += '<td>' + data[count].room + ' - ' + data[count].schedule + '</td>';
-                tableData += '<td><button type="button" class="enrollBtn btn btn-secondary">Enroll</button></td>';
+                tableData += '<td><button type="button" class="enrollBtn btn btn-outline-dark">Enroll</button></td>';
             }
             table.html(tableData);
         },
@@ -208,3 +208,42 @@ $(document).ready(function(){
         }
     }
 });
+
+//not allowing text to be placed on number box
+var inputBox = document.getElementById("numberInput");
+
+var invalidChars = [
+  "-",
+  "+",
+  "e",
+];
+
+inputBox.addEventListener("input", function() {
+  this.value = this.value.replace(/[e\+\-]/gi, "");
+});
+
+inputBox.addEventListener("keydown", function(e) {
+  if (invalidChars.includes(e.key)) {
+    e.preventDefault();
+  }
+});
+
+var inputBox = document.getElementById("eCapacity");
+
+var invalidChars = [
+  "-",
+  "+",
+  "e",
+];
+
+inputBox.addEventListener("input", function() {
+  this.value = this.value.replace(/[e\+\-]/gi, "");
+});
+
+inputBox.addEventListener("keydown", function(e) {
+  if (invalidChars.includes(e.key)) {
+    e.preventDefault();
+  }
+});
+
+//number box end

@@ -56,21 +56,23 @@
 
                     <div class="modal-body">
 
-                        <form id="addForm" action="add_subject" method="post">
+                        <form id="addForm" class="form-group" action="add_subject" method="post">
                             <!-- Indicator sucessful/unsuccessful adding -->
                             <div class="existIndicator">
                             </div>
                         @csrf
                             <label for="subjectName">Subject Name</label><br>
-                            <input type="text" class="loginInput" name="subjectName" placeholder="Enter Subject Name here..." required/><br>
+                            <input type="text" class="form-control" name="subjectName" placeholder="Enter Subject Name here..." required/><br>
                             <label for="room">Room</label><br>
-                            <input type="text" class="loginInput" name="room" placeholder="Enter Room here..." required/><br>
+                            <input type="text" class="form-control" name="room" placeholder="Enter Room here..." required/><br>
                             <label for="capacity">Capacity</label><br>
-                            <input type="number" class="loginInput" id="numberInput" name="capacity" placeholder="Enter Capacity..." required/><br>
+                            <input type="number" class="form-control" id="numberInput" name="capacity" placeholder="Enter Capacity..." required/><br>
                             <label for="schedule">Schedule</label><br>
-                            <input type="text" class="loginInput" name="schedule" placeholder="Enter Schedule here..." required/><br>
-
-                            <input type="submit" id="addSubmit" value="Add Subject">
+                            <input type="text" class="form-control" name="schedule" placeholder="Enter Schedule here..." required/><br>
+                            <div class="positionDiv">
+                                <input type="submit" id="addSubmit" class="btn btn-outline-dark" value="Add Subject">
+                            </div>
+                            
 
                             
 
@@ -94,36 +96,41 @@
 
                     <div class="modal-body">
 
-                        <form id="updateForm">
+                        <form id="updateForm" class="form-group">
                         <!-- Indicator sucessful/unsuccessful adding -->
                         <div class="existIndicator">
                             </div>
                             @csrf
                             @method('put')
                             <label for="editedSubjectName">Subject Name</label><br>
-                            <input type="text" class="loginInput" id="eSubName" name="editedSubjectName" required><br>
+                            <input type="text" class="form-control" id="eSubName" name="editedSubjectName" required><br>
                             <label for="editedRoom">Room</label><br>
-                            <input type="text" class="loginInput" id="eRoom" name="editedRoom" required><br>
+                            <input type="text" class="form-control" id="eRoom" name="editedRoom" required><br>
                             <label for="editedCapacity">Capacity</label><br>
-                            <input type="number" class="loginInput" id="eCapacity" name="editedCapacity" required><br>
+                            <input type="number" class="form-control" id="eCapacity" name="editedCapacity" required><br>
                             <label for="editedSchedule">Schedule</label><br>
-                            <input type="text" class="loginInput" id="eSchedule" name="editedSchedule" required><br>
+                            <input type="text" class="form-control" id="eSchedule" name="editedSchedule" required><br>
 
                             <input type="text" id="oldSubName" class="hidden" name="oldSubName">
                             <input type="text" id="subjId" class="hidden" name="subjId">
-
-                            <input type="submit" id="updateSubmit" value="Edit">
+                            <div class="positionDiv">
+                                <input type="submit" id="updateSubmit" class="btn btn-outline-dark" value="Edit">
+                            </div>
+                            
 
                             
 
                         </form>
 
 
-                        <form id="deleteSubject">
+                        <form id="deleteSubject" class="form-group">
                             @csrf
                             @method('delete')
                             <input type="text" id="delSubId" class="hidden" name="delSubId"><br>
-                            <button type="button" class="btn btn-danger btn-xs deleteBtn"> Delete this subject </button> 
+                            <div class="positionDiv">
+                                <button type="button" id="deleteBtn" class="btn btn-outline-danger btn-xs"> Delete this subject </button>
+                            </div>
+                             
                         </form>
 
                     </div>
@@ -133,6 +140,31 @@
         
 
         <!-- Modal for viewing Enrollees of a Subject  -->
+        <div id="viewModal" class="modal" tabindex=-1 role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Enrollees</h2>
+                        <span class="closeViewBtn">&times;</span>
+                    </div>
+
+                    <table class="viewEnrolleesTable">
+                        <thead>
+                        <tr>
+                        <th style="width: 10%;">ID Number</th>
+                        <th style="width: 10%;">Full Name</th>
+                        <th style="width: 10%;">Course</th>
+                        <th style="width: 10%;"></th>
+                        </tr>
+                        </thead>
+                        <tbody id="enrolleeTable">
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
         <div id="viewModal" class="modal">
             <div class="enrollee-modal-content">
                 <div class="modal-header">
@@ -202,30 +234,32 @@
 
                 <!-- For adding Subjects -->
                 <div class="addStudentBtn">
-                    <button type="button" id="showAdd" class="loginBtn btn btn-secondary" data-toggle="modal" data-target="#simpleModal">Add Subject</button>
+                    <button type="button" id="showAdd" class="btn btn-outline-dark mb-2" data-toggle="modal" data-target="#simpleModal">Add Subject</button>
                 </div>
 
                 <!-- For clearing all Enrollees -->
                 <form action="/clear_enrollees" method="post">
                     @csrf
                     @method('delete')
-                    <input type="submit" class="loginBtn btn btn-secondary" value="Clear Enrollees">
+                    <input type="submit" class="btn btn-outline-danger" value="Clear Enrollees">
                 </form>
 
+                <div class="border border-dark mx-auto mt-3">
+                    <table class="student_table">
+                        <thead>
+                        <tr>
+                        <th style="width: 15%;">Subject</th>
+                        <th style="width: 10%;">Enrollees</th>
+                        <th style="width: 10%;"></th>
+                        <th style="width: 10%;"></th>
+                        </tr>
+                        </thead>
+                        <tbody id="subjTable">
 
-                <table class="student_table">
-                    <thead>
-                    <tr>
-                    <th style="width: 15%;">Subject</th>
-                    <th style="width: 10%;">Enrollees</th>
-                    <th style="width: 10%;"></th>
-                    <th style="width: 10%;"></th>
-                    </tr>
-                    </thead>
-                    <tbody id="subjTable">
-
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
+                
 
             </div>
         </div>

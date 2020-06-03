@@ -93,23 +93,17 @@ button:hover {
 }
 
  .modal-content {
-    background-color: #f4f4f4;
-    margin: 10% auto;
-    width: 20%;
-    animation-name: modalOpen;
-    animation-duration: 0.5s;
-    text-align: center;
-}
-.enrollee-modal-content {
-    background-color: #f4f4f4;
-    margin: 10% auto;
-    width: 80%;
-    height: 70%;
-    overflow-y: auto;
     animation-name: modalOpen;
     animation-duration: 0.5s;
 }
 
+#enrollSubmit {
+    margin-top: -50px;
+}
+
+#viewModal {
+    width: 100%;
+}
 
 .loginInput {
     margin: 10px;
@@ -180,11 +174,8 @@ button:hover {
 
 /*Student Management*/
 
-.student_table {
-    width: 80%;
-    margin-left: 10%;
-    border: 2px solid black;
-    padding: 20px;
+.border {
+    width: 75%;
 }
 
 td, th {
@@ -260,9 +251,21 @@ h2 {
     color: red;
 }
 
+#deleteBtn {
+    margin-top: -45px;
+    padding-bottom: -50px;
+}
+
+#updateSubmit {
+    margin-top: -10px;
+}
+
 /* Staff Main Page */
 
-
+#searchInput {
+    width: 30%;
+    margin-bottom: -10px;
+}
 
 .staffBtn {
     margin-bottom: 20px;
@@ -283,19 +286,17 @@ h2 {
     background-color: gray;
 }
 
-.loginBtn {
-    color: black;
-    background-color: white;
-    font-family: 'Nunito', sans-serif;
-    border-radius: 10px;
-    font-size: medium;
-    margin: 10px;
+.form-group {
+    width: 100%;
 }
 
+.loginBtn {
+    margin-bottom: -15px;
+    margin-top: -15px;
+}
 
-.loginBtn:hover {
-    color: white;
-    background-color: gray;
+.positionDiv {
+    text-align: center;
 }
 
 .staffP {
@@ -327,4 +328,8 @@ input[type="number"] {
 
 .error{
     color: red;
+}
+
+#addSubmit {
+    margin-bottom: -10px;
 }

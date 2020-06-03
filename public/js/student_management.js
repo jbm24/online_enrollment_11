@@ -120,9 +120,9 @@ function generateTable(){
                 tableData += '<tr><td class="studId">' + data[count].id_number + '</td>';
                 tableData += '<td class="studName"> <p class="studLName">' + data[count].last_name + "</p>, <p class=studFName>" + data[count].first_name + '</p></td>';
                 tableData += '<td class="studCourse">' + data[count].course + '</td>';
-                tableData += '<td><button type="button" class="viewBtn">View</button></td>';
-                tableData += '<td class="editTD"> <button type="button" class="editBtn">Edit</button> <p class="hidden">' + data[count].birthday + '</p></td>';
-                tableData += '<td class="del"><button type="button" class="btn btn-danger btn-xs deleteBtn" id="' + data[count].id + '">Delete</button></td></tr>';
+                tableData += '<td><button type="button" class="viewBtn btn btn-outline-dark">View</button></td>';
+                tableData += '<td class="editTD"> <button type="button" class="editBtn btn btn-outline-dark">Edit</button> <p class="hidden">' + data[count].birthday + '</p></td>';
+                tableData += '<td class="del"><button type="button" class="btn btn-outline-danger btn-xs deleteBtn" id="' + data[count].id + '">Delete</button></td></tr>';
             }
             table.html(tableData);
         },
@@ -280,6 +280,7 @@ inputBox.addEventListener("keydown", function(e) {
     e.preventDefault();
   }
 });
+
 //number box end
 
 

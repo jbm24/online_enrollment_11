@@ -20,7 +20,7 @@
     </head>
     <body>
         <div class="staffLogin">
-            <button type="button" id="staffModal" class="loginBtn btn btn-secondary" data-toggle="modal" data-target="#simpleModal">Staff Login</button>
+            <button type="button" id="staffModal" class="btn btn-outline-dark" data-toggle="modal" data-target="#simpleModal">Staff Login</button>
         </div>
 
         <div id="simpleModal" class="modal" tabindex=-1 role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true">
@@ -33,17 +33,18 @@
                     </div>
                     <div class="modal-body">
 
-                        <form id="loginForm" method="post" action="/auth">
+                        <form id="loginForm" class="form-group" method="post" action="/auth">
                         <!-- Indicator for if input had wrong details -->
                         <div id="loginIndicator" class="hidden">
                             </div>
                         <?php echo csrf_field(); ?>
                             <label for="user">Username</label><br>
-                            <input type="text" class="loginInput" name="user" placeholder="Enter username here..." required><br>
+                            <input type="text" class="form-control" name="user" placeholder="Enter username here..." required><br>
                             <label for="pass">Password</label><br>
-                            <input type="password" class="loginInput" name="pass" placeholder="Enter password here..." required><br>
-                            <input type="submit" id="loginSubmit" class="btn btn-secondary" value="Login">
-                            
+                            <input type="password" class="form-control" name="pass" placeholder="Enter password here..." required><br>
+                            <div class="positionDiv">
+                                <input type="submit" id="loginSubmit" class="btn btn-outline-dark loginBtn" value="Login">
+                            </div>
                             
                         </form>
 
@@ -69,7 +70,7 @@
                 </p>
                 <p>
                     <form action="/enrollment">
-                        <input type="submit" class="btnStaff btn btn-secondary" value="Click here to enroll">
+                        <input type="submit" class="btn btn-outline-dark" value="Click here to enroll">
                     </form>
                 </p>
             </div>

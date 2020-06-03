@@ -23,7 +23,7 @@
 
     <body>
         <form action="/">
-            <input type="submit" class="loginBtn btn btn-secondary" value="Back to Landing Page">
+            <input type="submit" class="btn btn-outline-dark m-2" value="Back to Landing Page">
         </form>
 
 
@@ -65,13 +65,15 @@
                             </div>
                             @csrf
                             <label for="editedSubjectName">Id Number</label><br>
-                            <input type="number" class="loginInput" name="confirmId" required><br>
+                            <input type="number" id="numberInput" class="form-control" name="confirmId" required><br>
                             <label for="editedCapacity">Birthday</label><br>
-                            <input type="date" class="loginInput" name="confirmBday" required><br>
+                            <input type="date" class="form-control" name="confirmBday" required><br>
 
                             <input type="text" id="subject" class="hidden" name="subject"><br>
-
-                            <input type="submit" id="enrollSubmit" value="Confirm Enrollment">
+                            <div class="positionDiv">
+                                <input type="submit" id="enrollSubmit" class="btn btn-outline-dark" value="Confirm Enrollment">
+                            </div>
+                            
 
                             
                         </form>
@@ -87,7 +89,7 @@
         <!-- Table of Subjects -->
         <div>
             <div class="content">
-                <div class="title m-b-md">
+                <div class="title m-b-md mb-2">
                     Enrollment Page
                 </div>
 
@@ -95,29 +97,31 @@
                 <form id="search">
                     @csrf
                     <label for="searchSubject">Search subject:</label><br>
-                    <input type="text" id="searchInput" class="searched" name="searchSubject"><br>
+                    <input type="text" id="searchInput" class="form-control searched mx-auto" name="searchSubject"><br>
 
                     <!-- Indicator for when the searched subject does not exist -->
                     <p id="searchIndicator" class="hidden">The subject you are looking for does not exist.</p>
 
-                    <input type="button" id="searchBtn" value="Search">
+                    <input type="button" id="searchBtn" class="btn btn-outline-dark" value="Search">
                 </form>
+                <div class="border border-dark mx-auto mt-3">
+                    <table>
+                        <thead>
+                        <tr>
+                        <th style="width: 25%;">Subject Name</th>
+                        <th style="width: 10%;">Enrolled/Capacity</th>
+                        <th style="width: 30%;">Room and Schedule</th>
+                        <th style="width: 10%;"></th>
+                        </tr>
+                        </thead>
 
-                <table style="width:80%;margin-left: 10%;">
-                    <thead>
-                    <tr>
-                    <th style="width: 25%;">Subject Name</th>
-                    <th style="width: 10%;">Enrolled/Capacity</th>
-                    <th style="width: 30%;">Room and Schedule</th>
-                    <th style="width: 10%;"></th>
-                    </tr>
-                    </thead>
+                        <tbody id="subjTable">
 
-                    <tbody id="subjTable">
+                        </tbody>
 
-                    </tbody>
-
-                </table>
+                    </table>
+                </div>
+                
 
             </div>
         </div>
