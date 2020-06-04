@@ -8,6 +8,7 @@ $.ajaxSetup({
 
 // Enroll in a Subject
 $('#enrollSubmit').click(function (e) {
+    $(".alert").hide();
 
     $("#enrollForm").validate({
         submitHandler: function (form) {
@@ -25,14 +26,36 @@ $('#enrollSubmit').click(function (e) {
                     var closeIndicatorBtn = $(".closeIndicatorBtn");
 
                     if (data.wrong){
-                        $("#wrongIndicator").html(data.wrong);
-                        $("#wrongIndicator").show();
+                        $('.alert-danger').html(data.wrong);
+                        $('.alert-danger').show();
                     }
-                    else {
-                        $("#indicator").html(data.success);
+
+                    else if (data.unsuccessful){
+                        $('.alert-danger').html(data.unsuccessful);
+                        $('.alert-danger').show();
                         indicator.show();
                         $('#enrollModal').hide();
+                        setTimeout(function(){
+                            indicator.hide('fade');
+                            $(".alert").hide('fade');
+                        }, 2000);
+
                         generateTable();
+                        $('#enrollForm').trigger("reset");
+                    }
+                    
+                    else {
+                        generateTable();
+
+                        $(".alert-success").html(data.success);
+                        $(".alert-success").show();
+                        indicator.show();
+                        $('#enrollModal').hide();
+                        setTimeout(function(){
+                            indicator.hide('fade');
+                            $(".alert").hide('fade');
+                        }, 2000);
+
                         $("#searchInput").val('');
                         $('#enrollForm').trigger("reset");
                     }
@@ -41,7 +64,7 @@ $('#enrollSubmit').click(function (e) {
                     //close modal
                     closeIndicatorBtn.on('click', function() {
                         indicator.hide();
-                        $("#wrongIndicator").hide();
+                        $(".alert").hide();
                     });
 
 
@@ -49,18 +72,22 @@ $('#enrollSubmit').click(function (e) {
                     window.onclick = function(event) {
                         if(event.target == document.getElementById('modalIndicator')){
                             indicator.hide();
-                            $("#wrongIndicator").hide();
+                            $(".alert").hide();
                         }
                         if(event.target == document.getElementById('enrollModal')){
                             enrollModal.hide();
                             $('#enrollForm').trigger("reset");
-                            $("#wrongIndicator").hide();
+                            $(".alert").hide();
                         }
                     }
                 },
 
                 error: function (data) {
                     console.log('Error:', data);
+
+                    $('#enrollSubmit').val("Confirm Enrollment");
+                    $('.alert-danger').html(data.responseJSON.message);
+                    $('.alert-danger').show();
                 }
             });
         }
@@ -160,8 +187,14 @@ $(document).on('click', '.enrollBtn', function(){
             enrollModal.show();
         }
         else {
-            $("#indicator").html("This subject is already full.");
+            $('.alert-danger').html("This subject is already full.");
+            $('.alert-danger').show();
             indicator.show();
+            $('#enrollModal').hide();
+            setTimeout(function(){
+                indicator.hide('fade');
+                $(".alert").hide('fade');
+            }, 2000);
         }
 
     //close modal
@@ -174,7 +207,7 @@ $(document).on('click', '.enrollBtn', function(){
     //close modal
     closeIndicatorBtn.on('click', function() {
         indicator.hide();
-        $("#wrongIndicator").hide();
+        $(".alert").hide();
     });
 
 
@@ -183,11 +216,11 @@ $(document).on('click', '.enrollBtn', function(){
         if(event.target == document.getElementById('enrollModal')){
             enrollModal.hide();
             $('#enrollForm').trigger("reset");
-            $("#wrongIndicator").hide();
+            $(".alert").hide();
         }
         if(event.target == document.getElementById('modalIndicator')){
             indicator.hide();
-            $("#wrongIndicator").hide();
+            $(".alert").hide();
         }
     }
 });

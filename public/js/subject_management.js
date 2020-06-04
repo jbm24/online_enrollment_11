@@ -8,6 +8,7 @@ $.ajaxSetup({
 
 // Add Subject
 $('#addSubmit').click(function (e) {
+    $('.alert').hide();
 
     $("#addForm").validate({
         submitHandler: function (form) {
@@ -22,13 +23,27 @@ $('#addSubmit').click(function (e) {
                 success: function (data) {
                     $('#addForm').trigger("reset");
                     $('#addSubmit').val('Add subject');
-                    $('.existIndicator').html(data.success);
-                    $('.existIndicator').show();
+                    if (data.exists){
+                        $('.alert-danger').html(data.exists);
+                        $('.alert-danger').show();
+                    }
+                    else{
+                        $('.alert-success').html(data.success);
+                        $('.alert-success').show();
+                        setTimeout(function(){
+                            $('.alert-success').hide('fade');
+                        }, 2000);
+                    }
+
                     generateTable();
                 },
 
                 error: function (data) {
                     console.log('Error:', data);
+
+                    $('#addSubmit').val('Add student');
+                    $('.alert-danger').html(data.responseJSON.message);
+                    $('.alert-danger').show();
                 }
             });
         }
@@ -39,6 +54,7 @@ $('#addSubmit').click(function (e) {
 
 // Edit Subject
 $('#updateSubmit').click(function (e) {
+    $('.alert').hide();
 
     $("#updateForm").validate({
         submitHandler: function (form) {
@@ -52,13 +68,28 @@ $('#updateSubmit').click(function (e) {
 
                 success: function (data) {
                     $('#updateSubmit').val('Edit subject');
-                    $('.existIndicator').html(data.success);
-                    $('.existIndicator').show();
+                    
+                    if (data.exists){
+                        $('.alert-danger').html(data.exists);
+                        $('.alert-danger').show();
+                    }
+                    else{
+                        $('.alert-success').html(data.success);
+                        $('.alert-success').show();
+                        setTimeout(function(){
+                            $('.alert-success').hide('fade');
+                        }, 2000);
+                    }
+
                     generateTable();
                 },
 
                 error: function (data) {
                     console.log('Error:', data);
+
+                    $('#updateSubmit').val('Edit subject');
+                    $('.alert-danger').html(data.responseJSON.message);
+                    $('.alert-danger').show();
                 }
             });
         }
@@ -68,7 +99,7 @@ $('#updateSubmit').click(function (e) {
 
 
 // Delete Subject
-$(document).on('click', '.deleteBtn', function(){
+$(document).on('click', '#deleteBtn', function(){
     var deleteModal = $('#deleteModal');
     
     $.ajax({
@@ -78,8 +109,15 @@ $(document).on('click', '.deleteBtn', function(){
 
         success:function(data)
         {
-            $('#deleteMsg').html(data.success);
+            $('.alert-success').html(data.success);
+            $('.alert-success').show();
             deleteModal.show();
+
+            setTimeout(function(){
+                deleteModal.hide('fade');
+                $('.alert').hide('fade');
+            }, 2000);
+
             generateTable();
             $('#updateModal').hide();
         },
@@ -89,6 +127,39 @@ $(document).on('click', '.deleteBtn', function(){
         }
     });
 });
+
+
+
+// Clear Enrollees
+$(document).on('click', '#clearBtn', function(){
+    var clearModal = $('#deleteModal');
+    
+    $.ajax({
+        url:"clear_enrollees",
+        method:"delete",
+
+        success:function(data)
+        {
+            $('.alert-success').html(data.success);
+            $('.alert-success').show();
+            clearModal.show();
+
+            setTimeout(function(){
+                clearModal.hide('fade');
+                $('.alert').hide('fade');
+            }, 2000);
+
+            generateTable();
+        },
+
+        error: function (data) {
+            console.log('Error:', data);
+        }
+    });
+});
+
+
+
 
     
 
@@ -177,14 +248,14 @@ $(document).on('click', '#showAdd', function(){
     //fcn to close modal
     closeAddBtn.on('click', function(){
         addModal.hide();
-        $(".existIndicator").hide();
+        $('.alert').hide();
     });
 
     //listen for outside click
     window.onclick = function(event) {
         if(event.target == document.getElementById('addModal')){
             addModal.hide();
-            $(".existIndicator").hide();
+            $('.alert').hide();
         }
     }
 });
@@ -218,17 +289,18 @@ $(document).on('click', '.editBtn', function(){
     //fcn to close modal
     function closeUpdateModal(){
         updateModal.hide();
-        $(".existIndicator").hide();
+        $('.alert').hide();
     } 
 
     //listen for outside click
     window.onclick = function(event) {
         if(event.target == document.getElementById('updateModal')){
             updateModal.hide();
-            $(".existIndicator").hide();
+            $('.alert').hide();
         }
         if(event.target == document.getElementById('deleteModal')){
             deleteModal.hide();
+            $('.alert').hide();
         }
     }
 
@@ -239,6 +311,7 @@ $(document).on('click', '.editBtn', function(){
     // For closing Delete modal
     $(".closeDelBtn").on('click', function(){
         deleteModal.hide();
+        $('.alert').hide();
     });
         
 
@@ -328,7 +401,7 @@ inputBox.addEventListener("keydown", function(e) {
 // Unenroll student
 $(document).on('click', '.unenrollBtn', function(){
     
-    var unenrollModal = $('#unenrollModal');
+    var unenrollModal = $('#deleteModal');
 
     // For closing Delete modal
     $(".closeUnenrollBtn").on('click', function(){
@@ -357,11 +430,18 @@ $(document).on('click', '.unenrollBtn', function(){
 
         success:function(data)
         {
-            $('#unenrollMsg').html(data.success);
+            generateEnrolleeTable(subject_id);
+            
+            $('.alert-success').html(data.success);
+            $('.alert-success').show();
             unenrollModal.show();
+
+            setTimeout(function(){
+                unenrollModal.hide('fade');
+                $('.alert').hide('fade');
+            }, 2000);
             
             generateTable();
-            generateEnrolleeTable(subject_id);
         },
 
         error: function (data) {
@@ -369,8 +449,6 @@ $(document).on('click', '.unenrollBtn', function(){
         }
     });
 });
-
-
 
 
 

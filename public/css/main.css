@@ -333,3 +333,6 @@ input[type="number"] {
 #addSubmit {
     margin-bottom: -10px;
 }
+.modal {
+    background: rgba(240, 248, 255, 0.5);
+}

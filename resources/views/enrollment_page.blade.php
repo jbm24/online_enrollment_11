@@ -37,9 +37,13 @@
                         <h6>Enrollment Message</h6>
                         <span class="closeIndicatorBtn">&times;</span>
                     </div>
-                    <div id="indicator" class="modal-body">
-    
+                    <!-- Indicator for sucessful enrolling -->
+                    <div class="alert alert-success collapse" role="alert" data-dismiss="alert">
                     </div>
+                    <!-- Indicator for unsuccessful enrolling -->
+                    <div class="alert alert-danger collapse" role="alert" data-dismiss="alert">
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -56,13 +60,12 @@
                         <span class="closeEnrollBtn">&times;</span>
                     </div>
 
-
                     <div class="modal-body">
+                        <!-- Indicator for wrong input details -->
+                        <div class="alert alert-danger collapse" role="alert" data-dismiss="alert">
+                        </div>
 
                         <form id="enrollForm">
-                            <!-- Indicator for if input had wrong Student details -->
-                            <div id="wrongIndicator" class="hidden">
-                            </div>
                             @csrf
                             <label for="editedSubjectName">Id Number</label><br>
                             <input type="number" id="numberInput" class="form-control" name="confirmId" required><br>

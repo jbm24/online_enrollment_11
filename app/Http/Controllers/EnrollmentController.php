@@ -43,6 +43,12 @@ class EnrollmentController extends Controller
 
 
     public function store(Request $request){
+        $request->validate([
+            'confirmId' => ['required', 'numeric'],
+            'confirmBday' => ['required', 'date'],
+            'subject' => ['required'],
+        ]);
+
         $studId = $request->confirmId;
         $birthday = $request->confirmBday;
         $subjectName = $request->subject;
@@ -80,13 +86,13 @@ class EnrollmentController extends Controller
 
 
         if ($full == true){
-            return response()->json(['success'=> 'This subject is already full.']);
+            return response()->json(['unsuccessful'=> 'This subject is already full.']);
         }
         else if ($flag == false){
             return response()->json(['wrong'=> 'Wrong ID Number or Birthday.']);
         }
         else if ($alreadyEnrolled == true){
-            return response()->json(['success'=> 'You are already enrolled in this subject.']);
+            return response()->json(['unsuccessful'=> 'You are already enrolled in this subject.']);
         }
         else {
             return response()->json(['success'=> 'You have successfully enrolled']);
@@ -106,6 +112,6 @@ class EnrollmentController extends Controller
      public function clear() {
         Enrollee::truncate();
 
-        return redirect('subject_management');
+        return response()->json(['success'=> 'Successfully cleared all enrollees']);
      }
 }

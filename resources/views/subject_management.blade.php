@@ -55,11 +55,14 @@
                     </div>
 
                     <div class="modal-body">
+                        <!-- Indicator for sucessful adding -->
+                        <div class="alert alert-success collapse" role="alert" data-dismiss="alert">
+                        </div>
+                        <!-- Indicator for unsuccessful adding -->
+                        <div class="alert alert-danger collapse" role="alert" data-dismiss="alert">
+                        </div>
 
                         <form id="addForm" class="form-group" action="add_subject" method="post">
-                            <!-- Indicator sucessful/unsuccessful adding -->
-                            <div class="existIndicator">
-                            </div>
                         @csrf
                             <label for="subjectName">Subject Name</label><br>
                             <input type="text" class="form-control" name="subjectName" placeholder="Enter Subject Name here..." required/><br>
@@ -95,21 +98,24 @@
                     </div>
 
                     <div class="modal-body">
+                        <!-- Indicator sucessful editing -->
+                        <div class="alert alert-success collapse" role="alert" data-dismiss="alert">
+                        </div>
+                        <!-- Indicator unsucessful editing -->
+                        <div class="alert alert-danger collapse" role="alert" data-dismiss="alert">
+                        </div>
 
                         <form id="updateForm" class="form-group">
-                        <!-- Indicator sucessful/unsuccessful adding -->
-                        <div class="existIndicator">
-                            </div>
                             @csrf
                             @method('put')
                             <label for="editedSubjectName">Subject Name</label><br>
-                            <input type="text" class="form-control" id="eSubName" name="editedSubjectName" required><br>
+                            <input type="text" class="form-control" id="eSubName" name="editedSubjectName" ><br>
                             <label for="editedRoom">Room</label><br>
-                            <input type="text" class="form-control" id="eRoom" name="editedRoom" required><br>
+                            <input type="text" class="form-control" id="eRoom" name="editedRoom" ><br>
                             <label for="editedCapacity">Capacity</label><br>
-                            <input type="number" class="form-control" id="eCapacity" name="editedCapacity" required><br>
+                            <input type="number" class="form-control" id="eCapacity" name="editedCapacity" ><br>
                             <label for="editedSchedule">Schedule</label><br>
-                            <input type="text" class="form-control" id="eSchedule" name="editedSchedule" required><br>
+                            <input type="text" class="form-control" id="eSchedule" name="editedSchedule" ><br>
 
                             <input type="text" id="oldSubName" class="hidden" name="oldSubName">
                             <input type="text" id="subjId" class="hidden" name="subjId">
@@ -199,25 +205,11 @@
                         <h6>Deleted</h6>
                         <span class="closeDelBtn">&times;</span>
                     </div>
-                    <div id="deleteMsg" class="modal-body">
-    
-                    </div>
-                </div>
-            </div>
-        </div>
 
-
-        <!-- Modal for indicating successful unenrolling of Student -->
-        <div id="unenrollModal" class="modal" tabindex=-1 role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h6>Unenrolled</h6>
-                        <span class="closeUnenrollBtn">&times;</span>
+                    <!-- Successful Delete Alert -->
+                    <div class="alert alert-success collapse" role="alert" data-dismiss="alert">
                     </div>
-                    <div id="unenrollMsg" class="modal-body">
 
-                    </div>
                 </div>
             </div>
         </div>
@@ -238,11 +230,14 @@
                 </div>
 
                 <!-- For clearing all Enrollees -->
-                <form action="/clear_enrollees" method="post">
+                <div class="clearEnrolleesBtn">
+                    <button type="button" id="clearBtn" class="btn btn-outline-danger">Clear Enrollees</button>
+                </div>
+                <!-- <form action="/clear_enrollees" method="post">
                     @csrf
                     @method('delete')
                     <input type="submit" class="btn btn-outline-danger" value="Clear Enrollees">
-                </form>
+                </form> -->
 
                 <div class="border border-dark mx-auto mt-3">
                     <table class="student_table">

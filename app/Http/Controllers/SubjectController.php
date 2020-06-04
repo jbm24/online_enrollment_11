@@ -23,6 +23,13 @@ class SubjectController extends Controller
 
 
     public function store(Request $request){
+        $request->validate([
+            'subjectName' => ['required'],
+            'room' => ['required'],
+            'capacity' => ['required', 'numeric'],
+            'schedule' => ['required'],
+        ]);
+
         $name = $request->subjectName;
         $room = $request->room;
         $capacity = $request->capacity;
@@ -43,12 +50,22 @@ class SubjectController extends Controller
             return response()->json(['success'=> 'Successfully added subject.']);
         }
         else {
-            return response()->json(['success'=>'That subject name already exists.']);
+            return response()->json(['exists'=>'That subject name already exists.']);
         }
     }
 
 
     public function update(Request $request){
+        $request->validate([
+            'oldSubName' => ['required'],
+            'subjId' => ['required', 'numeric'],
+
+            'editedSubjectName' => ['required'],
+            'editedRoom' => ['required'],
+            'editedCapacity' => ['required', 'numeric'],
+            'editedSchedule' => ['required'],
+        ]);
+
         $oldSubName = $request->oldSubName;
         $id = $request->subjId;
 
@@ -79,7 +96,7 @@ class SubjectController extends Controller
             return response()->json(['success'=> 'Successfully edited subject.']);
         }
         else {
-            return response()->json(['success'=>'Another subject already has that name.']);
+            return response()->json(['exists'=>'Another subject already has that name.']);
         }
     }
 

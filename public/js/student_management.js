@@ -273,7 +273,6 @@ $(document).on('click', '.viewBtn', function(){
     //fcn to close modal
     function closeViewModal(){
         viewModal.hide();
-        $('.alert').hide();
     } 
 
     //listen for outside click
