@@ -26,7 +26,7 @@
         <div id="simpleModal" class="modal" tabindex=-1 role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header bg-light">
                         <h2>Staff Login</h2>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -35,11 +35,13 @@
 
                         <form id="loginForm" class="form-group" method="post" action="/auth">
                         <!-- Indicator for if input had wrong details -->
-                        <div id="loginIndicator" class="hidden">
-                            </div>
+                        <div class="alert alert-danger collapse" role="alert" data-dismiss="alert">
+                        </div>
+                        
                         <?php echo csrf_field(); ?>
                             <label for="user">Username</label><br>
                             <input type="text" class="form-control" name="user" placeholder="Enter username here..." required><br>
+
                             <label for="pass">Password</label><br>
                             <input type="password" class="form-control" name="pass" placeholder="Enter password here..." required><br>
                             <div class="positionDiv">
@@ -89,8 +91,7 @@
 
             // Authenticate Login
             $('#loginSubmit').click(function (e) {
-                $('#loginIndicator').hide();
-
+                $('.alert').hide();
                 $("#loginForm").validate({
                     submitHandler: function (form) {
                         $('#loginSubmit').val('Authenticating..');
@@ -108,13 +109,19 @@
                                 else{
                                     $('#loginForm').trigger("reset");
                                     $('#loginSubmit').val('Login');
-                                    $('#loginIndicator').html(data.incorrect);
-                                    $('#loginIndicator').show();
+                                    $('.alert').html(data.incorrect);
+                                    $('.alert').show();
                                 }
                             },
 
                             error: function (data) {
                                 console.log('Error:', data);
+                                
+                                $('#loginSubmit').val('Login');
+                                if (data.status == 422) {                             
+                                    $('.alert').html(data.responseJSON.message);
+                                    $('.alert').show();
+                                }
                             }
                         });
                     }

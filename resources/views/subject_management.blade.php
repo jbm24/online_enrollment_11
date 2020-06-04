@@ -49,7 +49,7 @@
         <div id="addModal" class="modal" tabindex=-1 role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header bg-light">
                         <h2>Add Subject</h2>
                         <span id="closeAddBtn">&times;</span>
                     </div>
@@ -92,7 +92,7 @@
         <div id="updateModal" class="modal" tabindex=-1 role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header bg-light">
                         <h2 id="modalHeader">Edit Subject Information</h2>
                         <span class="closeUpdateBtn">&times;</span>
                     </div>
@@ -149,7 +149,7 @@
         <div id="viewModal" class="modal" tabindex=-1 role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header bg-light">
                         <h2>Enrollees</h2>
                         <span class="closeViewBtn">&times;</span>
                     </div>
@@ -173,7 +173,7 @@
         </div>
         <div id="viewModal" class="modal">
             <div class="enrollee-modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-light">
                     <h2>Enrollees</h2>
                     <span class="closeViewBtn">&times;</span>
                 </div>
@@ -201,7 +201,7 @@
         <div id="deleteModal" class="modal" tabindex=-1 role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header bg-light">
                         <h6>Deleted</h6>
                         <span class="closeDelBtn">&times;</span>
                     </div>
