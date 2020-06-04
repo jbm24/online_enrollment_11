@@ -21,7 +21,6 @@ $('#addSubmit').click(function (e) {
                 dataType: 'json',
 
                 success: function (data) {
-                    $('#addForm').trigger("reset");
                     $('#addSubmit').val('Add subject');
                     if (data.exists){
                         $('.alert-danger').html(data.exists);
@@ -40,9 +39,16 @@ $('#addSubmit').click(function (e) {
 
                 error: function (data) {
                     console.log('Error:', data);
+                    console.log(data.responseJSON.errors);
 
                     $('#addSubmit').val('Add student');
-                    $('.alert-danger').html(data.responseJSON.message);
+
+                    var errorList='';
+                    for (var error in data.responseJSON.errors){
+                        errorList += data.responseJSON.errors[error] + '<br>';
+                    }
+                    $('.alert-danger').html(errorList);
+
                     $('.alert-danger').show();
                 }
             });
@@ -88,7 +94,13 @@ $('#updateSubmit').click(function (e) {
                     console.log('Error:', data);
 
                     $('#updateSubmit').val('Edit subject');
-                    $('.alert-danger').html(data.responseJSON.message);
+                    
+                    var errorList='';
+                    for (var error in data.responseJSON.errors){
+                        errorList += data.responseJSON.errors[error] + '<br>';
+                    }
+                    $('.alert-danger').html(errorList);
+                    
                     $('.alert-danger').show();
                 }
             });

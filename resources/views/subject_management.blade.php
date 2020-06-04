@@ -109,13 +109,13 @@
                             @csrf
                             @method('put')
                             <label for="editedSubjectName">Subject Name</label><br>
-                            <input type="text" class="form-control" id="eSubName" name="editedSubjectName" ><br>
+                            <input type="text" class="form-control" id="eSubName" name="editedSubjectName" required><br>
                             <label for="editedRoom">Room</label><br>
-                            <input type="text" class="form-control" id="eRoom" name="editedRoom" ><br>
+                            <input type="text" class="form-control" id="eRoom" name="editedRoom" required><br>
                             <label for="editedCapacity">Capacity</label><br>
-                            <input type="number" class="form-control" id="eCapacity" name="editedCapacity" ><br>
+                            <input type="number" class="form-control" id="eCapacity" name="editedCapacity" required><br>
                             <label for="editedSchedule">Schedule</label><br>
-                            <input type="text" class="form-control" id="eSchedule" name="editedSchedule" ><br>
+                            <input type="text" class="form-control" id="eSchedule" name="editedSchedule" required><br>
 
                             <input type="text" id="oldSubName" class="hidden" name="oldSubName">
                             <input type="text" id="subjId" class="hidden" name="subjId">

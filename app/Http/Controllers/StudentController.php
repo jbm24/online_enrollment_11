@@ -23,13 +23,26 @@ class StudentController extends Controller
 
 
     public function store(Request $request){
-        $request->validate([
+        $rules =[
             'firstName' => ['required'],
             'lastName' => ['required'],
             'idNumber' => ['required', 'numeric'],
             'birthday' => ['required', 'date'],
             'course' => ['required'],
-        ]);
+        ];
+
+        $messages = [
+            'firstName.required' => 'Please enter a valid First Name',
+            'lastName.required' => 'Please enter a valid Last Name',
+            'idNumber.required' => 'Please enter a valid ID Number',
+            'idNumber.numeric' => 'Please enter a valid ID Number',
+            'birthday.date' => 'Please enter a valid date in Birthday',
+            'birthday.required' => 'Please enter a valid Birthday',
+            'course.required' => 'Please enter a valid Course'
+        ];
+
+        $this->validate($request, $rules, $messages);
+
 
 
         $fName = $request->firstName;
@@ -61,15 +74,25 @@ class StudentController extends Controller
 
 
     public function update(Request $request){
-        $request->validate([
-            'oldIdNumber' => ['required', 'numeric'],
-            'studentId' => ['required', 'numeric'],
+        $rules =[
             'updatedFirstName' => ['required'],
             'updatedLastName' => ['required'],
             'updatedIdNumber' => ['required', 'numeric'],
             'updatedBirthday' => ['required', 'date'],
             'updatedCourse' => ['required'],
-        ]);
+        ];
+
+        $messages = [
+            'updatedFirstName.required' => 'Please enter a valid First Name',
+            'updatedLastName.required' => 'Please enter a valid Last Name',
+            'updatedIdNumber.required' => 'Please enter a valid ID Number',
+            'updatedIdNumber.numeric' => 'Please enter a valid ID Number',
+            'updatedBirthday.date' => 'Please enter a valid date in Birthday',
+            'updatedBirthday.required' => 'Please enter a valid Birthday',
+            'updatedCourse.required' => 'Please enter a valid Course'
+        ];
+
+        $this->validate($request, $rules, $messages);
 
 
         $oldIdNum = $request->oldIdNumber;

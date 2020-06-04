@@ -23,12 +23,23 @@ class SubjectController extends Controller
 
 
     public function store(Request $request){
-        $request->validate([
+        $rules = [
             'subjectName' => ['required'],
             'room' => ['required'],
             'capacity' => ['required', 'numeric'],
-            'schedule' => ['required'],
-        ]);
+            'schedule' => ['required']
+        ];
+        
+        $messages = [
+            'subjectName.required' => 'Please enter a valid Subject Name',
+            'room.required' => 'Please enter a valid Room',
+            'capacity.required' => 'Please enter a valid Capacity',
+            'capacity.numeric' => 'Please enter a valid number in Capacity',
+            'schedule.required' => 'Please enter a valid Schedule'
+        ];
+
+        $this->validate($request, $rules, $messages);
+
 
         $name = $request->subjectName;
         $room = $request->room;
@@ -56,15 +67,23 @@ class SubjectController extends Controller
 
 
     public function update(Request $request){
-        $request->validate([
-            'oldSubName' => ['required'],
-            'subjId' => ['required', 'numeric'],
-
+        $rules = [
             'editedSubjectName' => ['required'],
             'editedRoom' => ['required'],
             'editedCapacity' => ['required', 'numeric'],
             'editedSchedule' => ['required'],
-        ]);
+        ];
+
+        $messages = [
+            'editedSubjectName.required' => 'Please enter a valid Subject Name',
+            'editedRoom.required' => 'Please enter a valid Room',
+            'editedCapacity.required' => 'Please enter a valid Capacity',
+            'editedCapacity.numeric' => 'Please enter a valid Capacity',
+            'editedSchedule.required' => 'Please enter a valid Schedule'
+        ];
+
+        $this->validate($request, $rules, $messages);
+
 
         $oldSubName = $request->oldSubName;
         $id = $request->subjId;
