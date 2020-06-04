@@ -33,7 +33,7 @@
         <div id="modalIndicator" class="modal">
         <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header bg-light">
                         <h6>Enrollment Message</h6>
                         <span class="closeIndicatorBtn">&times;</span>
                     </div>
@@ -55,7 +55,7 @@
         <div id="enrollModal" class="modal" tabindex=-1 role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header bg-light">
                         <h2 id="modalHeader">Enrollment Confirmation</h2>
                         <span class="closeEnrollBtn">&times;</span>
                     </div>
